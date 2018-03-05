@@ -10,14 +10,14 @@ LIB_DIR = 	./libft/
 HEADER =	./include/
 CFLAGS =	-Wall -Werror -Wextra -g
 ARFLAGS =	-rcs
-CFILES =	main ft_printf debug
+CFILES =	main debug ft_printf parser apply spec_format spec_type spec_unicode
 
 SRCS =		$(CFILES:%=$(SRCS_DIR)%.c)
 OBJS =		$(SRCS:%.c=$(OBJS_DIR)%.o)
 
 all:
 	make -C libft/
-	$(CC) $(SRCS) -I$(HEADER) -Ilibft/ -L$(LIB_DIR) -l$(LIB) -o $(EXEC)
+	$(CC) $(SRCS) -I$(HEADER) -Ilibft/ -L$(LIB_DIR) -l$(LIB) -o $(EXEC) #-fsanitize=address -g
 
 clean:
 	rm -f $(OBJS)

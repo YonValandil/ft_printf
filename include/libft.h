@@ -23,6 +23,7 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+int					ft_abs(int x);
 void				ft_putchar(char c);
 void				ft_putstr(char const *s);
 size_t				ft_strlen(char const *s);
@@ -64,6 +65,8 @@ void				*ft_memccpy(void *dest, const void *src, int c, size_t n);
 void				*ft_memmove(void *dst, const void *src, size_t len);
 void				*ft_memchr(const void *s, int c, size_t n);
 char				*ft_itoa(int n);
+char				*ft_ulltoa_base(unsigned long long n, unsigned int base);
+char				*ft_lltoa_base(long long n, unsigned int base);
 char				*ft_strtrim(char const *s);
 int					ft_strequ(char const *s1, char const *s2);
 int					ft_strnequ(char const *s1, char const *s2, size_t n);

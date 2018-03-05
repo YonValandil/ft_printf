@@ -5,9 +5,9 @@ void 	print_flag(t_printf *data)
 	int i;
 
 	i = -1;
-	printf("\n'0' '-' '+' ' ' '#' 'w' '.'\n");
-	while (++i < 7)
-		printf("[%d] ", (data->flag[0] & (1 << e_flag_zero + i)) / (1 << i));
+	printf("\n'0' '-' '+' ' ' '#' 'hh' 'h' 'j' 'l' 'z' 'L' '.' 'w'\n");
+	while (++i <= flag_with)
+		printf("[%d] ", (data->flag[0] & 1 << (flag_zero + i)) / (1 << i));
 	printf("\n\n");
 	printf("field with = %d\n", data->flag[1]);
 	printf("precision = %d\n\n", data->flag[2]);
@@ -15,7 +15,7 @@ void 	print_flag(t_printf *data)
 
 void 	print_lst(t_printf *data)
 {
-	t_result *curr = data->res_begin;
+	t_result *curr = data->result_start;
 
 	printf("\nresult: \"");
 	while (curr) {

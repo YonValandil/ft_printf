@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/01/21 06:53:06 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/03 19:49:14 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,40 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdint.h>
 # include <stdarg.h>
+#include <limits.h>
 # include "libft.h"
 
 # include <stdio.h>
 
-# define BUFF_SIZE 5 //un ou 2 f?
-# define SPECIFIER "sSpdDioOuUxXcC" //float et binary?
-# define FLAG "0-+ #123456789.hlLjz" //manque: q et t
+# define BUF_SIZE 1
+# define SPECIFIER "sSpdDoOuUxXcCi"
+# define FLAG "0-+ #hhjlzL.123456789"
 
-typedef enum 		e_flag
+enum {flag_zero = 0, flag_neg, flag_plus, flag_space, flag_hash, flag_hh,
+	flag_h, flag_j, flag_l, flag_z, flag_L, flag_pre, flag_with};
+
+typedef enum 		e_bool
 {
-	e_flag_zero = 0,
-	e_flag_neg,
-	e_flag_plus,
-	e_flag_space,
-	e_flag_hash,
-	e_flag_with,
-	e_flag_pre,
-	e_flag_spe
-}					t_flag;
+	false = 0,
+	true
+}					t_bool;
+
+typedef union		u_type
+{
+    char c;
+    short sh;
+	unsigned int u;
+	unsigned long int ul;
+	unsigned long int ull;
+	long long ll;
+	long double ldb;
+    long l;
+    float f;
+    int d;
+	char* s;
+}					t_type;
 
 /**
 ** structure qui sert de node pour la liste chainée(queue):
@@ -44,7 +58,7 @@ typedef enum 		e_flag
 **/
 typedef struct		s_result
 {
-	char			buf[BUFF_SIZE + 1];
+	char			buf[BUF_SIZE + 1];
 	struct s_result	*next;
 }					t_result;
 
@@ -60,10 +74,17 @@ typedef struct		s_result
 typedef struct		s_printf
 {
 	char			*format;
-	t_result		*res_begin;
-	t_result		*res_end;
+	t_result		*result_start;
+	t_result		*result_end;
+	int				result_i;
+	int				format_i;
 	int				flag[3];
 }					t_printf;
+
+typedef void (*t_ptr_get_spec)(t_printf *, va_list, t_type specifier);
+
+void apply_modifier(t_printf *data, t_type *specifier);
+void apply_specifier(t_printf *data, va_list vl);
 
 /**
 ** parcourt la str(chaine de format) passé en arguments de ft_printf,
@@ -81,7 +102,14 @@ void	parser(t_printf *print, va_list vl);
 ** parcourt la chaine format (apres le %) et store les valeurs adequates
 ** dans flag[0] flag[1] et flag[2], jusqu'a tomber sur un caractere non flag.
 **/
-int		get_flag(t_printf *print, int j, int i);
+void	get_flag(t_printf *print);
+
+/**
+** creer/update la list chainee, et store le bon caractere dans le buffer.
+** si flag == 0 alors on prend le caractere dans la chaine de format
+** sinon on envoi le caractere manuellement
+**/
+void 	add_to_result(t_printf *data, char c, int flag);
 
 /**
 ** fonction principale:
@@ -100,5 +128,24 @@ void 	del_list(t_result *lst);
 void 	print_flag(t_printf *data);
 void 	print_lst(t_printf *data);
 void 	print_format(t_printf *data);
+
+/**
+** Toutes les declarations des specifiers en pointeurs de fonctions
+**/
+
+void 	s(t_printf *data, va_list vl, t_type specifier);
+void 	S(t_printf *data, va_list vl, t_type specifier);
+void 	p(t_printf *data, va_list vl, t_type specifier);
+void 	d(t_printf *data, va_list vl, t_type specifier);
+void 	D(t_printf *data, va_list vl, t_type specifier);
+void 	S(t_printf *data, va_list vl, t_type specifier);
+void 	o(t_printf *data, va_list vl, t_type specifier);
+void 	O(t_printf *data, va_list vl, t_type specifier);
+void 	u(t_printf *data, va_list vl, t_type specifier);
+void 	U(t_printf *data, va_list vl, t_type specifier);
+void 	x(t_printf *data, va_list vl, t_type specifier);
+void 	X(t_printf *data, va_list vl, t_type specifier);
+void 	c(t_printf *data, va_list vl, t_type specifier);
+void 	C(t_printf *data, va_list vl, t_type specifier);
 
 #endif

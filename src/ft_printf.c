@@ -1,89 +1,77 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/01/21 08:40:42 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/04 21:30:10 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int		get_flag(t_printf *data, int j, int i)
+void 	del_list(t_result *lst)
 {
-	data->flag[0] = 0;
-	while (ft_strchr(FLAG, data->format[++j]) && !(i = 0))
+	t_result *tmp;
+
+	tmp = lst;
+	while (tmp)
 	{
-		while (i < 5)
-			data->flag[0] |= (data->format[j] == FLAG[i]) << e_flag_zero + i++;
-		if (ft_isdigit(data->format[j]) && (data->format[j] != '0') && (--j) &&
-			(data->flag[0] |= (1 << e_flag_with)) && !(data->flag[1] = 0))
-			while (ft_isdigit(data->format[j + 1]) && (++j))
-				data->flag[1] = data->flag[1] * 10 + data->format[j] - '0';
-		if ((data->format[j] == '.') && !(data->flag[2] = 0) &&
-			(data->flag[0] |= (1 << e_flag_pre)))
-			while (ft_isdigit(data->format[j + 1]) && (++j))
-				data->flag[2] = data->flag[2] * 10 + data->format[j] - '0';
+		tmp = tmp->next;
+		ft_memdel((void **)&lst);
+		lst = tmp;
 	}
-	return (j);
+	ft_memdel((void **)&tmp);
 }
 
-int 	add_str_to_buf(t_printf *data, int i, int j)
+void 	add_to_result(t_printf *data, char c, int flag)
 {
 	t_result *new;
 
-	if ((i == 0) || (i == BUFF_SIZE))
+	if ((data->result_i == 0) || (data->result_i == BUF_SIZE))
 	{
 		if (!(new = (t_result*)ft_memalloc(sizeof(t_result))))
 			exit(EXIT_FAILURE);
-		ft_bzero(new->buf, BUFF_SIZE + 1);
-		if (i == 0)
-			data->res_begin = new;
-		else if (!(i = 0))
-			data->res_end->next = new;
-		data->res_end = new;
+		if (data->result_i == 0)
+			data->result_start = new;
+		else if (!(data->result_i = 0))
+			data->result_end->next = new;
+		data->result_end = new;
 		new->next = NULL;
 	}
-	data->res_end->buf[i] = data->format[j];
-	return (i);
+	if (flag == 0)
+		data->result_end->buf[data->result_i] = data->format[data->format_i];
+	else
+		data->result_end->buf[data->result_i] = c;
+	++(data->result_i);
 }
 
-void	parser(t_printf *data, va_list vl) //dereferrencer ou par adresse?
-{
-	int i;
-	int j;
-	int state;
-
-	i = -1;
-	j = -1;
-	while ((data->format[++j]) && !(state = 0))
-	{
-		if(data->format[j] == '%' && data->format[j + 1] != '%' && (state = 1))
-			j = get_flag(data, j, i);
-		if (state)
-			printf("\ncall the universe\n");
-		else
-			i = add_str_to_buf(data, ++i, (data->format[j] == '%') ? ++j : j);
-	}
-}
-
-//injection ? / pourquoi le vrais printf affiche quand il veut (\n?)
+//faire un printf qui "bufferise"?
 int		ft_printf(const char *format, ...)
 {
 	va_list     vl;
 	t_printf	data;
 
+	//initialisation
 	data.format = ft_strdup(format);
+	data.result_i = 0;
+	data.format_i = -1;
+
+	//code reel ft_printf
 	va_start(vl, format);
 	parser(&data, vl);
+	printf("lol\n");
 	va_end(vl);
+
+	//affichage de debug
 	print_flag(&data);
 	print_format(&data);
 	print_lst(&data);
-	ft_memdel((void **)&(data.format)); //cast * ou ** ?
-	del_list(data.res_begin);
+
+	//free
+	ft_memdel((void **)&(data.format));
+	del_list(data.result_start);
 	return (42);
 }

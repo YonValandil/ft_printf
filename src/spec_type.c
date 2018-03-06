@@ -7,7 +7,6 @@ void 	s(t_printf *data, va_list vl, t_type specifier)
 
 	i = -1;
 	specifier.s = va_arg(vl, char *);
-	// apply_modifier(data, &specifier, 1);
 	tmp = ft_strlen(specifier.s);
 	while (++i <= tmp)
 		add_to_result(data, specifier.s[i], 1);
@@ -16,7 +15,6 @@ void 	s(t_printf *data, va_list vl, t_type specifier)
 void 	c(t_printf *data, va_list vl, t_type specifier)
 {
 	specifier.c = (char)va_arg(vl, int);
-	// apply_modifier(data, &specifier, 1);
 	// if (((data->flag[0] & (1 << flag_pre)) / (1 << flag_pre)))
 	add_to_result(data, specifier.c, 1);
 }
@@ -56,9 +54,12 @@ void 	u(t_printf *data, va_list vl, t_type specifier)
 	char *a;
 
 	i = -1;
-	specifier.u = va_arg(vl, unsigned int);
+	specifier.ul = va_arg(vl, unsigned long int);
 	apply_modifier(data, &specifier, 0);
-	a = ft_ulltoa_base(specifier.u, 10);
+	if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l)))
+		a = ft_ulltoa_base(specifier.ul, 10);
+	else
+		a = ft_ulltoa_base(specifier.u, 10);
 	tmp = ft_strlen(a);
 	while (++i <= tmp)
 		add_to_result(data, a[i], 1);

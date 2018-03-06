@@ -5,7 +5,6 @@ void	get_flag(t_printf *data)
 	int i;
 	int *j;
 
-	data->flag[0] = 0;
 	j = &(data->format_i);
 	while (ft_strchr(FLAG, data->format[++(*j)]) && (i = -1))
 	{
@@ -25,7 +24,8 @@ void	get_flag(t_printf *data)
 			while (ft_isdigit(data->format[*j + 1]) && (++*j))
 				data->flag[2] = data->flag[2] * 10 + data->format[*j] - '0';
 	}
-	if (data->format[*j] == 'D')
+	if (data->format[*j] == 'D' || data->format[*j] == 'O' ||
+		data->format[*j] == 'U')
 		data->flag[0] |= (1 << flag_l);
 }
 
@@ -37,6 +37,7 @@ void	parser(t_printf *data, va_list vl)
 	{
 		if(data->format[data->format_i] == '%' && (is_flag = true))
 		{
+			data->flag[0] = 0;
 			get_flag(data);
 			if (ft_strchr(SPECIFIER, data->format[data->format_i]))
 				apply_specifier(data, vl);

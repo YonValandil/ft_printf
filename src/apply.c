@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/06 15:53:39 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/06 18:56:09 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,11 @@ void 	apply_modifier(t_printf *data, t_type *specifier, int sign)
 		specifier->l = (char)specifier->l;
 	if (((data->flag[0] & (1 << flag_L)) / (1 << flag_L)) && !sign)
 		specifier->l = (long double)specifier->l;
-	else if (((data->flag[0] & (1 << flag_j)) / (1 << flag_j))&& !sign)
+	else if (((data->flag[0] & (1 << flag_j)) / (1 << flag_j)) && !sign)
 		specifier->l = (uintmax_t)specifier->l;
-	else if (((data->flag[0] & (1 << flag_z)) / (1 << flag_z))&& !sign)
+	else if (((data->flag[0] & (1 << flag_z)) / (1 << flag_z)) && !sign)
 		specifier->l = (size_t)specifier->l;
-	else if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l))&& !sign)
+	else if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l)) && !sign)
 		specifier->l = (unsigned long)specifier->l;
 	else if (((data->flag[0] & (1 << flag_h)) / (1 << flag_h)) && !sign)
 		specifier->l = (unsigned short)specifier->l;
@@ -47,17 +47,20 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	t_ptr_get_spec *tab_ptr_get_spec;
 
 	specifier.l = 0;
-	tab_ptr_get_spec = (t_ptr_get_spec[13]){&s, &S, &p, &d, &o, &O,
-		&u, &U, &x, &X, &c, &C};
-	while (++i < 11)
+	tab_ptr_get_spec = (t_ptr_get_spec[13]){&s, &S, &p, &d, &o, &u,
+		&x, &X,&c, &C};
+	while (++i < 10)
 		if (data->format[data->format_i] == SPECIFIER[i])
 			tab_ptr_get_spec[i](data, vl, specifier);
 	if (data->format[data->format_i] == 'i' ||
 		data->format[data->format_i] == 'D')
 		tab_ptr_get_spec[3](data, vl, specifier);
-	//affichage de debug
-	print_flag(data);
-	printf("\n-------------------------------------\n\n");
+	if (data->format[data->format_i] == 'O')
+		tab_ptr_get_spec[4](data, vl, specifier);
+	if (data->format[data->format_i] == 'U')
+		tab_ptr_get_spec[5](data, vl, specifier);
+	// print_flag(data);
+	// printf("\n-------------------------------------\n\n");
 }
 
 void 	  apply_attribut()

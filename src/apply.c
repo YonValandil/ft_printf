@@ -6,13 +6,12 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/03 19:55:57 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/06 11:40:28 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-//pars du principe que printf prend le plus grand cast par defaut
 void 	apply_modifier(t_printf *data, t_type *specifier)
 {
 	if (((data->flag[0] & (1 << flag_hh)) / (1 << flag_hh)))
@@ -35,6 +34,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	t_type specifier;
 	t_ptr_get_spec *tab_ptr_get_spec;
 
+	specifier.l = 0;
 	tab_ptr_get_spec = (t_ptr_get_spec[14]){&s, &S, &p, &d, &D, &o, &O,
 		&u, &U, &x, &X, &c, &C};
 	while (++i < 12)

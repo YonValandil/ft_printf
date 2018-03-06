@@ -13,13 +13,13 @@ CFILES =		debug ft_printf parser apply spec_format spec_type spec_unicode
 SRC =			$(CFILES:%=$(SRC_DIR)%.c)
 OBJ =			$(CFILES:%=$(OBJ_DIR)%.o)
 
-all: $(LIBFT) $(EXEC) #$(NAME)
+all: $(LIBFT) $(EXEC) #replace exec by NAME
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
 
-$(EXEC): $(NAME)
-	$(CC) $(SRC_DIR)main.c $(SRC) -I$(HEADER_DIR) -L$(LIBFT_DIR) -L./ -lft -lft_printf -o $@ #$(CFLAGS) $(DEBUG_FLAGS)
+$(EXEC): $(NAME) $(SRC_DIR)main.c
+	$(CC) $(SRC_DIR)main.c $(SRC) -I$(HEADER_DIR) -L$(LIBFT_DIR) -L./ -lft -lft_printf -o $@ $(CFLAGS) $(DEBUG_FLAGS)
 
 $(NAME): $(OBJ)
 	ar $(ARFLAGS) $@ $(OBJ)
@@ -27,7 +27,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)
-	$(CC) -I$(HEADER_DIR) -c $< -o $@ #$(CFLAGS) #$(DEBUG_FLAGS)
+	$(CC) -I$(HEADER_DIR) -c $< -o $@ $(CFLAGS) $(DEBUG_FLAGS)
 
 clean:
 	rm -rf $(OBJ_DIR)

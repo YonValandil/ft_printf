@@ -24,7 +24,9 @@ void 	c(t_printf *data, va_list vl, t_type specifier)
 
 void 	p(t_printf *data, va_list vl, t_type specifier)
 {
-
+	(void)data;
+	(void)vl;
+	(void)specifier;
 }
 
 void 	d(t_printf *data, va_list vl, t_type specifier)
@@ -38,13 +40,11 @@ void 	d(t_printf *data, va_list vl, t_type specifier)
 	apply_modifier(data, &specifier);
 	if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l)) ||
 		((data->flag[0] & (1 << flag_z)) / (1 << flag_z)) ||
-		//flag L necessaire sur linux | a enlever sur mac :
 		((data->flag[0] & (1 << flag_L)) / (1 << flag_L)) ||
 		((data->flag[0] & (1 << flag_j)) / (1 << flag_j)))
 		a = ft_lltoa_base(specifier.l, 10);
 	else
 		a = ft_lltoa_base(specifier.d, 10);
-	printf("\n===============> a = %s\n", a);
 	specifier.l = 0;
 	tmp = ft_strlen(a);
 	while (++i <= tmp)
@@ -53,5 +53,7 @@ void 	d(t_printf *data, va_list vl, t_type specifier)
 
 void 	D(t_printf *data, va_list vl, t_type specifier)
 {
-
+	(void)data;
+	(void)vl;
+	(void)specifier;
 }

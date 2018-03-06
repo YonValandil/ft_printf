@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/04 21:30:10 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/06 10:20:57 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int		ft_printf(const char *format, ...)
 	//code reel ft_printf
 	va_start(vl, format);
 	parser(&data, vl);
-	printf("lol\n");
 	va_end(vl);
 
 	//affichage de debug

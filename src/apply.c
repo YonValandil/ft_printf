@@ -6,26 +6,36 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/06 11:40:28 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/06 12:48:18 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void 	apply_modifier(t_printf *data, t_type *specifier)
+void 	apply_modifier(t_printf *data, t_type *specifier, int sign)
 {
-	if (((data->flag[0] & (1 << flag_hh)) / (1 << flag_hh)))
+	if (((data->flag[0] & (1 << flag_hh)) / (1 << flag_hh)) && sign)
 		specifier->l = (char)specifier->l;
-	if (((data->flag[0] & (1 << flag_h)) / (1 << flag_h)))
+	if (((data->flag[0] & (1 << flag_h)) / (1 << flag_h)) && sign)
 		specifier->l = (short)specifier->l;
-	if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l)))
+	if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l)) && sign)
 		specifier->l = (long)specifier->l;
-	if (((data->flag[0] & (1 << flag_z)) / (1 << flag_z)))
-		specifier->l = (size_t)specifier->l;
-	if (((data->flag[0] & (1 << flag_j)) / (1 << flag_j)))
+	if (((data->flag[0] & (1 << flag_z)) / (1 << flag_z)) && sign)
+		specifier->l = (ssize_t)specifier->l;
+	if (((data->flag[0] & (1 << flag_j)) / (1 << flag_j)) && sign)
 		specifier->l = (intmax_t)specifier->l;
+	if (((data->flag[0] & (1 << flag_hh)) / (1 << flag_hh)) && !sign)
+		specifier->l = (unsigned char)specifier->l;
+	if (((data->flag[0] & (1 << flag_h)) / (1 << flag_h)) && !sign)
+		specifier->l = (unsigned short)specifier->l;
+	if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l))&& !sign)
+		specifier->l = (unsigned long)specifier->l;
+	if (((data->flag[0] & (1 << flag_z)) / (1 << flag_z))&& !sign)
+		specifier->l = (size_t)specifier->l;
+	if (((data->flag[0] & (1 << flag_j)) / (1 << flag_j))&& !sign)
+		specifier->l = (uintmax_t)specifier->l;
 	if (((data->flag[0] & (1 << flag_L)) / (1 << flag_L)))
-			specifier->l = (long double)specifier->l;
+		specifier->l = (long double)specifier->l;
 }
 
 void 	apply_specifier(t_printf *data, va_list vl)
@@ -85,3 +95,4 @@ void 	  apply_attribut()
 // {
 //
 // }
+//

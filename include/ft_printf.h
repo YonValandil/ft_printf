@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/03 19:49:14 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/06 12:25:28 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,11 @@ typedef enum 		e_bool
 typedef union		u_type
 {
     char c;
+    unsigned char uc;
     short sh;
 	unsigned int u;
 	unsigned long int ul;
-	unsigned long int ull;
+	unsigned long long int ull;
 	long long ll;
 	long double ldb;
     long l;
@@ -83,7 +84,7 @@ typedef struct		s_printf
 
 typedef void (*t_ptr_get_spec)(t_printf *, va_list, t_type specifier);
 
-void apply_modifier(t_printf *data, t_type *specifier);
+void apply_modifier(t_printf *data, t_type *specifier, int sign);
 void apply_specifier(t_printf *data, va_list vl);
 
 /**

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/06 12:25:28 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/06 15:12:49 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include <stdio.h>
 
 # define BUF_SIZE 1
-# define SPECIFIER "sSpdDoOuUxXcCi"
+# define SPECIFIER "sSpdoOuUxXcCiD"
 # define FLAG "0-+ #hhjlzL.123456789"
 
 enum {flag_zero = 0, flag_neg, flag_plus, flag_space, flag_hash, flag_hh,

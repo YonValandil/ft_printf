@@ -25,6 +25,8 @@ void	get_flag(t_printf *data)
 			while (ft_isdigit(data->format[*j + 1]) && (++*j))
 				data->flag[2] = data->flag[2] * 10 + data->format[*j] - '0';
 	}
+	if (data->format[*j] == 'D')
+		data->flag[0] |= (1 << flag_l);
 }
 
 void	parser(t_printf *data, va_list vl)

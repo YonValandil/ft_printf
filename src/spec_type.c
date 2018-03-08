@@ -19,9 +19,20 @@ void 	c(t_printf *data, va_list vl, t_type specifier)
 	add_to_result(data, specifier.c, 1);
 }
 
-
 void 	p(t_printf *data, va_list vl, t_type specifier)
 {
+	char *a;
+	int tmp;
+	int i;
+
+	i = -1;
+	specifier.l = va_arg(vl, unsigned long);
+	a = ft_lltoa_base(specifier.l, 16);
+	tmp = ft_strlen(a);
+	add_to_result(data, '0', 1);
+	add_to_result(data, 'x', 1);
+	while (++i <= tmp)
+		add_to_result(data, a[i], 1);
 }
 
 void 	d(t_printf *data, va_list vl, t_type specifier)

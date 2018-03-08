@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/08 18:12:12 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/08 20:11:01 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,9 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	// printf("\n-------------------------------------\n\n");
 }
 
-void 	  apply_attribut()
+void 	  apply_attribut(t_printf *data)
 {
+	
 }
 
 // void 	ptr_apply_zero(t_data *data, vl)

@@ -13,13 +13,15 @@ void 	x(t_printf *data, va_list vl, t_type specifier)
 	int tmp;
 	char *a;
 
-	specifier.d = va_arg(vl, int);
-	printf("val x = %ld\n", specifier.d);
-	a = ft_lltoa_base(specifier.d, 16);
-	printf("val x2 = %ld\n", specifier.d);
-	printf("val a = %s\n", a);
-
-	// apply_modifier(data, &specifier, 0);
+	i = -1;
+	specifier.ul = va_arg(vl, unsigned long);
+	apply_modifier(data, &specifier, 0);
+	if (((data->flag[0] & (1 << flag_l)) / (1 << flag_l)) ||
+		((data->flag[0] & (1 << flag_z)) / (1 << flag_z)) ||
+		((data->flag[0] & (1 << flag_j)) / (1 << flag_j)))
+		a = ft_ulltoa_base(specifier.ul, 16);
+	else
+		a = ft_ulltoa_base(specifier.u, 16);
 	tmp = ft_strlen(a);
 	while (++i <= tmp)
 		add_to_result(data, a[i], 1);

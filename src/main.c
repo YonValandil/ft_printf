@@ -79,8 +79,25 @@ int		main(void)
 		// ft_printf("send : |%x| |%lx| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", -511, -512, -513, -514, -515, -516, -517);
 		// printf("\nprintf: \"send : |%x| |%lx| |%jx| |%hhx| |%hx| |%zx| |%Lx| !\"\n", -511, -512, -513, -514, -515, -516, -517);
 	//-----nbr max et min :
-		ft_printf("send : |%Lx| |%zx| |%jx| |%hhx| |%hx| |%x| |%lx| !", ULONG_MAX, UINT_MAX , -851621 , CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
-		printf("\nprintf: \"send : |%Lx| |%zx| |%jx| |%hhx| |%hx| |%x| |%lx| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
+		// ft_printf("send : |%Lx| |%zx| |%jx| |%hhx| |%hx| |%x| |%lx| !", ULONG_MAX, UINT_MAX , -851621 , CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
+		// printf("\nprintf: \"send : |%Lx| |%zx| |%jx| |%hhx| |%hx| |%x| |%lx| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
+
+	//TEST MODIFIERS sur o
+	//-----nbr positif :
+		// ft_printf("send : |%o| |%jo| |%hho| |%ho| |%zo| |%Lo| !", 5111, 5112, 5113, 5114, 5115, 5116);
+		// printf("\nprintf: \"send : |%o| |%jo| |%hho| |%ho| |%zo| |%Lo| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
+		// ft_printf("send : |%O| |%jO| |%hhO| |%hO| |%zO| |%LO| !", 5111, 5112, 5113, 5114, 5115, 5116);
+		// printf("\nprintf: \"send : |%O| |%jO| |%hhO| |%hO| |%zO| |%LO| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
+	//-----nbr negatif :
+		// ft_printf("send : |%o| |%lo| |%jo| |%hho| |%ho| |%zo| |%Lo| !", -511, -512, -513, -514, -515, -516, -517);
+		// printf("\nprintf: \"send : |%o| |%lo| |%jo| |%hho| |%ho| |%zo| |%Lo| !\"\n", -511, -512, -513, -514, -515, -516, -517);
+		// ft_printf("send : |%O| |%lO| |%jO| |%hhO| |%hO| |%zO| |%LO| !", -511, -512, -513, -514, -515, -516, -517);
+		// printf("\nprintf: \"send : |%O| |%lO| |%jO| |%hhO| |%hO| |%zO| |%LO| !\"\n", -511, -512, -513, -514, -515, -516, -517);
+	//-----nbr max et min :
+		// ft_printf("send : |%Lo| |%zo| |%jo| |%hho| |%ho| |%o| |%lo| !", ULONG_MAX, UINT_MAX , -851621 , CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
+		// printf("\nprintf: \"send : |%Lo| |%zo| |%jo| |%hho| |%ho| |%o| |%lo| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
+		ft_printf("send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !", ULONG_MAX, UINT_MAX , -851621 , CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
+		printf("\nprintf: \"send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 
 	// printf("send : |%%%| |%.2-w| |%0.d| |%0207 -3 #15.7+s| pandas sauvages!");
 	// printf("\n==========> ulltoa = %s\n", ft_ulltoa_base(9669875, 16));

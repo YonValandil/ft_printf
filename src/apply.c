@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/06 18:56:09 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/08 17:13:43 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,9 +47,8 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	t_ptr_get_spec *tab_ptr_get_spec;
 
 	specifier.l = 0;
-	tab_ptr_get_spec = (t_ptr_get_spec[13]){&s, &S, &p, &d, &o, &u,
-		&x, &X,&c, &C};
-	while (++i < 10)
+	tab_ptr_get_spec = (t_ptr_get_spec[13]){&s, &S, &p, &d, &o, &u,&x, &c, &C};
+	while (++i < 9)
 		if (data->format[data->format_i] == SPECIFIER[i])
 			tab_ptr_get_spec[i](data, vl, specifier);
 	if (data->format[data->format_i] == 'i' ||
@@ -59,6 +58,8 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		tab_ptr_get_spec[4](data, vl, specifier);
 	if (data->format[data->format_i] == 'U')
 		tab_ptr_get_spec[5](data, vl, specifier);
+	if (data->format[data->format_i] == 'X')
+		tab_ptr_get_spec[6](data, vl, specifier);
 	// print_flag(data);
 	// printf("\n-------------------------------------\n\n");
 }

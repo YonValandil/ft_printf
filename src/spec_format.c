@@ -37,12 +37,9 @@ void 	x(t_printf *data, va_list vl, t_type specifier)
 		a = ft_ulltoa_base(specifier.u, 16);
 	tmp = ft_strlen(a);
 	while (++i <= tmp)
+	{
+		if (data->format[data->format_i] == 'X')
+			a[i] = ft_toupper(a[i]);
 		add_to_result(data, a[i], 1);
-}
-
-void 	X(t_printf *data, va_list vl, t_type specifier)
-{
-	(void)data;
-	(void)vl;
-	(void)specifier;
+	}
 }

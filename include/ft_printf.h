@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/08 17:13:34 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/11 22:29:41 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ typedef union		u_type
 {
     char c;
     unsigned char uc;
-    short sh;
 	unsigned int u;
 	unsigned long int ul;
 	unsigned long long int ull;
@@ -82,9 +81,10 @@ typedef struct		s_printf
 	int				flag[3];
 }					t_printf;
 
-typedef void (*t_ptr_get_spec)(t_printf *, va_list, t_type specifier);
+typedef void (*t_ptr_get_spec)(t_printf *, va_list, t_type);
 
-void apply_modifier(t_printf *data, t_type *specifier, int sign);
+void apply_modifier_signed(t_printf *data, t_type *specifier);
+void apply_modifier_unsigned(t_printf *data, t_type *specifier);
 void apply_specifier(t_printf *data, va_list vl);
 
 /**

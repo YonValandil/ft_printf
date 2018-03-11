@@ -1,5 +1,9 @@
 #include "ft_printf.h"
 
+#define printest(...) \
+		dprintf(2, __VA_ARGS__); \
+		ft_printf(__VA_ARGS__);
+
 int		main(void)
 {
 	// int ret;
@@ -11,8 +15,8 @@ int		main(void)
 
 	//TEST MODIFIERS sur d/D/i
 	//-----nbr negatif :
-		// ft_printf("send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
-		// printf("\nprintf: \"send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !\"\n", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
+		ft_printf("send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
+		printf("\nprintf: \"send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !\"\n", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
 		// ft_printf("send : |%zd| |%Ld| |%jd| |%hhd| |%hd| |%d| |%ld| !", -1250125, -1250225, -1250325, -1250425, -1250525, -1250625, -1250725);
 		// printf("\nprintf: \"send : |%zd| |%Ld| |%jd| |%hhd| |%hd| |%d| |%ld| !\"\n", -1250125, -1250225, -1250325, -1250425, -1250525, -1250625, -1250725);
 		// ft_printf("send : |%zi| |%Li| |%ji| |%hhi| |%hi| |%i| |%li| !", -1250125, -1250225, -1250325, -1250425, -1250525, -1250625, -1250725);
@@ -22,7 +26,7 @@ int		main(void)
 		// printf("\nprintf: \"send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !\"\n", 501, 502, 503, 504, 505, 506, 507);
 		// ft_printf("send : |%d| |%Ld| |%jd| |%hhd| |%hd| |%zd| |%ld| !", 501, 502, 503, 504, 505, 506, 507);
 		// printf("\nprintf: \"send : |%d| |%Ld| |%jd| |%hhd| |%hd| |%zd| |%ld| !\"\n", 501, 502, 503, 504, 505, 506, 507);
-		// ft_printf("send : |%i| |%Li| |%ji| |%hhi| |%hi| |%zi| |%li| !", 501, 502, 503, 504, 505, 506, 507);
+		// // ft_printf("send : |%i| |%Li| |%ji| |%hhi| |%hi| |%zi| |%li| !", 501, 502, 503, 504, 505, 506, 507);
 		// printf("\nprintf: \"send : |%i| |%Li| |%ji| |%hhi| |%hi| |%zi| |%li| !\"\n", 501, 502, 503, 504, 505, 506, 507);
 	//-----nbr max et min :
 		// ft_printf("send : |%LD| |%zD| |%jD| |%hhD| |%hD| |%D| |%lD| !", LONG_MAX, INT_MAX , -851621 , SCHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
@@ -49,7 +53,7 @@ int		main(void)
 		// ft_printf("send : |%LU| |%zU| |%jU| |%hhU| |%hU| |%U| |%lU| !", ULONG_MAX, UINT_MAX , -851621 , CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 		// printf("\nprintf: \"send : |%LU| |%zU| |%jU| |%hhU| |%hU| |%U| |%lU| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 
-	//TEST MODIFIERS sur c (useless)
+	//TEST MODIFIERS sur c
 	//-----nbr positif :
 		// ft_printf("send : |%c| |%lc| |%jc| |%hhc| |%hc| |%zc| |%Lc| !", 'a', 'b', 'c', 'd', 'e', 'f', 'g');
 		// printf("\nprintf: \"send : |%c| |%lc| |%jc| |%hhc| |%hc| |%zc| |%Lc| !\"\n", 'a', 'b', 'c', 'd', 'e', 'f', 'g');
@@ -75,7 +79,7 @@ int		main(void)
 	//-----nbr positif :
 		// ft_printf("send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", 5111, 5112, 5113, 5114, 5115, 5116);
 		// printf("\nprintf: \"send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
-		// ft_printf("send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !", 5111, 5112, 5113, 5114, 5115, 5116);
+		// // ft_printf("send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !", 5111, 5112, 5113, 5114, 5115, 5116);
 		// printf("\nprintf: \"send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
 	//-----nbr negatif :
 		// ft_printf("send : |%x| |%lx| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", -511, -512, -513, -514, -515, -516, -517);
@@ -105,15 +109,31 @@ int		main(void)
 		// ft_printf("send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !", ULONG_MAX, UINT_MAX , -851621 , CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 		// printf("\nprintf: \"send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 
-	int p;
-	ft_printf("send : |%p| !", &p);
-	printf("\nprintf: \"send : |%p| !\"\n", &p);
+	//AUTREE TEST DIVERS POUR COMPRENDRE
+	// int p;
+	// ft_printf("send : |%p| !", &p);
+	// printf("\nprintf: \"send : |%p| !\"\n", &p);
 	// printf("send : |%%%| |%.2-w| |%0.d| |%0207 -3 #15.7+s| pandas sauvages!");
-	// printf("\n==========> ulltoa = %s\n", ft_ulltoa_base(9669875, 16));
-	// printf("\nft_ulltoa_base = %s\n", ft_ulltoa_base(UINT_MAX));
-	// ft_printf("\nft_printf long_min : |%lu|\n", LONG_MIN);
-	// ft_printf("\nft_printf ulltoa  : |%s|\n", ft_ulltoa_base(LONG_MIN, 10));
-	// printf("\nprintf long_min : |%lu|\n", LONG_MIN);
-	// printf("\nprintf ulltoa : |%s|\n", ft_ulltoa_base(LONG_MIN, 10));
+
+	// ft_printf("coucou");
+	// printf("Je te l'avais dit:\n");
+	// printf("%10d\n", 43210);
+	// printf("%.10d\n", 43210);
+	// printf("%3d\n", 43210);
+	// printf("%.3d\n", 43210);
+    //
+	// printf("%10s\n", "test w");
+	// printf("%.10s\n", "test pre");
+	// printf("%3s\n", "test w");
+	// printf("%.3s\n", "test pre");
+    //
+	// printf("%#25.10d\n", 43210);
+	// printf("%25.10d\n", 43210);
+
+	// printf("\n%10.3d\n", 43210);
+	// ft_printf("yoyo %.3d", 43210);
+	// ft_printf("a%10.4lhhd", 43210); //boucle infini avec field width
+	// ft_printf("%10.4lhhd", 43210); //boucle infini avec field width
+
 	return EXIT_SUCCESS;
 }

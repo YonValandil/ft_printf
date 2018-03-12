@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/11 23:03:29 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/13 00:10:11 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,6 @@ void 	apply_modifier_signed(t_printf *data, t_type *specifier)
 		specifier->l = (short)specifier->l;
 	else if ((data->flag[0] & (1 << flag_hh)))
 		specifier->l = (char)specifier->l;
-	if ((data->flag[0] & (1 << flag_L)))
-		specifier->l = (long double)specifier->l;
-	else if ((data->flag[0] & (1 << flag_j)))
-		specifier->l = (uintmax_t)specifier->l;
-	else if ((data->flag[0] & (1 << flag_z)))
-		specifier->l = (size_t)specifier->l;
-	else if ((data->flag[0] & (1 << flag_l)))
-		specifier->l = (unsigned long)specifier->l;
-	else if ((data->flag[0] & (1 << flag_h)))
-		specifier->l = (unsigned short)specifier->l;
-	else if ((data->flag[0] & (1 << flag_hh)))
-		specifier->l = (unsigned char)specifier->l;
 }
 
 void 	apply_specifier(t_printf *data, va_list vl)

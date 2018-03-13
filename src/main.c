@@ -130,7 +130,7 @@ int		main(void)
 	// printf("%#25.10d\n", 43210);
 	// printf("%25.10d\n", 43210);
 
-	//OCTAL :
+	//-----OCTAL-----
 	/*
 	Avec un nombre:
 		- si precision <= au nb:
@@ -142,7 +142,7 @@ int		main(void)
 
 	Si nombre = 0:
 		- precision 0 et nb 0, affiche rien
-		- precision 0 et nb 0 avec #, affiche le 0 du #
+		- precision 0 et nb 0 avec #, ajoute le 0
 		-
 	*/
 	printf("\n==> octal pre 0 avec nb : %.0o", 54321);
@@ -169,7 +169,8 @@ int		main(void)
 	printf("\n==> octal nb 0 sans pre : %o", 0);
 	printf("\n==> octal nb 0 sans pre et # : %#o\n", 0);
 
-
+	printf("\n==> octal avec nb sans pre : %o", 123);
+	printf("\n==> octal avec nb sans pre et # : %#o\n", 123);
 
 	printf("\n==> test d %.0#d\n", 43210);
 

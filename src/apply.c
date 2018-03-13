@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/13 00:10:11 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/13 07:22:04 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void 	apply_modifier_unsigned(t_printf *data, t_type *specifier)
 
 void 	apply_modifier_signed(t_printf *data, t_type *specifier)
 {
-	if ((data->flag[0] & (1 << flag_L)) && sign)
+	if ((data->flag[0] & (1 << flag_L)))
 		specifier->l = (long double)specifier->l;
 	else if ((data->flag[0] & (1 << flag_j)))
 		specifier->l = (intmax_t)specifier->l;
@@ -54,7 +54,6 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		(void*)"oO", (void*)&o, (void*)"uU", (void*)&u,
 		(void*)"xX", (void*)&x, (void*)"c", (void*)&c,
 		(void*)"C", (void*)&C};
-	specifier.l = 0; //utile?
 	while ((i += 2) < (9 * 2))
 		if (ft_strchr((char*)tab_ptr_get_spec[i], data->format[data->format_i]))
 			((t_ptr_get_spec)tab_ptr_get_spec[i + 1])(data, vl, specifier);

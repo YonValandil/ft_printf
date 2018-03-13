@@ -13,10 +13,10 @@ void	get_flag(t_printf *data)
 				data->flag[0] |= (data->format[*j] == FLAG[i]) << i;
 		if (data->format[*j] == 'h' && (data->flag[0] |= (1 << flag_hh)))
 			data->flag[0] ^= (data->flag[0] & 1 << flag_h) ? 1 << 6 : 3 << 5;
-		if (ft_isdigit(data->format[*j]) && (data->format[*j] != '0') && (--*j) + 3) //si premier caractere le - arrive a 0
+		if (ft_isdigit(data->format[*j]) && (data->format[*j] != '0') &&
+			(data->flag[0] |= (1 << flag_with)) && !(data->flag[1] = 0))
 		{
-			data->flag[0] |= (1 << flag_with);
-			data->flag[1] = 0;
+			--*j;
 			while (ft_isdigit(data->format[*j + 1]) && (++*j))
 				data->flag[1] = data->flag[1] * 10 + data->format[*j] - '0';
 		}
@@ -26,7 +26,7 @@ void	get_flag(t_printf *data)
 	}
 	if (data->format[*j] == 'D' || data->format[*j] == 'O' ||
 		data->format[*j] == 'U')
-		data->flag[0] |= (1 < flag_l);
+		data->flag[0] |= (1 << flag_l);
 }
 
 void	parser(t_printf *data, va_list vl)

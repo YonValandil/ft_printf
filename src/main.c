@@ -26,7 +26,7 @@ int		main(void)
 		// printf("\nprintf: \"send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !\"\n", 501, 502, 503, 504, 505, 506, 507);
 		// ft_printf("send : |%d| |%Ld| |%jd| |%hhd| |%hd| |%zd| |%ld| !", 501, 502, 503, 504, 505, 506, 507);
 		// printf("\nprintf: \"send : |%d| |%Ld| |%jd| |%hhd| |%hd| |%zd| |%ld| !\"\n", 501, 502, 503, 504, 505, 506, 507);
-		// // ft_printf("send : |%i| |%Li| |%ji| |%hhi| |%hi| |%zi| |%li| !", 501, 502, 503, 504, 505, 506, 507);
+		// ft_printf("send : |%i| |%Li| |%ji| |%hhi| |%hi| |%zi| |%li| !", 501, 502, 503, 504, 505, 506, 507);
 		// printf("\nprintf: \"send : |%i| |%Li| |%ji| |%hhi| |%hi| |%zi| |%li| !\"\n", 501, 502, 503, 504, 505, 506, 507);
 	//-----nbr max et min :
 		// ft_printf("send : |%LD| |%zD| |%jD| |%hhD| |%hD| |%D| |%lD| !", LONG_MAX, INT_MAX , -851621 , SCHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
@@ -79,7 +79,7 @@ int		main(void)
 	//-----nbr positif :
 		// ft_printf("send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", 5111, 5112, 5113, 5114, 5115, 5116);
 		// printf("\nprintf: \"send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
-		// // ft_printf("send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !", 5111, 5112, 5113, 5114, 5115, 5116);
+		// ft_printf("send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !", 5111, 5112, 5113, 5114, 5115, 5116);
 		// printf("\nprintf: \"send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
 	//-----nbr negatif :
 		// ft_printf("send : |%x| |%lx| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", -511, -512, -513, -514, -515, -516, -517);

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/11 23:01:22 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/13 07:21:32 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,8 +55,8 @@ int		ft_printf(const char *format, ...)
 	t_printf	data;
 
 	//initialisation
+	ft_bzero(&data, sizeof(data));
 	data.format = ft_strdup(format);
-	data.result_i = 0;
 	data.format_i = -1;
 
 	//code reel ft_printf
@@ -65,8 +65,8 @@ int		ft_printf(const char *format, ...)
 	va_end(vl);
 
 	//affichage de debug
-	// print_flag(&data);
-	// print_format(&data);
+	print_flag(&data);
+	print_format(&data);
 	print_lst(&data);
 
 	//free

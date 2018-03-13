@@ -54,7 +54,7 @@ void 	d(t_printf *data, va_list vl, t_type specifier)
 	int val_prefix;
 	int effective_pre;
 	int effective_fw;
-    //
+
 	if ((data->flag[0] & (1 << flag_with)))
 	{
 		val_prefix = 0;
@@ -70,7 +70,7 @@ void 	d(t_printf *data, va_list vl, t_type specifier)
 	}
 	//--------------------------------------------------------------
 
-	// printf("\n-----> effective_fw = %d\n", effective_fw);
+	printf("\n-----> effective_fw = %d\n", effective_fw);
 	while (++i <= nbr_digit)
 		add_to_result(data, str[i], 1);
 }

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/11 22:29:41 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/13 15:36:26 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,8 @@ typedef void (*t_ptr_get_spec)(t_printf *, va_list, t_type);
 void apply_modifier_signed(t_printf *data, t_type *specifier);
 void apply_modifier_unsigned(t_printf *data, t_type *specifier);
 void apply_specifier(t_printf *data, va_list vl);
+int apply_effective_value(t_printf *data, int *eff_pre, int *val_prefix,
+	int nb_digit);
 
 /**
 ** parcourt la str(chaine de format) passé en arguments de ft_printf,

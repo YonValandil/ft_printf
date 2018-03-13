@@ -36,9 +36,12 @@ void 	p(t_printf *data, va_list vl, t_type specifier)
 
 void 	d(t_printf *data, va_list vl, t_type specifier)
 {
-	char *str;
-	int nbr_digit;
 	int i;
+	char *str;
+	int nb_digit;
+	int val_prefix;
+	int effective_pre;
+	int effective_fw;
 
 	i = -1;
 	specifier.l = va_arg(vl, long);
@@ -48,30 +51,13 @@ void 	d(t_printf *data, va_list vl, t_type specifier)
 		str = ft_lltoa_base(specifier.l, 10);
 	else
 		str = ft_lltoa_base(specifier.d, 10);
-	nbr_digit = ft_strlen(str);
+	nb_digit = ft_strlen(str);
+	effective_fw = apply_effective_value(data,
+		&effective_pre, &val_prefix, nb_digit);
 
-	//----------------calcul largeur de champ/attribut--------------
-	int val_prefix;
-	int effective_pre;
-	int effective_fw;
+	
 
-	if ((data->flag[0] & (1 << flag_with)))
-	{
-		val_prefix = 0;
-		if ((data->flag[0] & (1 << flag_plus)))
-			val_prefix += 1;
-		if ((data->flag[0] & (1 << flag_pre)))
-		{
-			effective_pre = 0;
-			if (data->flag[2] > nbr_digit)
-				effective_pre -= nbr_digit;
-			effective_fw -= effective_pre - val_prefix;
-		}
-	}
-	//--------------------------------------------------------------
-
-	printf("\n-----> effective_fw = %d\n", effective_fw);
-	while (++i <= nbr_digit)
+	while (++i <= nb_digit)
 		add_to_result(data, str[i], 1);
 }
 

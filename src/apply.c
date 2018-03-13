@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/13 07:22:04 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/13 17:23:37 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,31 +59,31 @@ void 	apply_specifier(t_printf *data, va_list vl)
 			((t_ptr_get_spec)tab_ptr_get_spec[i + 1])(data, vl, specifier);
 }
 
-// void 		ft_printf_precision(t_printf *data)
-// {
+int 	apply_effective_value(t_printf *data, int *eff_pre, //si flag - pas mettre le flag
+	int *val_prefix, int nb_digit) //gerer en amont les exceptions
+{
+	int eff_fw;
 
-// }
+	*eff_pre = 0;
+	eff_fw = 0;
+	*val_prefix = 0;
+	if ((data->flag[0] & (1 << flag_pre)))
+		if (data->flag[2] > nb_digit)
+			*eff_pre = data->flag[2] - nb_digit;
+	//gerer les preffix avant la fnct
+	if ((data->flag[0] & (1 << flag_plus))) //pour nbr signe
+		*val_prefix += 1;
+	if ((data->flag[0] & (1 << flag_space)))//pour nbr signe
+		*val_prefix += 1;
+	//le #: hexa (+2 sauf si nbr 0), octal ?|
+	// if ((data->flag[0] & (1 << flag_x)))
+		// *val_prefix += 2;
+	if ((data->flag[0] & (1 << flag_with)))
+		eff_fw = data->flag[1] - nb_digit - *eff_pre - *val_prefix;
 
-// void 		ft_printf_field_with(t_printf *data)
-// {
-	//FIELD WITH:
-	//--need precision effective,
-	//--need nbr de digit (ici nbr_digit),
-	// - preffix
-
-	//si FW des le debut: (flag 0 ou pas peut importe)
-
-	//si apres prefix (avec flag 0 sinon impossible)
-	//----------------
-
-	//PRECISION:
-	//-- effet sur les chiffres si plus grand
-	//-- effet sur les textes si plus petit
-
-	//----------------
-
-	//FIELD WITH:
-	//si a la fin (avec flag 0 et - mettre des espaces)
-
-	//----------------
-// }
+	printf("\n-----> value nbr_digit = %d\n", nb_digit);
+	printf("-----> value_preffix = %d\n", *val_prefix);
+	printf("-----> effective_pre = %d\n", *eff_pre);
+	printf("\n-----> effective_fw = %d\n", eff_fw);
+	return (eff_fw);
+}

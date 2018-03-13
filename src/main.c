@@ -15,8 +15,8 @@ int		main(void)
 
 	//TEST MODIFIERS sur d/D/i
 	//-----nbr negatif :
-		ft_printf("send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
-		printf("\nprintf: \"send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !\"\n", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
+		// ft_printf("send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
+		// printf("\nprintf: \"send : |%D| |%LD| |%jD| |%hhD| |%hD| |%zD| |%lD| !\"\n", -501, (long long)-502, (long)-503, (char)-504, (short)-505, (long)-506, (long)-507);
 		// ft_printf("send : |%zd| |%Ld| |%jd| |%hhd| |%hd| |%d| |%ld| !", -1250125, -1250225, -1250325, -1250425, -1250525, -1250625, -1250725);
 		// printf("\nprintf: \"send : |%zd| |%Ld| |%jd| |%hhd| |%hd| |%d| |%ld| !\"\n", -1250125, -1250225, -1250325, -1250425, -1250525, -1250625, -1250725);
 		// ft_printf("send : |%zi| |%Li| |%ji| |%hhi| |%hi| |%i| |%li| !", -1250125, -1250225, -1250325, -1250425, -1250525, -1250625, -1250725);
@@ -77,8 +77,8 @@ int		main(void)
 
 	//TEST MODIFIERS sur x
 	//-----nbr positif :
-		// ft_printf("send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", 5111, 5112, 5113, 5114, 5115, 5116);
-		// printf("\nprintf: \"send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
+		ft_printf("send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", 5111, 5112, 5113, 5114, 5115, 5116);
+		printf("\nprintf: \"send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
 		// ft_printf("send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !", 5111, 5112, 5113, 5114, 5115, 5116);
 		// printf("\nprintf: \"send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
 	//-----nbr negatif :
@@ -130,10 +130,51 @@ int		main(void)
 	// printf("%#25.10d\n", 43210);
 	// printf("%25.10d\n", 43210);
 
-	// printf("\n%10.3d\n", 43210);
-	// ft_printf("yoyo %.3d", 43210);
-	// ft_printf("a%10.4lhhd", 43210); //boucle infini avec field width
-	// ft_printf("%10.4lhhd", 43210); //boucle infini avec field width
+	//OCTAL :
+	/*
+	Avec un nombre:
+		- si precision <= au nb:
+			- affiche le nombre
+			- avec le #: affiche un zero avant
+		- si > au nb:
+			- ajoute des 0 avant le nombre
+			- avec le #: inactif car deja des 0
+
+	Si nombre = 0:
+		- precision 0 et nb 0, affiche rien
+		- precision 0 et nb 0 avec #, affiche le 0 du #
+		-
+	*/
+	printf("\n==> octal pre 0 avec nb : %.0o", 54321);
+	printf("\n==> octal pre 0 avec nb et # : %.0#o\n", 54321);
+
+	printf("\n==> octal pre 0 nb 0 : %.0o", 0);
+	printf("\n==> octal pre 0 nb 0 et # : %.0#o\n", 0);
+
+	printf("\n==> octal pre 4 avec nb  : %.4o", 54321);
+	printf("\n==> octal pre 4 avec nb et # : %.4#o\n", 54321);
+
+	printf("\n==> octal pre 4 nb 0 : %.4o", 0);
+	printf("\n==> octal pre 4 nb 0 et # : %.4#o\n", 0);
+
+	printf("\n==> octal pre 4 avec nb : %.4o", 1000);
+	printf("\n==> octal pre 4 avec nb et # : %.4#o\n", 1000);
+
+	printf("\n==> octal pre 8 avec nb : %.8o", 1000);
+	printf("\n==> octal pre 8 avec nb et # : %.8#o\n", 1000);
+
+	printf("\n==> octal pre 8  nb 0 : %.8o", 0);
+	printf("\n==> octal pre 8 nb 0 et # : %.8#o\n", 0);
+
+	printf("\n==> octal nb 0 sans pre : %o", 0);
+	printf("\n==> octal nb 0 sans pre et # : %#o\n", 0);
+
+
+
+	printf("\n==> test d %.0#d\n", 43210);
+
+	//test calcul de valeur effective:
+	ft_printf("%+10.7d", 43210);
 
 	return EXIT_SUCCESS;
 }

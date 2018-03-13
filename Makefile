@@ -9,7 +9,7 @@ LIBFT =			$(LIBFT_DIR)libft.a
 CFLAGS =		-Wall -Werror -Wextra
 DEBUG_FLAGS =	-fsanitize=address -g
 ARFLAGS =		-rcs
-CFILES =		debug ft_printf parser apply spec_format spec_type spec_unicode
+CFILES =		debug ft_printf parser apply attribut spec_format spec_type spec_unicode
 SRC =			$(CFILES:%=$(SRC_DIR)%.c)
 OBJ =			$(CFILES:%=$(OBJ_DIR)%.o)
 

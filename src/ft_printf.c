@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/13 07:21:32 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/13 14:22:53 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void 	add_to_result(t_printf *data, char c, int flag)
 	++(data->result_i);
 }
 
-//faire un printf qui "bufferise"?
 int		ft_printf(const char *format, ...)
 {
 	va_list     vl;

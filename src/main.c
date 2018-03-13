@@ -77,8 +77,8 @@ int		main(void)
 
 	//TEST MODIFIERS sur x
 	//-----nbr positif :
-		ft_printf("send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", 5111, 5112, 5113, 5114, 5115, 5116);
-		printf("\nprintf: \"send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
+		// ft_printf("send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !", 5111, 5112, 5113, 5114, 5115, 5116);
+		// printf("\nprintf: \"send : |%x| |%jx| |%hhx| |%hx| |%zx| |%Lx| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
 		// ft_printf("send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !", 5111, 5112, 5113, 5114, 5115, 5116);
 		// printf("\nprintf: \"send : |%X| |%jX| |%hhX| |%hX| |%zX| |%LX| !\"\n", 5111, 5112, 5113, 5114, 5115, 5116);
 	//-----nbr negatif :
@@ -130,7 +130,7 @@ int		main(void)
 	// printf("%#25.10d\n", 43210);
 	// printf("%25.10d\n", 43210);
 
-	//-----OCTAL-----
+	//---------------------------------OCTAL------------------------------------
 	/*
 	Avec un nombre:
 		- si precision <= au nb:
@@ -145,37 +145,55 @@ int		main(void)
 		- precision 0 et nb 0 avec #, ajoute le 0
 		-
 	*/
-	printf("\n==> octal pre 0 avec nb : %.0o", 54321);
-	printf("\n==> octal pre 0 avec nb et # : %.0#o\n", 54321);
+	// printf("\n==> octal pre 0 avec nb : |%. 0o|", 54321);
+	// printf("\n==> octal pre 0 avec nb et # : |% .0#o|\n", 54321);
+    //
+	// printf("\n==> octal pre 0 nb 0 : %.0o", 0);
+	// printf("\n==> octal pre 0 nb 0 et # : %.0#o\n", 0);
+    //
+	// printf("\n==> octal pre 4 avec nb  : %.4o", 54321);
+	// printf("\n==> octal pre 4 avec nb et # : %.4#o\n", 54321);
+    //
+	// printf("\n==> octal pre 4 nb 0 : %.4o", 0);
+	// printf("\n==> octal pre 4 nb 0 et # : %.4#o\n", 0);
+    //
+	// printf("\n==> octal pre 4 avec nb : %.4o", 1000);
+	// printf("\n==> octal pre 4 avec nb et # : %.4#o\n", 1000);
+    //
+	// printf("\n==> octal pre 8 avec nb : %.8o", 1000);
+	// printf("\n==> octal pre 8 avec nb et # : %.8#o\n", 1000);
+    //
+	// printf("\n==> octal pre 8  nb 0 : %.8o", 0);
+	// printf("\n==> octal pre 8 nb 0 et # : %.8#o\n", 0);
+    //
+	// printf("\n==> octal nb 0 sans pre : %o", 0);
+	// printf("\n==> octal nb 0 sans pre et # : %#o\n", 0);
+    //
+	// printf("\n==> octal avec nb sans pre : %o", 123);
+	// printf("\n==> octal avec nb sans pre et # : %#o\n", 123);
+    //
+	// printf("\n==> octal avec nb sans pre et +: %+o", 123);
+	// printf("\n==> octal avec nb sans pre et # + : %+#o\n", 123);
+	//-------------------------------------------------------------------------
 
-	printf("\n==> octal pre 0 nb 0 : %.0o", 0);
-	printf("\n==> octal pre 0 nb 0 et # : %.0#o\n", 0);
+	//-------------------------test d------------------------------------------
+	// printf("\n==> d et +: %+d", 123);
+	// printf("\n==> d et #: %+#d\n", 123);
+	// printf("\n==> d et #: |% d|\n", 123);
+	// printf("\n==> d et #: %0 d\n", 123);
+	ft_printf("\n==> d: |%7+.5d|\n", 123); //space pas actif si fw?
+	printf("\n==>printf d: |%7+.5d|\n", 123);
+	//-------------------------------------------------------------------------
 
-	printf("\n==> octal pre 4 avec nb  : %.4o", 54321);
-	printf("\n==> octal pre 4 avec nb et # : %.4#o\n", 54321);
-
-	printf("\n==> octal pre 4 nb 0 : %.4o", 0);
-	printf("\n==> octal pre 4 nb 0 et # : %.4#o\n", 0);
-
-	printf("\n==> octal pre 4 avec nb : %.4o", 1000);
-	printf("\n==> octal pre 4 avec nb et # : %.4#o\n", 1000);
-
-	printf("\n==> octal pre 8 avec nb : %.8o", 1000);
-	printf("\n==> octal pre 8 avec nb et # : %.8#o\n", 1000);
-
-	printf("\n==> octal pre 8  nb 0 : %.8o", 0);
-	printf("\n==> octal pre 8 nb 0 et # : %.8#o\n", 0);
-
-	printf("\n==> octal nb 0 sans pre : %o", 0);
-	printf("\n==> octal nb 0 sans pre et # : %#o\n", 0);
-
-	printf("\n==> octal avec nb sans pre : %o", 123);
-	printf("\n==> octal avec nb sans pre et # : %#o\n", 123);
-
-	printf("\n==> test d %.0#d\n", 43210);
+	//-------------------------test x------------------------------------------
+	// printf("\n==> x et +: %+x", 1723);
+	// printf("\n==> x et #: %+#x\n", 1723);
+	// printf("\n==> x et #: |% x|\n", 1723);
+	// printf("\n==> x et #: %0 x\n", 1723);
+	//-------------------------------------------------------------------------
 
 	//test calcul de valeur effective:
-	ft_printf("%+10.7d", 43210);
+	// ft_printf("%+10.7d", 43210);
 
 	return EXIT_SUCCESS;
 }

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/13 17:23:37 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/13 19:40:59 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,8 +59,8 @@ void 	apply_specifier(t_printf *data, va_list vl)
 			((t_ptr_get_spec)tab_ptr_get_spec[i + 1])(data, vl, specifier);
 }
 
-int 	apply_effective_value(t_printf *data, int *eff_pre, //si flag - pas mettre le flag
-	int *val_prefix, int nb_digit) //gerer en amont les exceptions
+int 	apply_effective_value(t_printf *data, int *eff_pre, //si flag - pas mettre le flag 0
+	int *val_prefix, int nb_digit) //gerer en amont les exceptions, desactive les flags etc..
 {
 	int eff_fw;
 
@@ -70,11 +70,12 @@ int 	apply_effective_value(t_printf *data, int *eff_pre, //si flag - pas mettre 
 	if ((data->flag[0] & (1 << flag_pre)))
 		if (data->flag[2] > nb_digit)
 			*eff_pre = data->flag[2] - nb_digit;
-	//gerer les preffix avant la fnct
 	if ((data->flag[0] & (1 << flag_plus))) //pour nbr signe
 		*val_prefix += 1;
 	if ((data->flag[0] & (1 << flag_space)))//pour nbr signe
 		*val_prefix += 1;
+	// if ((data->flag[0] & (1 << flag_hash)))//pour nbr signe
+		// *val_prefix += 2;
 	//le #: hexa (+2 sauf si nbr 0), octal ?|
 	// if ((data->flag[0] & (1 << flag_x)))
 		// *val_prefix += 2;

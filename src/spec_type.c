@@ -52,6 +52,10 @@ void 	d(t_printf *data, va_list vl, t_type specifier)
 	else
 		str = ft_lltoa_base(specifier.d, 10);
 	nb_digit = ft_strlen(str);
+
+	if ((data->flag[0] & (1 << flag_hash))) //s supr
+		data->flag[0] &= ~(1 << flag_hash);
+
 	effective_fw = apply_effective_value(data,
 		&effective_pre, &val_prefix, nb_digit);
 

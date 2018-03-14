@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/13 14:22:53 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/14 16:15:25 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,15 @@ void 	add_to_result(t_printf *data, char c, int flag)
 	else
 		data->result_end->buf[data->result_i] = c;
 	++(data->result_i);
+}
+
+void 	add_str_to_result(t_printf *data, char* str, int flag)
+{
+	int i;
+
+	i = -1;
+	while (str[++i])
+		add_to_result(data, str[i], flag);
 }
 
 int		ft_printf(const char *format, ...)

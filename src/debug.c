@@ -5,9 +5,9 @@ void 	print_flag(t_printf *data)
 	int i;
 
 	i = -1;
-	printf("\n'0' '-' '+' ' ' '#' 'hh' 'h' 'j' 'l' 'z' 'L' '.' 'w'\n");
+	printf("\n'0'  '-'  '+'  ' '  '#'  'hh' 'h'  'j'  'l'  'z'  'L'  '.'  'w'\n");
 	while (++i <= flag_with)
-		printf("[%d] ", (data->flag[0] & 1 << (flag_zero + i)) / (1 << i));
+		printf("[%d]  ", (data->flag[0] & 1 << (flag_zero + i)) / (1 << i));
 	printf("\n\n");
 	printf("field with = %d\n", data->flag[1]);
 	printf("precision = %d\n\n", data->flag[2]);

@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-void 	C(t_printf *data, va_list vl, t_type specifier)
+int 	C(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	(void)data;
 	(void)vl;
@@ -8,7 +8,7 @@ void 	C(t_printf *data, va_list vl, t_type specifier)
 
 }
 
-void 	S(t_printf *data, va_list vl, t_type specifier)
+int 	S(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	(void)data;
 	(void)vl;

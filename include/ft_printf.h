@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/13 15:36:26 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/14 16:42:54 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,21 +73,24 @@ typedef struct		s_result
 **/
 typedef struct		s_printf
 {
-	char			*format;
 	t_result		*result_start;
 	t_result		*result_end;
+	char			*format;
 	int				result_i;
 	int				format_i;
 	int				flag[3];
+	char			*prefix;
+	int				val_prefix;
+	int				effective_pre;
+	int				effective_fw;
 }					t_printf;
 
-typedef void (*t_ptr_get_spec)(t_printf *, va_list, t_type);
+typedef int (*t_ptr_get_spec)(t_printf *, va_list, t_type, char **str);
 
 void apply_modifier_signed(t_printf *data, t_type *specifier);
 void apply_modifier_unsigned(t_printf *data, t_type *specifier);
 void apply_specifier(t_printf *data, va_list vl);
-int apply_effective_value(t_printf *data, int *eff_pre, int *val_prefix,
-	int nb_digit);
+int apply_effective_value(t_printf *data, int len_arg);
 
 /**
 ** parcourt la str(chaine de format) passé en arguments de ft_printf,
@@ -113,6 +116,7 @@ void	get_flag(t_printf *print);
 ** sinon on envoi le caractere manuellement
 **/
 void 	add_to_result(t_printf *data, char c, int flag);
+void 	add_str_to_result(t_printf *data, char *str, int flag);
 
 /**
 ** fonction principale:
@@ -136,19 +140,14 @@ void 	print_format(t_printf *data);
 ** Toutes les declarations des specifiers en pointeurs de fonctions
 **/
 
-void 	s(t_printf *data, va_list vl, t_type specifier);
-void 	S(t_printf *data, va_list vl, t_type specifier);
-void 	p(t_printf *data, va_list vl, t_type specifier);
-void 	d(t_printf *data, va_list vl, t_type specifier);
-void 	D(t_printf *data, va_list vl, t_type specifier);
-void 	S(t_printf *data, va_list vl, t_type specifier);
-void 	o(t_printf *data, va_list vl, t_type specifier);
-void 	O(t_printf *data, va_list vl, t_type specifier);
-void 	u(t_printf *data, va_list vl, t_type specifier);
-void 	U(t_printf *data, va_list vl, t_type specifier);
-void 	x(t_printf *data, va_list vl, t_type specifier);
-void 	X(t_printf *data, va_list vl, t_type specifier);
-void 	c(t_printf *data, va_list vl, t_type specifier);
-void 	C(t_printf *data, va_list vl, t_type specifier);
+int 	s(t_printf *data, va_list vl, t_type specifier, char **str);
+int		S(t_printf *data, va_list vl, t_type specifier, char **str);
+int		d(t_printf *data, va_list vl, t_type specifier, char **str);
+int		u(t_printf *data, va_list vl, t_type specifier, char **str);
+int		p(t_printf *data, va_list vl, t_type specifier, char **str);
+int		o(t_printf *data, va_list vl, t_type specifier, char **str);
+int		x(t_printf *data, va_list vl, t_type specifier, char **str);
+int		c(t_printf *data, va_list vl, t_type specifier, char **str);
+int		C(t_printf *data, va_list vl, t_type specifier, char **str);
 
 #endif

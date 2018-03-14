@@ -128,10 +128,14 @@ int		main(void)
 	// printf("%#25.10d\n", 43210);
 	// printf("%25.10d\n", 43210);
 
-	ft_printf("|%-#9.4o|", 123);
-	printf("printf: \"|%-#9.4o|\"\n", 123);
-	ft_printf("|%-9.4x|", 123);
-	printf("printf: \"|%-9.4x|\"\n", 123);
+	// ft_printf("|%#9.4o|", 123);
+	// printf("printf: \"|%#9.4o|\"\n", 123);
+	// ft_printf("|%-+#9d|", -123);
+	// printf("printf: \"|%-+#9d|\"\n", -123);
+	ft_printf("|%+#9d|", 123);
+	printf("printf: \"|%+#9d|\"\n", 123);
+	ft_printf("|%0+#9d|", 123);
+	printf("printf: \"|%0+#9d|\"\n", 123);
 
 	//---------------------------------OCTAL------------------------------------
 	/*

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/14 16:42:54 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/14 21:34:28 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ typedef struct		s_printf
 	int				result_i;
 	int				format_i;
 	int				flag[3];
-	char			*prefix;
+	char			*str_prefix;
 	int				val_prefix;
 	int				effective_pre;
 	int				effective_fw;
@@ -117,6 +117,7 @@ void	get_flag(t_printf *print);
 **/
 void 	add_to_result(t_printf *data, char c, int flag);
 void 	add_str_to_result(t_printf *data, char *str, int flag);
+void 	put_n_char_to_result(t_printf *data, char c, int flag);
 
 /**
 ** fonction principale:

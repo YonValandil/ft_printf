@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/14 21:10:36 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/14 23:10:36 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,6 @@ void 	apply_specifier(t_printf *data, va_list vl)
 {
 	int i;
 	char *str_arg;
-	char *str_prefix;
 	int len_arg;
 
 	i = -2;
@@ -72,22 +71,32 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	if ((data->flag[0] & (1 << flag_neg)) || (data->flag[0] & (1 << flag_pre))) //si flag - OU flag_pre, ALORS flag 0 est ecrasé
 		data->flag[0] &= ~(1 << flag_zero);
 
+printf("\n\n============> val field with : %d\n\n", ((data->flag[0] & (1 << flag_plus)) && (data->flag[0] & (1 << flag_zero))) ||
+													 ((data->flag[0] & (1 << flag_hash)) && (data->flag[0] & (1 << flag_zero))));
 	//field width, begin
-	if ((data->flag[0] & (1 << flag_with)) && //si fw exist
-		!(data->flag[0] & (1 << flag_neg) && //si pas de flag -
-		!((data->flag[0] & (1 << flag_plus)) && //si flag + ET flag 0, la fw est apres le prefix
-		(data->flag[0] & (1 << flag_zero))) &&
-		!((data->flag[0] & (1 << flag_hash)) && //si flag # ET flag 0, la fw est apres le prefix
-		(data->flag[0] & (1 << flag_zero))))
-	)
+	if ((data->flag[0] & (1 << flag_with))
+		&& !(data->flag[0] & (1 << flag_neg))
+		&& !((data->flag[0] & (1 << flag_plus)) && (data->flag[0] & (1 << flag_zero)))//si flag + ET flag 0, la fw est apres le prefix
+		&& !((data->flag[0] & (1 << flag_hash)) && (data->flag[0] & (1 << flag_zero))))//si flag # ET flag 0, la fw est apres le prefix
+			put_n_char_to_result(data, ((data->flag[0] & (1 << flag_zero)) ? '0' : ' '), data->effective_fw); 
+
+	//prefix
+		if (data->val_prefix > 0)
+			add_str_to_result(data, data->str_prefix, 1);
+
+	//signe - OU + pour les int (modifier lltoa_base)
+		//si chiffre negatif, affiche le '-'
+		//si chiffre positif et flag +, afficher '+'
+
+	//field width, after prefix
+	if ((data->flag[0] & (1 << flag_with)) //si fw exist
+		&& !(data->flag[0] & (1 << flag_neg)) //si pas de flag -
+		&& ((data->flag[0] & (1 << flag_plus)) && (data->flag[0] & (1 << flag_zero)))
+		|| ((data->flag[0] & (1 << flag_hash)) && (data->flag[0] & (1 << flag_zero))))
 		(data->flag[0] & (1 << flag_zero)) ?
 			put_n_char_to_result(data, '0', data->effective_fw) :
 			put_n_char_to_result(data, ' ', data->effective_fw);
 
-	//prefix
-	
-
-	//field width, after prefix
 
 	//precision
 
@@ -95,9 +104,10 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	add_str_to_result(data, str_arg, 1);
 
 	//field width, end
-	if ((data->flag[0] & (1 << flag_with)))
+	if ((data->flag[0] & (1 << flag_with)) && (data->flag[0] & (1 << flag_neg)))
 		put_n_char_to_result(data, ' ', data->effective_fw);
-	//free str
+	ft_memdel((void**)&str_arg);
+	ft_memdel((void**)&(data->str_prefix));
 }
 
 int 	apply_effective_value(t_printf *data, int len_arg)
@@ -106,15 +116,22 @@ int 	apply_effective_value(t_printf *data, int len_arg)
 		if (data->flag[2] > len_arg)
 			data->effective_pre = data->flag[2] - len_arg;
 	if ((data->flag[0] & (1 << flag_plus)))
+	{
 		data->val_prefix += 1;
+		data->str_prefix = ft_strdup("+");
+
+	}
 	if ((data->flag[0] & (1 << flag_space)))
+	{
 		data->val_prefix += 1;
+		data->str_prefix = ft_strdup(" ");
+	}
 	if ((data->flag[0] & (1 << flag_with)))
 		data->effective_fw = data->flag[1] - len_arg - data->effective_pre - data->val_prefix;
 
-	printf("\n-----> value nbr_digit = %d\n", len_arg);
-	printf("-----> value_preffix = %d\n", data->val_prefix);
-	printf("-----> effective_pre = %d\n", data->effective_pre);
-	printf("\n-----> effective_fw = %d\n", data->effective_fw);
+	// printf("\n-----> value nbr_digit = %d\n", len_arg);
+	// printf("-----> value_preffix = %d\n", data->val_prefix);
+	// printf("-----> effective_pre = %d\n", data->effective_pre);
+	// printf("\n-----> effective_fw = %d\n", data->effective_fw);
 	return (data->effective_fw);
 }

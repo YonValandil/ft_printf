@@ -16,10 +16,13 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 	len_arg = ft_strlen(*str);
 	if ((data->flag[0] & (1 << flag_plus)))
 		data->flag[0] &= ~(1 << flag_plus);
-	if (data->flag[2] > len_arg) //si pre > a len_arg ALORS pas de #
+	if (data->flag[2] > len_arg) //si pre > a len_arg ALORS pas de flag #
 		data->flag[0] &= ~(1 << flag_hash);
 	if ((data->flag[0] & (1 << flag_hash)))
+	{
 		data->val_prefix = 1;
+		data->str_prefix = ft_strdup("0");
+	}
 	return (len_arg);
 }
 
@@ -28,8 +31,6 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 	int i;
 	int len_arg;
 
-	if (data->flag[0] && (1 << flag_hash))
-		data->prefix = (data->format[data->format_i] == 'x') ? "Ox" : "OX";
 	i = -1;
 	specifier.ul = va_arg(vl, unsigned long);
 	apply_modifier_unsigned(data, &specifier);
@@ -44,7 +45,11 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 			(*str)[i] = ft_toupper((*str)[i]);
 	if ((data->flag[0] & (1 << flag_plus)))
 			data->flag[0] &= ~(1 << flag_plus);
-	if ((data->flag[0] & (1 << flag_hash)))
+	if (data->flag[0] & (1 << flag_hash))
+	{
+		data->str_prefix = (data->format[data->format_i] == 'x') ?
+			ft_strdup("0x") : ft_strdup("0X");
 		data->val_prefix = 2;
+	}
 	return (ft_strlen(*str));
 }

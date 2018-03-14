@@ -63,6 +63,8 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_lltoa_base(specifier.d, 10);
 	if ((data->flag[0] & (1 << flag_hash)))
 			data->flag[0] &= ~(1 << flag_hash);
+	if ((data->flag[0] & (1 << flag_plus)))
+			; //modifier lltoa_base pour le signe
 	return (ft_strlen(*str));
 }
 

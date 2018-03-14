@@ -3,6 +3,7 @@
 int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	int i;
+	int len_arg;
 
 	i = -1;
 	specifier.ul = va_arg(vl, unsigned long);
@@ -12,11 +13,14 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_ulltoa_base(specifier.ul, 8);
 	else
 		*str = ft_ulltoa_base(specifier.u, 8);
+	len_arg = ft_strlen(*str);
 	if ((data->flag[0] & (1 << flag_plus)))
-			data->flag[0] &= ~(1 << flag_plus);
+		data->flag[0] &= ~(1 << flag_plus);
+	if (data->flag[2] > len_arg) //si pre > a len_arg ALORS pas de #
+		data->flag[0] &= ~(1 << flag_hash);
 	if ((data->flag[0] & (1 << flag_hash)))
-			data->flag[0] &= ~(1 << flag_hash);
-	return (ft_strlen(*str));
+		data->val_prefix = 1;
+	return (len_arg);
 }
 
 int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
@@ -40,5 +44,7 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 			(*str)[i] = ft_toupper((*str)[i]);
 	if ((data->flag[0] & (1 << flag_plus)))
 			data->flag[0] &= ~(1 << flag_plus);
+	if ((data->flag[0] & (1 << flag_hash)))
+		data->val_prefix = 2;
 	return (ft_strlen(*str));
 }

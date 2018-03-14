@@ -11,11 +11,27 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 	while (++i <= len_arg)
 		add_to_result(data, specifier.s[i], 1);
 	return (len_arg);
+	if ((data->flag[0] & (1 << flag_plus)))
+		data->flag[0] &= ~(1 << flag_plus);
+	if ((data->flag[0] & (1 << flag_zero)))
+		data->flag[0] &= ~(1 << flag_zero);
+	if ((data->flag[0] & (1 << flag_hash)))
+		data->flag[0] &= ~(1 << flag_hash);
+	if ((data->flag[0] & (1 << flag_space)))
+		data->flag[0] &= ~(1 << flag_space);
 }
 
 int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	specifier.c = (char)va_arg(vl, int);
+	if ((data->flag[0] & (1 << flag_plus)))
+		data->flag[0] &= ~(1 << flag_plus);
+	if ((data->flag[0] & (1 << flag_zero)))
+		data->flag[0] &= ~(1 << flag_zero);
+	if ((data->flag[0] & (1 << flag_hash)))
+		data->flag[0] &= ~(1 << flag_hash);
+	if ((data->flag[0] & (1 << flag_space)))
+		data->flag[0] &= ~(1 << flag_space);
 	return (1);
 }
 

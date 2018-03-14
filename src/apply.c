@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/14 20:25:14 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/14 21:10:36 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,6 @@ void 	apply_specifier(t_printf *data, va_list vl)
 				specifier, &str_arg);
 	data->effective_fw = apply_effective_value(data, len_arg);
 
-	print_flag(data); //debug
-
 	//attributs regles generales
 	if ((data->flag[0] & (1 << flag_plus) && (data->flag[0] & (1 << flag_space)))) //si flag + ET flag_space, ALORS flag_space est ecrasé
 		data->flag[0] &= ~(1 << flag_space);
@@ -87,6 +85,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 			put_n_char_to_result(data, ' ', data->effective_fw);
 
 	//prefix
+	
 
 	//field width, after prefix
 
@@ -96,8 +95,9 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	add_str_to_result(data, str_arg, 1);
 
 	//field width, end
-
-	print_flag(data);//debug
+	if ((data->flag[0] & (1 << flag_with)))
+		put_n_char_to_result(data, ' ', data->effective_fw);
+	//free str
 }
 
 int 	apply_effective_value(t_printf *data, int len_arg)
@@ -109,8 +109,6 @@ int 	apply_effective_value(t_printf *data, int len_arg)
 		data->val_prefix += 1;
 	if ((data->flag[0] & (1 << flag_space)))
 		data->val_prefix += 1;
-	// if () { //pour le hash
-	// }
 	if ((data->flag[0] & (1 << flag_with)))
 		data->effective_fw = data->flag[1] - len_arg - data->effective_pre - data->val_prefix;
 

@@ -12,6 +12,10 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_ulltoa_base(specifier.ul, 8);
 	else
 		*str = ft_ulltoa_base(specifier.u, 8);
+	if ((data->flag[0] & (1 << flag_plus)))
+			data->flag[0] &= ~(1 << flag_plus);
+	if ((data->flag[0] & (1 << flag_hash)))
+			data->flag[0] &= ~(1 << flag_hash);
 	return (ft_strlen(*str));
 }
 
@@ -34,5 +38,7 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 	while (++i <= len_arg)
 		if (data->format[data->format_i] == 'X')
 			(*str)[i] = ft_toupper((*str)[i]);
+	if ((data->flag[0] & (1 << flag_plus)))
+			data->flag[0] &= ~(1 << flag_plus);
 	return (ft_strlen(*str));
 }

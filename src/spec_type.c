@@ -45,8 +45,8 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_lltoa_base(specifier.l, 10);
 	else
 		*str = ft_lltoa_base(specifier.d, 10);
-	if ((data->flag[0] & (1 << flag_plus) && (data->flag[0] & (1 << flag_space))))
-		data->flag[0] &= ~(1 << flag_space);
+	if ((data->flag[0] & (1 << flag_hash)))
+			data->flag[0] &= ~(1 << flag_hash);
 	return (ft_strlen(*str));
 }
 

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/14 17:01:08 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/14 20:25:14 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 {
 	int i;
 	char *str_arg;
+	char *str_prefix;
 	int len_arg;
 
 	i = -2;
@@ -65,21 +66,41 @@ void 	apply_specifier(t_printf *data, va_list vl)
 				specifier, &str_arg);
 	data->effective_fw = apply_effective_value(data, len_arg);
 
-	//field width begin
+	print_flag(data); //debug
+
+	//attributs regles generales
+	if ((data->flag[0] & (1 << flag_plus) && (data->flag[0] & (1 << flag_space)))) //si flag + ET flag_space, ALORS flag_space est ecrasé
+		data->flag[0] &= ~(1 << flag_space);
+	if ((data->flag[0] & (1 << flag_neg)) || (data->flag[0] & (1 << flag_pre))) //si flag - OU flag_pre, ALORS flag 0 est ecrasé
+		data->flag[0] &= ~(1 << flag_zero);
+
+	//field width, begin
+	if ((data->flag[0] & (1 << flag_with)) && //si fw exist
+		!(data->flag[0] & (1 << flag_neg) && //si pas de flag -
+		!((data->flag[0] & (1 << flag_plus)) && //si flag + ET flag 0, la fw est apres le prefix
+		(data->flag[0] & (1 << flag_zero))) &&
+		!((data->flag[0] & (1 << flag_hash)) && //si flag # ET flag 0, la fw est apres le prefix
+		(data->flag[0] & (1 << flag_zero))))
+	)
+		(data->flag[0] & (1 << flag_zero)) ?
+			put_n_char_to_result(data, '0', data->effective_fw) :
+			put_n_char_to_result(data, ' ', data->effective_fw);
 
 	//prefix
 
-	//field width after prefix
+	//field width, after prefix
 
 	//precision
 
 	//val arg
 	add_str_to_result(data, str_arg, 1);
 
-	//field width end
+	//field width, end
+
+	print_flag(data);//debug
 }
 
-int 	apply_effective_value(t_printf *data, int len_arg) //si flag - pas mettre le flag 0
+int 	apply_effective_value(t_printf *data, int len_arg)
 {
 	if ((data->flag[0] & (1 << flag_pre)))
 		if (data->flag[2] > len_arg)

@@ -109,14 +109,12 @@ int		main(void)
 		// ft_printf("send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !", ULONG_MAX, UINT_MAX , -851621 , CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 		// printf("\nprintf: \"send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 
-	//AUTREE TEST DIVERS POUR COMPRENDRE
+	//----------------AUTRE TEST DIVERS POUR COMPRENDRE-------------------------
 	// int p;
 	// ft_printf("send : |%p| !", &p);
 	// printf("\nprintf: \"send : |%p| !\"\n", &p);
-	// printf("send : |%%%| |%.2-w| |%0.d| |%0207 -3 #15.7+s| pandas sauvages!");
+	// printf("send : |%%%| |%.2-w| |%0.d| |%0207 -3 #15.7+s| panda sauvage!");
 
-	// ft_printf("coucou");
-	// printf("Je te l'avais dit:\n");
 	// printf("%10d\n", 43210);
 	// printf("%.10d\n", 43210);
 	// printf("%3d\n", 43210);
@@ -129,6 +127,11 @@ int		main(void)
     //
 	// printf("%#25.10d\n", 43210);
 	// printf("%25.10d\n", 43210);
+
+	ft_printf("|%+#9.4x|", 123);
+	printf("printf: \"|%+#9.4x|\"\n", 123);
+	ft_printf("|%+#09.4x|", 123);
+	printf("printf: \"|%+#09.4x|\"\n", 123);
 
 	//---------------------------------OCTAL------------------------------------
 	/*
@@ -176,15 +179,45 @@ int		main(void)
 	// printf("\n==> octal avec nb sans pre et # + : %+#o\n", 123);
 	//-------------------------------------------------------------------------
 
-	//-------------------------test d------------------------------------------
-	// printf("\n==> d et +: %+d", 123);
-	// printf("\n==> d et #: %+#d\n", 123);
-	// printf("\n==> d et #: |% d|\n", 123);
-	// printf("\n==> d et #: %0 d\n", 123);
-	// ft_printf("\n d: |%09+ .5d|\n", 123);
-	// printf("\nprintf d: |%09+ .5d|\n", 123);
-	ft_printf("\n d: |%09.4d|\n", 123);
-	printf("\nprintf d: |%09.4d|\n", 123);
+	//-------------------------test field width avec d------------------------------------------
+	// printf("\nprintf d: |%0+9.4d|\n", 123); //fw = ' ' avant le +, puis pre puis pre (ok)
+	// printf("\nprintf d: |%09.4d|\n", 123); //fw = ' ' et pre apres (ok) | pas de flag_0 avec flag_pre
+	// printf("\nprintf d: |%0+9d|\n", 123); //fw = 0 apres le + (ok)
+	// printf("\nprintf d: |%+9d|\n", 123); //fw = ' ' avant le + (ok)
+	// printf("\nprintf d: |%09d|\n", 123); //fw = 0 (ok)
+	// printf("\nprintf d: |%9d|\n", 123);//fw = ' ' (ok)
+	//-------------------------------------------------------------------------
+
+	//-------------------------test field width avec x------------------------------------------
+	// printf("\nprintf x: |%0+9.4x|\n", 123); //fw = ' ' avant le +, puis pre puis pre (ok)
+	// printf("\nprintf x: |%09.4x|\n", 123); //fw = ' ' et pre apres (ok) | pas de flag_0 avec flag_pre
+	// printf("\nprintf x: |%0+9x|\n", 123); //pas de + (ok)
+	// printf("\nprintf x: |%+9x|\n", 123); //pas de + avec x (ok)
+	// printf("\nprintf x: |%09x|\n", 123); //fw = 0 (ok)
+	// printf("\nprintf x: |%9x|\n", 123);//fw = ' ' (ok)
+
+	// printf("\nprintf x: |%0#9.4x|\n", 123); //fw = ' ' , puis # puis pre (ok)
+	// printf("\nprintf x: |%09.4x|\n", 123); //fw = ' ' et pre apres (ok) | pas de flag_0 avec flag_pre
+	// printf("\nprintf x: |%0#9x|\n", 123); //fw = '0' apres le 0x (ok)
+	// printf("\nprintf x: |%#9x|\n", 123); //fw = ' ' puis affiche le 0x (ok)
+	// printf("\nprintf x: |%09x|\n", 123); //fw = 0 (ok)
+	// printf("\nprintf x: |%9x|\n", 123);//fw = ' ' (ok)
+	//-------------------------------------------------------------------------
+
+	//-------------------------test field width avec o------------------------------------------
+	// printf("\nprintf o: |%0+9.4o|\n", 123); //fw = ' ' avant le +, puis preix puis pre (ok)
+	// printf("\nprintf o: |%09.4o|\n", 123); //fw = ' ' et pre apres (ok) | pas de flag_0 avec flag_pre
+	// printf("\nprintf o: |%0+9o|\n", 123); //pas de o (ok)
+	// printf("\nprintf o: |%+9o|\n", 123); //pas de + avec o (ok)
+	// printf("\nprintf o: |%09o|\n", 123); //fw = 0 (ok)
+	// printf("\nprintf o: |%9o|\n", 123);//fw = ' ' (ok)
+
+	// printf("\nprintf o: |%0#9.4o|\n", 123); //fw = ' ' avant le +, puis preix puis pre (ok)
+	// printf("\nprintf o: |%09.4o|\n", 123); //fw = ' ' et pre apres (ok) | pas de flag_0 avec flag_pre
+	// printf("\nprintf o: |%0#9o|\n", 123); //pas de o (ok)
+	// printf("\nprintf o: |%#9o|\n", 123); //pas de + avec o (ok)
+	// printf("\nprintf o: |%09o|\n", 123); //fw = 0 (ok)
+	// printf("\nprintf o: |%9o|\n", 123);//fw = ' ' (ok)
 	//-------------------------------------------------------------------------
 
 	//-------------------------test x------------------------------------------
@@ -194,8 +227,7 @@ int		main(void)
 	// printf("\n==> x et #: %0 x\n", 1723);
 	//-------------------------------------------------------------------------
 
-	//test calcul de valeur effective:
-	// ft_printf("%+10.7d", 43210);
+	// printf("\n\nres test = %s\n", (char *)ft_memset((ft_memalloc(11)), '0', 10));
 
 	return EXIT_SUCCESS;
 }

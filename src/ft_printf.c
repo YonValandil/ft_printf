@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/14 16:15:25 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/14 19:46:27 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,16 @@ void 	add_str_to_result(t_printf *data, char* str, int flag)
 		add_to_result(data, str[i], flag);
 }
 
+void 	put_n_char_to_result(t_printf *data, char c, int n)
+{
+	int i;
+
+	i = -1;
+	while (++i < n) {
+		add_to_result(data, c, 1);
+	}
+}
+
 int		ft_printf(const char *format, ...)
 {
 	va_list     vl;
@@ -73,7 +83,7 @@ int		ft_printf(const char *format, ...)
 	va_end(vl);
 
 	//affichage de debug
-	print_flag(&data);
+	// print_flag(&data);
 	print_format(&data);
 	print_lst(&data);
 

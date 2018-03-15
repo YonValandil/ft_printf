@@ -14,6 +14,8 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 	else
 		*str = ft_ulltoa_base(specifier.u, 8);
 	len_arg = ft_strlen(*str);
+	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] <= len_arg))
+			data->flag[0] &= ~(1 << flag_pre);
 	if ((data->flag[0] & (1 << flag_plus)))
 		data->flag[0] &= ~(1 << flag_plus);
 	if (data->flag[2] > len_arg) //si pre > a len_arg ALORS pas de flag #
@@ -43,6 +45,8 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 	while (++i <= len_arg)
 		if (data->format[data->format_i] == 'X')
 			(*str)[i] = ft_toupper((*str)[i]);
+	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] <= len_arg))
+			data->flag[0] &= ~(1 << flag_pre);
 	if ((data->flag[0] & (1 << flag_plus)))
 			data->flag[0] &= ~(1 << flag_plus);
 	if (data->flag[0] & (1 << flag_hash))

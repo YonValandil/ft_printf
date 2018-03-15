@@ -113,29 +113,43 @@ int		main(void)
 	// int p;
 	// ft_printf("send : |%p| !", &p);
 	// printf("\nprintf: \"send : |%p| !\"\n", &p);
+
 	// printf("send : |%%%| |%.2-w| |%0.d| |%0207 -3 #15.7+s| panda sauvage!");
 
-	// printf("%10d\n", 43210);
-	// printf("%.10d\n", 43210);
-	// printf("%3d\n", 43210);
-	// printf("%.3d\n", 43210);
-    //
+	// printf("\nTEST s pre 0 === %-010.2s |\n", "ABC");
+	// printf("\nTEST c pre 0 === %.3s |\n", 'a');
+
 	// printf("%10s\n", "test w");
 	// printf("%.10s\n", "test pre");
 	// printf("%3s\n", "test w");
 	// printf("%.3s\n", "test pre");
-    //
-	// printf("%#25.10d\n", 43210);
-	// printf("%25.10d\n", 43210);
 
-	// ft_printf("|%#9.4o|", 123);
-	// printf("printf: \"|%#9.4o|\"\n", 123);
-	// ft_printf("|%-+#9d|", -123);
-	// printf("printf: \"|%-+#9d|\"\n", -123);
-	ft_printf("|%+#9d|", 123);
-	printf("printf: \"|%+#9d|\"\n", 123);
-	ft_printf("|%0+#9d|", 123);
-	printf("printf: \"|%0+#9d|\"\n", 123);
+	ft_printf("|%d|", 123);
+	//ALL OK
+	// ft_printf("|%+#10.5d|", 123);
+	// printf("printf: \"|%+#10.5d|\"\n", 123);
+	// ft_printf("|%0+#10.5d|", 123);
+	// printf("printf: \"|%0+#10.5d|\"\n", 123);
+	// ft_printf("|%0#10.5d|", 123);
+	// printf("printf: \"|%0#10.5d|\"\n", 123);
+	// ft_printf("|%0+#10.5d|", -123);
+	// printf("printf: \"|%0+#10.5d|\"\n", -123);
+	// ft_printf("|%0+#10.5x|", 123);
+	// printf("printf: \"|%0+#10.5x|\"\n", 123);
+	// ft_printf("|%0+#10.5o|", 123);
+	// printf("printf: \"|%0+#10.5o|\"\n", 123);
+
+	//TEST pending
+	// ft_printf("\n|%s|", "123");
+	// printf("printf: \"|%s|\"\n", "123");
+	// ft_printf("|%c|", 'a');
+	// printf("printf: \"|%c|\"\n", 'a');
+
+	// ft_printf("\n|%0+#10.5s|", "123");
+	// printf("printf: \"|%0+#10.5s|\"\n", "123");
+	// ft_printf("|%0+#10.5c|", 'a');
+	// printf("printf: \"|%0+#10.5c|\"\n", 'a');
+
 
 	//---------------------------------OCTAL------------------------------------
 	/*

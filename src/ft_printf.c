@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/14 19:46:27 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/15 23:00:27 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,12 @@ void 	add_str_to_result(t_printf *data, char* str, int flag)
 {
 	int i;
 
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (str[i])
+	{
 		add_to_result(data, str[i], flag);
+		++i;
+	}
 }
 
 void 	put_n_char_to_result(t_printf *data, char c, int n)

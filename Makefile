@@ -19,7 +19,7 @@ $(LIBFT):
 	make -C $(LIBFT_DIR)
 
 $(EXEC): $(NAME) $(SRC_DIR)main.c
-	$(CC) $(SRC_DIR)main.c $(SRC) -I$(HEADER_DIR) -L$(LIBFT_DIR) -L./ -lft -lft_printf -o $@ #$(CFLAGS) $(DEBUG_FLAGS)
+	$(CC) $(SRC_DIR)main.c $(SRC) -I$(HEADER_DIR) -L$(LIBFT_DIR) -L./ -lft -lft_printf -o $@ $(DEBUG_FLAGS) #$(CFLAGS) $(DEBUG_FLAGS)
 
 $(NAME): $(OBJ)
 	ar $(ARFLAGS) $@ $(OBJ)

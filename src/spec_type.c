@@ -1,6 +1,6 @@
 #include "ft_printf.h"
 
-int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
+int 	s(t_printf *data, va_list vl, t_type specifier, char **str) //0 avec ocal char et str | segfault char et str | penser au null
 {
 	int i;
 	int len_arg;
@@ -10,7 +10,6 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 	len_arg = ft_strlen(specifier.s);
 	while (++i <= len_arg)
 		add_to_result(data, specifier.s[i], 1);
-	return (len_arg);
 	if ((data->flag[0] & (1 << flag_plus)))
 		data->flag[0] &= ~(1 << flag_plus);
 	if ((data->flag[0] & (1 << flag_zero)))
@@ -19,6 +18,9 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 		data->flag[0] &= ~(1 << flag_hash);
 	if ((data->flag[0] & (1 << flag_space)))
 		data->flag[0] &= ~(1 << flag_space);
+	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] > len_arg))
+			data->flag[0] &= ~(1 << flag_pre);
+	return (len_arg);
 }
 
 int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
@@ -32,10 +34,12 @@ int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 		data->flag[0] &= ~(1 << flag_hash);
 	if ((data->flag[0] & (1 << flag_space)))
 		data->flag[0] &= ~(1 << flag_space);
+	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] > 1))
+			data->flag[0] &= ~(1 << flag_pre);
 	return (1);
 }
 
-int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
+int 	p(t_printf *data, va_list vl, t_type specifier, char **str) //faire les tests pour p
 {
 	int len_arg;
 	int i;
@@ -52,19 +56,32 @@ int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
 int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	int i;
+	int neg;
 
 	i = -1;
 	specifier.l = va_arg(vl, long);
 	apply_modifier_signed(data, &specifier);
 	if ((data->flag[0] & (1 << flag_l)) || (data->flag[0] & (1 << flag_z)) ||
 		(data->flag[0] & (1 << flag_j)))
+	{
 		*str = ft_lltoa_base(specifier.l, 10);
+		neg = (specifier.l < 0) ? 1 : 0 ;
+	}
 	else
+	{
+		// *str = ft_strdup("test");
 		*str = ft_lltoa_base(specifier.d, 10);
+		neg = (specifier.d < 0) ? 1 : 0 ;
+	}
+
+	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] <= ft_strlen(*str)))
+			data->flag[0] &= ~(1 << flag_pre);
 	if ((data->flag[0] & (1 << flag_hash)))
 			data->flag[0] &= ~(1 << flag_hash);
-	if ((data->flag[0] & (1 << flag_plus)))
-			; //modifier lltoa_base pour le signe
+	if (neg && (data->val_prefix = 1))
+		data->str_prefix = ft_strdup("-");
+	if ((data->flag[0] & (1 << flag_plus)) && !(neg) && (data->val_prefix = 1))
+		data->str_prefix = ft_strdup("+");
 	return (ft_strlen(*str));
 }
 
@@ -79,5 +96,14 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_ulltoa_base(specifier.ul, 10);
 	else
 		*str = ft_ulltoa_base(specifier.u, 10);
+	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] <= ft_strlen(*str)))
+			data->flag[0] &= ~(1 << flag_pre);
+	if ((data->flag[0] & (1 << flag_hash)))
+			data->flag[0] &= ~(1 << flag_hash);
+	if ((data->flag[0] & (1 << flag_plus)))
+	{
+		data->val_prefix = 1;
+		data->str_prefix = ft_strdup("+");
+	}
 	return (ft_strlen(*str));
 }

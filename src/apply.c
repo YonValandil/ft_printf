@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 16:33:10 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 18:34:02 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,6 @@ void 	apply_modifier_signed(t_printf *data, t_type *specifier)
 	else if ((data->flag[0] & flag_hh))
 		specifier->l = (char)specifier->l;
 }
-
 
 /**
 ** recherche dans le tableau d pointeur sur foncion le bon argument envoyé

@@ -4,16 +4,23 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	int i;
 	int len_arg;
+	char *str_tmp;
 
 	i = -1;
 	specifier.s = va_arg(vl, char *);
 	if (specifier.s == NULL)
-		*str = ft_strdup("(null)");
+		str_tmp = ft_strdup("(null)");
 	else
-		*str = ft_strdup(specifier.s);
-	len_arg = ft_strlen(*str);
-	data->effective_fw = apply_effective_value(data, len_arg); //largeur de precision here
-	ft_strncpy(*str, *str, data->effective_pre); //copie de la chaine reelle finale
+		str_tmp = ft_strdup(specifier.s);
+	len_arg = ft_strlen(str_tmp);
+	if ((data->flag[0] & flag_pre) && (data->flag[2] < len_arg))
+	{
+		*str = (char*)ft_memalloc(data->flag[2] + 1);
+		ft_strncpy(*str, str_tmp, data->flag[2]);
+		len_arg = ft_strlen(*str);
+	}
+	else
+		*str = ft_strdup(str_tmp);
 	if (data->flag[0] & flag_plus)
 		data->flag[0] &= ~flag_plus;
 	if (data->flag[0] & flag_hash)
@@ -22,17 +29,32 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 		data->flag[0] &= ~flag_space;
 	if ((data->flag[0] & flag_pre) && (data->flag[2] > len_arg))
 			data->flag[0] &= ~flag_pre;
+	free(str_tmp);
 	return (len_arg);
 }
 
 int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	char tab[2];
+	int len_arg;
 
 	ft_bzero(tab, 2);
 	tab[0] = (char)va_arg(vl, int);
-	*str = ft_strdup(tab);
-
+	printf("\n===============> specifier c tab[0]: %c\n", tab[0]);
+	printf("===============> specifier c tab[0]: %c\n", tab[0]);
+	printf("===============> specifier c pre: %d\n", data->flag[2]);
+	if ((data->flag[0] & flag_pre) && (data->flag[2] < 1) && !(tab[0]))
+	{
+		tab[0] = '\0';
+		len_arg = 0;
+	}
+	else
+	{
+		*str = ft_strdup(tab);
+		len_arg = 1;
+	}
+	printf("===============> specifier c *str: %s\n", *str);
+	printf("===============> specifier c len_arg: %d\n", len_arg);
 	if (data->flag[0] & flag_plus)
 		data->flag[0] &= ~flag_plus;
 	if (data->flag[0] & flag_hash)
@@ -41,7 +63,7 @@ int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 		data->flag[0] &= ~flag_space;
 	if ((data->flag[0] & flag_pre) && (data->flag[2] > 1))
 			data->flag[0] &= ~flag_pre;
-	return (ft_strlen(*str));
+	return (len_arg);
 }
 
 int 	p(t_printf *data, va_list vl, t_type specifier, char **str) //faire les tests pour p

@@ -6,12 +6,16 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 14:07:48 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 14:52:41 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
+/**
+** applique les casts de modificateur de longueur pour les types unsigned
+present en argument, et garde le plus grand si plusieurs sont envoyé
+**/
 void 	apply_modifier_unsigned(t_printf *data, t_type *specifier)
 {
 	if ((data->flag[0] & flag_L))
@@ -28,6 +32,10 @@ void 	apply_modifier_unsigned(t_printf *data, t_type *specifier)
 		specifier->l = (unsigned char)specifier->l;
 }
 
+/**
+** applique les casts de modificateur de longueur pour les types signed
+present en argument, et garde le plus grand si plusieurs sont envoyé
+**/
 void 	apply_modifier_signed(t_printf *data, t_type *specifier)
 {
 	if ((data->flag[0] & flag_L))
@@ -44,6 +52,10 @@ void 	apply_modifier_signed(t_printf *data, t_type *specifier)
 		specifier->l = (char)specifier->l;
 }
 
+
+/**
+** execute la fonction du specifier envoye en argument
+**/
 void 	apply_specifier(t_printf *data, va_list vl)
 {
 	int i;
@@ -109,6 +121,9 @@ void 	apply_print_f(t_printf *data, char *str_arg, int len_arg)
 	ft_memdel((void**)&(data->str_prefix));
 }
 
+/**
+** calcul les valeurs effective de la precision et de la largeur de champ,
+**/
 int 	apply_effective_value(t_printf *data, int len_arg)
 {
 	if (data->flag[0] & flag_pre)

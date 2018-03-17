@@ -12,6 +12,8 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 	else
 		*str = ft_strdup(specifier.s);
 	len_arg = ft_strlen(*str);
+	data->effective_fw = apply_effective_value(data, len_arg); //largeur de precision here
+	ft_strncpy(*str, *str, data->effective_pre); //copie de la chaine reelle finale
 	if (data->flag[0] & flag_plus)
 		data->flag[0] &= ~flag_plus;
 	if (data->flag[0] & flag_hash)

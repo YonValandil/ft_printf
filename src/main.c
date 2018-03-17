@@ -150,17 +150,38 @@ int		main(void)
 	// ft_printf("|%0+#10.5u|", -123);
 	// printf("printf: \"|%0+#10.5u|\"\n", -123);
 
-	//TEST sur les types text
-	// ft_printf("|%0+#10.2s|", "123");
-	// printf("printf: \"|%0+#10.2s|\"\n", "123");
-	// ft_printf("|%0+#10.5c|", 'a');
-	// printf("printf: \"|%0+#10.5c|\"\n", 'a');
+	//TEST sur les types text (global)
+	// ft_printf("|%0 +#10.2s|", "123");
+	// printf("printf: \"|%0 +#10.2s|\"\n", "123");
+	// ft_printf("|%0 +#10.5c|", 'a');
+	// printf("printf: \"|%0 +#10.5c|\"\n", 'a');
 
-	//char null ou pre 0
-	ft_printf("|%0+#10.5c|", 0);
-	printf("printf: \"|%0+#10.5c|\"\n", 0);
+	//valeur null ou pre 0
+	//pour char
+	ft_printf("|%010.5c|", 'a');
+	printf("printf: \"|%010.5c|\"\n", 'a');
+	ft_printf("|%010.1c|", 'a');
+	printf("printf: \"|%010.1c|\"\n", 'a');
+	ft_printf("|%010.c|", 'a');
+	printf("printf: \"|%010.c|\"\n", 'a');
+	ft_printf("|%010.5c|", 0);
+	printf("printf: \"|%010.5c|\"\n", 0);
+	ft_printf("|%010.c|", 0);
+	printf("printf: \"|%010.c|\"\n", 0);
+
+	//pour str
+	// ft_printf("|%010.5s|", "abc");
+	// printf("printf: \"|%010.5s|\"\n", "abc");
+	ft_printf("|%010.1s|", "abc");
+	printf("printf: \"|%010.1s|\"\n", "abc");
+	// ft_printf("|%010.s|", 'a'"abc");
+	// printf("printf: \"|%010.s|\"\n", "abc");
+	ft_printf("|%010.5s|", 0);
+	printf("printf: \"|%010.5s|\"\n", 0);
+	// ft_printf("|%010.s|", 0);
+	// printf("printf: \"|%010.s|\"\n", 0);
 	// ft_printf("|%0+#10.5s|", 0);
-	printf("printf: \"|%010.19s|\"\n", 0);
+	// printf("printf: \"|%010.19s|\"\n", 0);
 
 	//---------------------------------OCTAL------------------------------------
 	/*

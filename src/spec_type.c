@@ -1,17 +1,16 @@
 #include "ft_printf.h"
 
-int 	s(t_printf *data, va_list vl, t_type specifier, char **str) //char et str | penser au null sur str
+int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	int i;
 	int len_arg;
 
 	i = -1;
 	specifier.s = va_arg(vl, char *);
-	*str = ft_strdup(specifier.s);
-	// if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] == 0))
-	// {
-
-	// }
+	if (specifier.s == NULL)
+		*str = ft_strdup("(null)");
+	else
+		*str = ft_strdup(specifier.s);
 	len_arg = ft_strlen(*str);
 	if ((data->flag[0] & (1 << flag_plus)))
 		data->flag[0] &= ~(1 << flag_plus);

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/15 15:28:55 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 05:30:56 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,14 @@
 
 enum {flag_zero = 0, flag_neg, flag_plus, flag_space, flag_hash, flag_hh,
 	flag_h, flag_j, flag_l, flag_z, flag_L, flag_pre, flag_with};
-// enum {flag_zero = 0, flag_neg,
-// 	flag_plus, flag_space,
-// 	flag_hash, flag_hh,
-// 	flag_h, flag_j,
-// 	flag_l, flag_z,
-// 	flag_L, flag_pre,
-// 	flag_width};
+
+// enum {flag_zero = (1 << flag_zero), flag_neg = (1 << flag_neg),
+// 	flag_plus = (1 << flag_plus), flag_space = (1 << flag_space),
+// 	flag_hash = (1 << flag_hash), flag_hh = (1 << flag_hh),
+// 	flag_h = (1 << flag_h), flag_j = (1 << flag_j),
+// 	flag_l = (1 << flag_l), flag_z = (1 << flag_z),
+// 	flag_L = (1 << flag_L), flag_pre = (1 << flag_pre),
+// 	flag_width = (1 << flag_width)};
 
 typedef enum 		e_bool
 {

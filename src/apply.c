@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 03:30:15 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 05:23:41 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,9 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		data->flag[0] &= ~(1 << flag_space);
 	if ((data->flag[0] & (1 << flag_neg)) || (data->flag[0] & (1 << flag_pre))) //si flag - OU flag_pre, ALORS flag 0 est ecrasé
 		data->flag[0] &= ~(1 << flag_zero);
+		if ((data->format[data->format_i] == 'c') || (data->format[data->format_i] == 's')
+		|| (data->format[data->format_i] == 'C') || (data->format[data->format_i] == 'S'))
+			data->flag[0] |= (1 << flag_zero);
 //-------------------------------------------------
 
 	//field width, begin
@@ -117,20 +120,19 @@ int 	apply_effective_value(t_printf *data, int len_arg)
 {
 	if ((data->flag[0] & (1 << flag_pre)))
 	{
-		if (data->flag[2] > len_arg)
-			data->effective_pre = data->flag[2] - len_arg;
+		if ((data->format[data->format_i] == 'c') || (data->format[data->format_i] == 's')
+		|| (data->format[data->format_i] == 'C') || (data->format[data->format_i] == 'S'))
+			if (data->flag[2] < len_arg)
+				data->effective_pre = data->flag[2];
+		else
+			if (data->flag[2] > len_arg)
+				data->effective_pre = data->flag[2] - len_arg;
 	}
 	if ((data->flag[0] & (1 << flag_space)))
 	{
 		data->val_prefix = 1;
 		data->str_prefix = ft_strdup(" ");
 	}
-	// if ((data->format[data->format_i] == 'x') || (data->format[data->format_i] == 'X'))
-	// {
-		// if ((data->flag[0] & (1 << flag_space)) && ()) {
-			/* code */
-		// }
-	// }
 	if ((data->flag[0] & (1 << flag_with)))
 		data->effective_fw = data->flag[1] - len_arg - data->effective_pre - data->val_prefix;
 	return (data->effective_fw);

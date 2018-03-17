@@ -15,13 +15,16 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_ulltoa_base(specifier.u, 8);
 	len_arg = ft_strlen(*str);
 	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] <= len_arg))
-			data->flag[0] &= ~(1 << flag_pre);
+		data->flag[0] &= ~(1 << flag_pre);
+	if ((data->flag[0] & (1 << flag_zero)))
+		data->flag[0] &= ~(1 << flag_zero);
 	if ((data->flag[0] & (1 << flag_plus)))
 		data->flag[0] &= ~(1 << flag_plus);
 	if (data->flag[2] > len_arg) //si pre > a len_arg ALORS pas de flag #
 		data->flag[0] &= ~(1 << flag_hash);
-	if ((data->flag[0] & (1 << flag_hash)))
+	if ((data->flag[0] & (1 << flag_hash)) && (specifier.ul != 0))
 	{
+		data->flag[0] &= ~(1 << flag_space);
 		data->val_prefix = 1;
 		data->str_prefix = ft_strdup("0");
 	}
@@ -51,6 +54,7 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 			data->flag[0] &= ~(1 << flag_plus);
 	if (data->flag[0] & (1 << flag_hash))
 	{
+		data->flag[0] &= ~(1 << flag_space);
 		data->str_prefix = (data->format[data->format_i] == 'x') ?
 			ft_strdup("0x") : ft_strdup("0X");
 		data->val_prefix = 2;

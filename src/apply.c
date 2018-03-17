@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/15 23:27:14 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 03:30:15 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		data->flag[0] &= ~(1 << flag_space);
 	if ((data->flag[0] & (1 << flag_neg)) || (data->flag[0] & (1 << flag_pre))) //si flag - OU flag_pre, ALORS flag 0 est ecrasé
 		data->flag[0] &= ~(1 << flag_zero);
+//-------------------------------------------------
 
 	//field width, begin
 	if ((data->flag[0] & (1 << flag_with))
@@ -77,10 +78,13 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		&& !((data->flag[0] & (1 << flag_plus)) && (data->flag[0] & (1 << flag_zero)))//si flag + ET flag 0, la fw est apres le prefix
 		&& !((data->flag[0] & (1 << flag_hash)) && (data->flag[0] & (1 << flag_zero))))//si flag # ET flag 0, la fw est apres le prefix
 			put_n_char_to_result(data, ((data->flag[0] & (1 << flag_zero)) ? '0' : ' '), data->effective_fw);
+	//-------------------------------------------------
 
 	//prefix
-		// if (data->val_prefix > 0)
-			// add_str_to_result(data, data->str_prefix, 1);
+	// data->str_prefix = ft_strdup("a");
+		if (data->val_prefix > 0)
+			add_str_to_result(data, data->str_prefix, 1);
+	//-------------------------------------------------
 
 	//field width, after prefix
 	if ((data->flag[0] & (1 << flag_with)) //si fw exist
@@ -90,19 +94,23 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		(data->flag[0] & (1 << flag_zero)) ?
 			put_n_char_to_result(data, '0', data->effective_fw) :
 			put_n_char_to_result(data, ' ', data->effective_fw);
+	//-------------------------------------------------
 
 	//precision
 	if ((data->flag[0] & (1 << flag_pre)))
 		put_n_char_to_result(data, '0', data->effective_pre);
+	//-------------------------------------------------
 
 	//val arg
 	add_str_to_result(data, str_arg, 1);
+	//-------------------------------------------------
 
 	//field width, end
 	if ((data->flag[0] & (1 << flag_with)) && (data->flag[0] & (1 << flag_neg)))
 		put_n_char_to_result(data, ' ', data->effective_fw);
 	ft_memdel((void**)&str_arg);
 	ft_memdel((void**)&(data->str_prefix));
+	//-------------------------------------------------
 }
 
 int 	apply_effective_value(t_printf *data, int len_arg)
@@ -117,6 +125,12 @@ int 	apply_effective_value(t_printf *data, int len_arg)
 		data->val_prefix = 1;
 		data->str_prefix = ft_strdup(" ");
 	}
+	// if ((data->format[data->format_i] == 'x') || (data->format[data->format_i] == 'X'))
+	// {
+		// if ((data->flag[0] & (1 << flag_space)) && ()) {
+			/* code */
+		// }
+	// }
 	if ((data->flag[0] & (1 << flag_with)))
 		data->effective_fw = data->flag[1] - len_arg - data->effective_pre - data->val_prefix;
 	return (data->effective_fw);

@@ -1,19 +1,20 @@
 #include "ft_printf.h"
 
-int 	s(t_printf *data, va_list vl, t_type specifier, char **str) //0 avec ocal char et str | segfault char et str | penser au null
+int 	s(t_printf *data, va_list vl, t_type specifier, char **str) //char et str | penser au null sur str
 {
 	int i;
 	int len_arg;
 
 	i = -1;
 	specifier.s = va_arg(vl, char *);
-	len_arg = ft_strlen(specifier.s);
-	while (++i <= len_arg)
-		add_to_result(data, specifier.s[i], 1);
+	*str = ft_strdup(specifier.s);
+	// if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] == 0))
+	// {
+
+	// }
+	len_arg = ft_strlen(*str);
 	if ((data->flag[0] & (1 << flag_plus)))
 		data->flag[0] &= ~(1 << flag_plus);
-	if ((data->flag[0] & (1 << flag_zero)))
-		data->flag[0] &= ~(1 << flag_zero);
 	if ((data->flag[0] & (1 << flag_hash)))
 		data->flag[0] &= ~(1 << flag_hash);
 	if ((data->flag[0] & (1 << flag_space)))
@@ -25,18 +26,21 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str) //0 avec ocal c
 
 int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 {
-	specifier.c = (char)va_arg(vl, int);
+	char tab[2];
+
+	ft_bzero(tab, 2);
+	tab[0] = (char)va_arg(vl, int);
+	*str = ft_strdup(tab);
+
 	if ((data->flag[0] & (1 << flag_plus)))
 		data->flag[0] &= ~(1 << flag_plus);
-	if ((data->flag[0] & (1 << flag_zero)))
-		data->flag[0] &= ~(1 << flag_zero);
 	if ((data->flag[0] & (1 << flag_hash)))
 		data->flag[0] &= ~(1 << flag_hash);
 	if ((data->flag[0] & (1 << flag_space)))
 		data->flag[0] &= ~(1 << flag_space);
 	if ((data->flag[0] & (1 << flag_pre)) && (data->flag[2] > 1))
 			data->flag[0] &= ~(1 << flag_pre);
-	return (1);
+	return (ft_strlen(*str));
 }
 
 int 	p(t_printf *data, va_list vl, t_type specifier, char **str) //faire les tests pour p
@@ -69,7 +73,6 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 	}
 	else
 	{
-		// *str = ft_strdup("test");
 		*str = ft_lltoa_base(specifier.d, 10);
 		neg = (specifier.d < 0) ? 1 : 0 ;
 	}
@@ -100,10 +103,5 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 			data->flag[0] &= ~(1 << flag_pre);
 	if ((data->flag[0] & (1 << flag_hash)))
 			data->flag[0] &= ~(1 << flag_hash);
-	if ((data->flag[0] & (1 << flag_plus)))
-	{
-		data->val_prefix = 1;
-		data->str_prefix = ft_strdup("+");
-	}
 	return (ft_strlen(*str));
 }

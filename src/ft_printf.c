@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/15 23:00:27 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/16 19:00:48 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int		ft_printf(const char *format, ...)
 
 	//initialisation
 	ft_bzero(&data, sizeof(data));
+	// data.str_prefix = ft_strdup("a");
 	data.format = ft_strdup(format);
 	data.format_i = -1;
 

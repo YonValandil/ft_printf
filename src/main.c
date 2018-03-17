@@ -116,16 +116,7 @@ int		main(void)
 
 	// printf("send : |%%%| |%.2-w| |%0.d| |%0207 -3 #15.7+s| panda sauvage!");
 
-	// printf("\nTEST s pre 0 === %-010.2s |\n", "ABC");
-	// printf("\nTEST c pre 0 === %.3s |\n", 'a');
-
-	// printf("%10s\n", "test w");
-	// printf("%.10s\n", "test pre");
-	// printf("%3s\n", "test w");
-	// printf("%.3s\n", "test pre");
-
-	ft_printf("|%d|", 123);
-	//ALL OK
+	//TESTS chiffres
 	// ft_printf("|%+#10.5d|", 123);
 	// printf("printf: \"|%+#10.5d|\"\n", 123);
 	// ft_printf("|%0+#10.5d|", 123);
@@ -134,22 +125,42 @@ int		main(void)
 	// printf("printf: \"|%0#10.5d|\"\n", 123);
 	// ft_printf("|%0+#10.5d|", -123);
 	// printf("printf: \"|%0+#10.5d|\"\n", -123);
-	// ft_printf("|%0+#10.5x|", 123);
-	// printf("printf: \"|%0+#10.5x|\"\n", 123);
+    //
+	// ft_printf("|%0+# 10.5x|", 123);
+	// printf("printf: \"|%0+# 10.5x|\"\n", 123);
+    //
+	// ft_printf("|%0+# 10.5o|", 123);
+	// printf("printf: \"|%0+# 10.5o|\"\n", 123);
 	// ft_printf("|%0+#10.5o|", 123);
 	// printf("printf: \"|%0+#10.5o|\"\n", 123);
+	// ft_printf("|%+# 10.2o|", 123);
+	// printf("printf: \"|%+# 10.2o|\"\n", 123);
 
-	//TEST pending
-	// ft_printf("\n|%s|", "123");
-	// printf("printf: \"|%s|\"\n", "123");
-	// ft_printf("|%c|", 'a');
-	// printf("printf: \"|%c|\"\n", 'a');
+	// ft_printf("|%0+# 10.o|", 123);
+	// printf("printf: \"|%0+# 10.o|\"\n", 123);
+	// ft_printf("|%+# 10.2o|", 123);
+	// printf("printf: \"|%+# 10.2o|\"\n", 123);
+	// ft_printf("|%0+# 10.2o|", 0);
+	// printf("printf: \"|%0+# 10.2o|\"\n", 0);
+	// ft_printf("|%0+# 10.o|", 0);
+	// printf("printf: \"|%0+# 10.o|\"\n", 0);
+    //
+	// ft_printf("|%0#10.5u|", 123);
+	// printf("printf: \"|%0#10.5u|\"\n", 123);
+	// ft_printf("|%0+#10.5u|", -123);
+	// printf("printf: \"|%0+#10.5u|\"\n", -123);
 
-	// ft_printf("\n|%0+#10.5s|", "123");
-	// printf("printf: \"|%0+#10.5s|\"\n", "123");
+	//TEST sur les types text
+	// ft_printf("|%0+#10.2s|", "123");
+	// printf("printf: \"|%0+#10.2s|\"\n", "123");
 	// ft_printf("|%0+#10.5c|", 'a');
 	// printf("printf: \"|%0+#10.5c|\"\n", 'a');
 
+	//char null ou pre 0
+	ft_printf("|%0+#10.5c|", 0);
+	printf("printf: \"|%0+#10.5c|\"\n", 0);
+	// ft_printf("|%0+#10.5s|", 0);
+	printf("printf: \"|%010.19s|\"\n", 0);
 
 	//---------------------------------OCTAL------------------------------------
 	/*

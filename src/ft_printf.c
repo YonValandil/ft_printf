@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/16 19:00:48 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 05:58:59 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ int		ft_printf(const char *format, ...)
 	parser(&data, vl);
 	va_end(vl);
 
-	//affichage de debug
+	// affichage de debug
 	// print_flag(&data);
 	print_format(&data);
 	print_lst(&data);

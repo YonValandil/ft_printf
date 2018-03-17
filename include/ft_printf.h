@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 05:30:56 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 12:57:47 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,13 @@
 # define SPECIFIER "sSpdouxcCiDOUX"
 # define FLAG "0-+ #hhjlzL.123456789"
 
-enum {flag_zero = 0, flag_neg, flag_plus, flag_space, flag_hash, flag_hh,
-	flag_h, flag_j, flag_l, flag_z, flag_L, flag_pre, flag_with};
+// enum {flag_zero = 0, flag_neg, flag_plus, flag_space, flag_hash, flag_hh,
+	// flag_h, flag_j, flag_l, flag_z, flag_L, flag_pre, flag_with};
 
-// enum {flag_zero = (1 << flag_zero), flag_neg = (1 << flag_neg),
-// 	flag_plus = (1 << flag_plus), flag_space = (1 << flag_space),
-// 	flag_hash = (1 << flag_hash), flag_hh = (1 << flag_hh),
-// 	flag_h = (1 << flag_h), flag_j = (1 << flag_j),
-// 	flag_l = (1 << flag_l), flag_z = (1 << flag_z),
-// 	flag_L = (1 << flag_L), flag_pre = (1 << flag_pre),
-// 	flag_width = (1 << flag_width)};
+enum {flag_zero = (1 << 0), flag_neg = (1 << 1),flag_plus = (1 << 2),
+	flag_space = (1 << 3),flag_hash = (1 << 4), flag_hh = (1 << 5),
+	flag_h = (1 << 6), flag_j = (1 << 7), flag_l = (1 << 8), flag_z = (1 << 9),
+	flag_L = (1 << 10), flag_pre = (1 << 11), flag_width = (1 << 12)};
 
 typedef enum 		e_bool
 {
@@ -99,6 +96,7 @@ void apply_modifier_signed(t_printf *data, t_type *specifier);
 void apply_modifier_unsigned(t_printf *data, t_type *specifier);
 void apply_specifier(t_printf *data, va_list vl);
 int apply_effective_value(t_printf *data, int len_arg);
+void apply_print_f(t_printf *data, char *str_arg, int len_arg);
 
 /**
 ** parcourt la str(chaine de format) passé en arguments de ft_printf,

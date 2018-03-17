@@ -27,7 +27,7 @@ $(NAME): $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)
-	$(CC) -I$(HEADER_DIR) -c $< -o $@ #$(CFLAGS) $(DEBUG_FLAGS)
+	$(CC) -I$(HEADER_DIR) -c $< -o $@ #$(DEBUG_FLAGS) #$(CFLAGS) 
 
 clean:
 	rm -rf $(OBJ_DIR)

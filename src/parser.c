@@ -45,8 +45,6 @@ void	parser(t_printf *data, va_list vl)
 				add_to_result(data, 'c', 0);
 		}
 		else
-		{
 			add_to_result(data, 'c', 0);
-		}
 	}
 }

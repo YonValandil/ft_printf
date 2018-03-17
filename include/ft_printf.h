@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 12:57:47 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 16:25:11 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,9 +25,6 @@
 # define BUF_SIZE 1
 # define SPECIFIER "sSpdouxcCiDOUX"
 # define FLAG "0-+ #hhjlzL.123456789"
-
-// enum {flag_zero = 0, flag_neg, flag_plus, flag_space, flag_hash, flag_hh,
-	// flag_h, flag_j, flag_l, flag_z, flag_L, flag_pre, flag_with};
 
 enum {flag_zero = (1 << 0), flag_neg = (1 << 1),flag_plus = (1 << 2),
 	flag_space = (1 << 3),flag_hash = (1 << 4), flag_hh = (1 << 5),

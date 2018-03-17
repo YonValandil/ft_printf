@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 14:52:41 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/17 16:33:10 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ void 	apply_modifier_signed(t_printf *data, t_type *specifier)
 
 
 /**
-** execute la fonction du specifier envoye en argument
+** recherche dans le tableau d pointeur sur foncion le bon argument envoyé
+** en parametre et l'execute.
 **/
 void 	apply_specifier(t_printf *data, va_list vl)
 {
@@ -122,7 +123,8 @@ void 	apply_print_f(t_printf *data, char *str_arg, int len_arg)
 }
 
 /**
-** calcul les valeurs effective de la precision et de la largeur de champ,
+** calcul les valeurs effective (la valeur reel a appliquer)
+** de la precision et de la largeur de champ.
 **/
 int 	apply_effective_value(t_printf *data, int len_arg)
 {

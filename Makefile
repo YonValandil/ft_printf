@@ -15,6 +15,7 @@ SRC =			$(CFILES:%=$(SRC_DIR)%.c)
 OBJ =			$(CFILES:%=$(OBJ_DIR)%.o)
 
 all: $(NAME) $(EXEC)
+# all: $(NAME)
 
 $(LIBFT):
 	make -C $(LIBFT_DIR)
@@ -29,7 +30,7 @@ $(NAME): $(LIBFT) $(OBJ)
 
 $(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	mkdir -p $(OBJ_DIR)
-	$(CC) -I$(HEADER_DIR) -c $< -o $@ #$(DEBUG_FLAGS) #$(CFLAGS)
+	$(CC) -I$(HEADER_DIR) -c $< -o $@
 
 clean:
 	rm -rf $(OBJ_DIR)

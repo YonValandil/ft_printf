@@ -111,8 +111,6 @@ int		main(void)
 		// printf("\nprintf: \"send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 
 	//----------------AUTRE TEST DIVERS POUR COMPRENDRE-------------------------
-	ft_printf("coucou\n");
-	// printf("coucou\n");
 	// int p;
 	// ft_printf("send : |%p| !", &p);
 	// printf("\nprintf: \"send : |%p| !\"\n", &p);
@@ -135,95 +133,95 @@ int		main(void)
 
 
 	//TESTS chiffres
-	// ft_printf("|%+#010.5d|", 123);
-	// printf("printf: \"|%+#010.5d|\"\n", 123);
-	// ft_printf("|%+#010d|", 123);
-	// printf("printf: \"|%+#010d|\"\n", 123);
-	// ft_printf("|%+#10.15d|", 123);
-	// printf("printf: \"|%+#10.15d|\"\n", 123);
-	// ft_printf("|%+#10.d|", 123);
-	// printf("printf: \"|%+#10.d|\"\n", 123);
-	// ft_printf("|%0+#10.5d|", 123);
-	// printf("printf: \"|%0+#10.5d|\"\n", 123);
-	// ft_printf("|%0#10.5d|", 123);
-	// printf("printf: \"|%0#10.5d|\"\n", 123);
-	// ft_printf("|%0+#10.5d|", -123);
-	// printf("printf: \"|%0+#10.5d|\"\n", -123);
-    //
-	// ft_printf("|%0+# 10.5x|", 123);
-	// printf("printf: \"|%0+# 10.5x|\"\n", 123);
-    //
-	// ft_printf("|%0+# 10.5o|", 123);
-	// printf("printf: \"|%0+# 10.5o|\"\n", 123);
-	// ft_printf("|%0+#10.5o|", 123);
-	// printf("printf: \"|%0+#10.5o|\"\n", 123);
-	// ft_printf("|%+# 10.2o|", 123);
-	// printf("printf: \"|%+# 10.2o|\"\n", 123);
-    //
-	// ft_printf("|%0+# 10.o|", 123);
-	// printf("printf: \"|%0+# 10.o|\"\n", 123);
-	// ft_printf("|%+# 10.2o|", 123);
-	// printf("printf: \"|%+# 10.2o|\"\n", 123);
-	// ft_printf("|%0+# 10.2o|", 0);
-	// printf("printf: \"|%0+# 10.2o|\"\n", 0);
-	// ft_printf("|%0+# 10.o|", 0);
-	// printf("printf: \"|%0+# 10.o|\"\n", 0);
-    //
-	// ft_printf("|%0#10.5u|", 123);
-	// printf("printf: \"|%0#10.5u|\"\n", 123);
-	// ft_printf("|%0+#10.5u|", -123);
-	// printf("printf: \"|%0+#10.5u|\"\n", -123);
-    //
-	// // TEST sur les types text (global)
-	// ft_printf("|%0 +#10.2s|", "123");
-	// printf("printf: \"|%0 +#10.2s|\"\n", "123");
-	// ft_printf("|%0 +#10.5c|", 'a');
-	// printf("printf: \"|%0 +#10.5c|\"\n", 'a');
+	ft_printf("|%+#010.5d|\n", 123);
+	printf("|%+#010.5d|\n", 123);
+	ft_printf("|%+#010d|\n", 123);
+	printf("|%+#010d|\n", 123);
+	ft_printf("|%+#10.15d|\n", 123);
+	printf("|%+#10.15d|\n", 123);
+	ft_printf("|%+#10.d|\n", 123);
+	printf("|%+#10.d|\n", 123);
+	ft_printf("|%0+#10.5d|\n", 123);
+	printf("|%0+#10.5d|\n", 123);
+	ft_printf("|%0#10.5d|\n", 123);
+	printf("|%0#10.5d|\n", 123);
+	ft_printf("|%0+#10.5d|\n", -123);
+	printf("|%0+#10.5d|\n", -123);
+
+	ft_printf("|%0+# 10.5x|\n", 123);
+	printf("|%0+# 10.5x|\n", 123);
+
+	ft_printf("|%0+# 10.5o|\n", 123);
+	printf("|%0+# 10.5o|\n", 123);
+	ft_printf("|%0+#10.5o|\n", 123);
+	printf("|%0+#10.5o|\n", 123);
+	ft_printf("|%+# 10.2o|\n", 123);
+	printf("|%+# 10.2o|\n", 123);
+
+	ft_printf("|%0+# 10.o|\n", 123);
+	printf("|%0+# 10.o|\n", 123);
+	ft_printf("|%+# 10.2o|\n", 123);
+	printf("|%+# 10.2o|\n", 123);
+	ft_printf("|%0+# 10.2o|\n", 0);
+	printf("|%0+# 10.2o|\n", 0);
+	ft_printf("|%0+# 10.o|\n", 0);
+	printf("|%0+# 10.o|\n", 0);
+
+	ft_printf("|%0#10.5u|\n", 123);
+	printf("|%0#10.5u|\n", 123);
+	ft_printf("|%0+#10.5u|\n", -123);
+	printf("|%0+#10.5u|\n", -123);
+
+	// TEST sur les types text (global)
+	ft_printf("|%0 +#10.2s|\n", "123");
+	printf("|%0 +#10.2s|\n", "123");
+	ft_printf("|%0 +#10.5c|\n", 'a');
+	printf("|%0 +#10.5c|\n", 'a');
 
 	//valeur null ou pre 0
 	//pour char
-	// ft_printf("|%010.5c|", 'a');
-	// printf("printf: \"|%010.5c|\"\n", 'a');
-	// ft_printf("|%010.1c|", 'a');
-	// printf("printf: \"|%010.1c|\"\n", 'a');
-	// ft_printf("|%010.c|", 'a');
-	// printf("printf: \"|%010.c|\"\n", 'a');
-	// ft_printf("|%.0c|", 'a');
-	// printf("printf: \"|%.0c|\"\n", 'a');
-	// ft_printf("|%010.5c|", 0);
-	// printf("printf: \"|%010.5c|\"\n", 0);
-	// ft_printf("|%10.c|", 0);
-	// printf("printf: \"|%10.c|\"\n", 0);
-	// ft_printf("|%010.c|", 0);
-	// printf("printf: \"|%010.c|\"\n", 0);
-	// ft_printf("|%.c|", 0);
-	// printf("printf: \"|%.c|\"\n", 0);
-	// ft_printf("|%-010.c|", 0);
-	// printf("printf: \"|%0-10.c|\"\n", 0);
-	// ft_printf("|%11c|", 0);
-	// printf("printf: \"|%11c|\"\n", 0);
+	ft_printf("|%010.5c|\n", 'a');
+	printf("|%010.5c|\n", 'a');
+	ft_printf("|%010.1c|\n", 'a');
+	printf("|%010.1c|\n", 'a');
+	ft_printf("|%010.c|\n", 'a');
+	printf("|%010.c|\n", 'a');
+	ft_printf("|%.0c|\n", 'a');
+	printf("|%.0c|\n", 'a');
+	ft_printf("|%010.5c|\n", 0);
+	printf("|%010.5c|\n", 0);
+	ft_printf("|%10.c|\n", 0);
+	printf("|%10.c|\n", 0);
+	ft_printf("|%010.c|\n", 0);
+	printf("|%010.c|\n", 0);
+	ft_printf("|%.c|\n", 0);
+	printf("\n|%.c|\n", 0);
+	ft_printf("|%-010.c|\n", 0);
+	printf("\n|%0-10.c|\n", 0);
+	ft_printf("|%11c|\n", 0);
+	printf("|%11c|\n", 0);
 
 	//pour str
-	// ft_printf("|%010.5s|", "abc");
-	// printf("printf: \"|%010.5s|\"\n", "abc");
-	// ft_printf("|%10.5s|", "abc");
-	// printf("printf: \"|%10.5s|\"\n", "abc");
-	// ft_printf("|%010.1s|", "abc");
-	// printf("printf: \"|%010.1s|\"\n", "abc");
-	// ft_printf("|%010.s|", "abc");
-	// printf("printf: \"|%010.s|\"\n", "abc");
-	// ft_printf("|%010.5s|", 0);
-	// printf("printf: \"|%010.5s|\"\n", 0);
-	// ft_printf("|%10.s|", 0);
-	// printf("printf: \"|%10.s|\"\n", 0);
-	// ft_printf("|%010.s|", 0);
-	// printf("printf: \"|%010.s|\"\n", 0);
-	// ft_printf("|%0+#10.5s|", 0);
-	// printf("printf: \"|%0+#10.5s|\"\n", 0);
-	// ft_printf("|%+#.s|", 0);
-	// printf("printf: \"|%+#.s|\"\n", 0);
-	// ft_printf("|%-010s|", "abc");
-	// printf("printf: \"|%-010s|\"\n", "abc");
+	ft_printf("|%010.5s|\n", "abc");
+	printf("|%010.5s|\n", "abc");
+	ft_printf("|%10.5s|\n", "abc");
+	printf("|%10.5s|\n", "abc");
+	ft_printf("|%010.1s|\n", "abc");
+	printf("|%010.1s|\n", "abc");
+	ft_printf("|%010.s|\n", "abc");
+	printf("|%010.s|\n", "abc");
+	ft_printf("|%010.5s|\n", 0);
+	printf("|%010.5s|\n", 0);
+	ft_printf("|%10.s|\n", 0);
+	printf("|%10.s|\n", 0);
+	ft_printf("|%010.s|\n", 0);
+	printf("|%010.s|\n", 0);
+	ft_printf("|%0+#10.5s|\n", 0);
+	printf("|%0+#10.5s|\n", 0);
+	ft_printf("|%+#.s|\n", 0);
+	printf("|%+#.s|\n", 0);
+	ft_printf("|%-010s|\n", "abc");
+	printf("|%-010s|\n", "abc");
 
 	//---------------------------------OCTAL------------------------------------
 	/*
@@ -294,6 +292,9 @@ int		main(void)
 	// printf("\nprintf x: |%#9x|\n", 123); //fw = ' ' puis affiche le 0x (ok)
 	// printf("\nprintf x: |%09x|\n", 123); //fw = 0 (ok)
 	// printf("\nprintf x: |%9x|\n", 123);//fw = ' ' (ok)
+
+	ft_printf("|%#x|\n", 0); //fw = ' ' puis affiche le 0x (ok)
+	printf("|%#x|\n", 0); //fw = ' ' puis affiche le 0x (ok)
 	//-------------------------------------------------------------------------
 
 	//-------------------------test field width avec o------------------------------------------

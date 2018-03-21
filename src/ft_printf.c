@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/21 11:28:54 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:16:46 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,6 @@ int		ft_printf(const char *format, ...)
 	va_start(vl, format);
 	parser(&data, vl);
 	va_end(vl);
-	// affichage de debug
-	// print_flag(&data);
-	// print_format(&data);
-
 	curr = data.result_start;
 	while (curr)
 	{
@@ -92,6 +88,7 @@ int		ft_printf(const char *format, ...)
 			write(1, curr, BUF_SIZE);
 		curr = curr->next;
 	}
+	// write(1, "\n", 1); //tmp
 	ft_memdel((void **)&(data.format));
 	del_list(data.result_start);
 	return (data.len_final);

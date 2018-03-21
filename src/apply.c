@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/21 06:05:41 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/21 12:27:11 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	i = -2;
 	len_arg = 0;
 	t_type specifier;
+	specifier.l = 0;
 	static int const *const tab_ptr_get_spec[18] =
 		{(void*)"s", (void*)&s, (void*)"S", (void*)&S,
 		(void*)"p", (void*)&p, (void*)"dDi", (void*)&d,

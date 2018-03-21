@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 18:34:02 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/21 06:05:41 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	data->effective_fw = apply_effective_value(data, len_arg);
 	if ((data->flag[0] & flag_plus) && (data->flag[0] & flag_space))
 		data->flag[0] &= ~flag_space;
-	if ((data->flag[0] & flag_neg) || (data->flag[0] & flag_pre))
+	if ((data->flag[0] & flag_neg))
 		data->flag[0] &= ~flag_zero;
 	apply_print_f(data, str_arg, len_arg);
 }
@@ -89,16 +89,12 @@ void 	apply_specifier(t_printf *data, va_list vl)
 ** 1 - la largeur de champ
 ** 2 - les prefix
 ** 3 - la largeur apres les prefix si besoin
-** 4 - la valeur de l'argument dans va_arg
-** 5 - et la largeur de champ de fin
+** 4 - ajoute la precision
+** 5 - la valeur de l'argument dans va_arg
+** 6 - et la largeur de champ de fin
 **/
 void 	apply_print_f(t_printf *data, char *str_arg, int len_arg)
 {
-	if ((data->format[data->format_i] == 'c')
-		|| (data->format[data->format_i] == 's')
-		|| (data->format[data->format_i] == 'C')
-		|| (data->format[data->format_i] == 'S'))
-		data->flag[0] |= flag_zero;
 	if ((data->flag[0] & flag_width) && !(data->flag[0] & flag_neg)
 		&& !((data->flag[0] & flag_plus) && (data->flag[0] & flag_zero))
 		&& !((data->flag[0] & flag_hash) && (data->flag[0] & flag_zero)))

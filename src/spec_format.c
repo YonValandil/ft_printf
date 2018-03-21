@@ -26,6 +26,8 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		data->val_prefix = 1;
 		data->str_prefix = ft_strdup("0");
 	}
+	if (data->flag[0] & flag_pre)
+		data->flag[0] &= ~flag_zero;
 	return (ft_strlen(*str));
 }
 
@@ -55,5 +57,7 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 			ft_strdup("0x") : ft_strdup("0X");
 		data->val_prefix = 2;
 	}
+	if (data->flag[0] & flag_pre)
+		data->flag[0] &= ~flag_zero;
 	return (ft_strlen(*str));
 }

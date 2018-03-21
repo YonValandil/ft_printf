@@ -17,17 +17,17 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 	{
 		*str = (char*)ft_memalloc(data->flag[2] + 1);
 		ft_strncpy(*str, str_tmp, data->flag[2]);
-		len_arg = ft_strlen(*str);
 	}
 	else
 		*str = ft_strdup(str_tmp);
+	len_arg = ft_strlen(*str);
 	if (data->flag[0] & flag_plus)
 		data->flag[0] &= ~flag_plus;
 	if (data->flag[0] & flag_hash)
 		data->flag[0] &= ~flag_hash;
 	if (data->flag[0] & flag_space)
 		data->flag[0] &= ~flag_space;
-	if ((data->flag[0] & flag_pre) && (data->flag[2] > len_arg))
+	if ((data->flag[0] & flag_pre) && (data->flag[2] >= len_arg))
 			data->flag[0] &= ~flag_pre;
 	free(str_tmp);
 	return (len_arg);
@@ -36,34 +36,21 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	char tab[2];
-	int len_arg;
 
 	ft_bzero(tab, 2);
 	tab[0] = (char)va_arg(vl, int);
-	printf("\n===============> specifier c tab[0]: %c\n", tab[0]);
-	printf("===============> specifier c tab[0]: %c\n", tab[0]);
-	printf("===============> specifier c pre: %d\n", data->flag[2]);
 	if ((data->flag[0] & flag_pre) && (data->flag[2] < 1) && !(tab[0]))
-	{
 		tab[0] = '\0';
-		len_arg = 0;
-	}
-	else
-	{
-		*str = ft_strdup(tab);
-		len_arg = 1;
-	}
-	printf("===============> specifier c *str: %s\n", *str);
-	printf("===============> specifier c len_arg: %d\n", len_arg);
+	*str = ft_strdup(tab);
 	if (data->flag[0] & flag_plus)
 		data->flag[0] &= ~flag_plus;
 	if (data->flag[0] & flag_hash)
 		data->flag[0] &= ~flag_hash;
 	if (data->flag[0] & flag_space)
 		data->flag[0] &= ~flag_space;
-	if ((data->flag[0] & flag_pre) && (data->flag[2] > 1))
+	if ((data->flag[0] & flag_pre) && (data->flag[2] >= 1))
 			data->flag[0] &= ~flag_pre;
-	return (len_arg);
+	return (1);
 }
 
 int 	p(t_printf *data, va_list vl, t_type specifier, char **str) //faire les tests pour p
@@ -99,11 +86,12 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_lltoa_base(specifier.d, 10);
 		neg = (specifier.d < 0) ? 1 : 0 ;
 	}
-
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
 	if (data->flag[0] & flag_hash)
 			data->flag[0] &= ~flag_hash;
+	if (data->flag[0] & flag_pre)
+		data->flag[0] &= ~flag_zero;
 	if (neg && (data->val_prefix = 1))
 		data->str_prefix = ft_strdup("-");
 	if ((data->flag[0] & flag_plus) && !(neg) && (data->val_prefix = 1))
@@ -126,5 +114,7 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 			data->flag[0] &= ~flag_pre;
 	if (data->flag[0] & flag_hash)
 			data->flag[0] &= ~flag_hash;
+	if (data->flag[0] & flag_pre)
+		data->flag[0] &= ~flag_zero;
 	return (ft_strlen(*str));
 }

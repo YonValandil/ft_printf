@@ -53,7 +53,7 @@ int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 	return (1);
 }
 
-int 	p(t_printf *data, va_list vl, t_type specifier, char **str) //faire les tests pour p
+int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	int len_arg;
 	int i;
@@ -62,8 +62,14 @@ int 	p(t_printf *data, va_list vl, t_type specifier, char **str) //faire les tes
 	specifier.l = va_arg(vl, unsigned long);
 	*str = ft_lltoa_base(specifier.l, 16);
 	len_arg = ft_strlen(*str);
-	add_to_result(data, '0', 1);
-	add_to_result(data, 'x', 1);
+	if (data->flag[0] & flag_hash)
+		data->flag[0] &= ~flag_hash;
+	if (data->flag[0] & flag_space)
+		data->flag[0] &= ~flag_space;
+	if (data->flag[0] & flag_hash)
+		data->flag[0] &= ~flag_hash;
+	data->str_prefix = ft_strdup("0x");
+	data->val_prefix = 2;
 	return (len_arg);
 }
 

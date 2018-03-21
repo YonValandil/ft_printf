@@ -2,9 +2,6 @@
 
 int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 {
-	int i;
-
-	i = -1;
 	specifier.ul = va_arg(vl, unsigned long);
 	apply_modifier_unsigned(data, &specifier);
 	if ((data->flag[0] & flag_l) || (data->flag[0] & flag_z) ||
@@ -14,10 +11,8 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		*str = ft_ulltoa_base(specifier.u, 8);
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 		data->flag[0] &= ~flag_pre;
-	if (data->flag[0] & flag_zero)
-		data->flag[0] &= ~flag_zero;
-	if (data->flag[0] & flag_plus)
-		data->flag[0] &= ~flag_plus;
+	data->flag[0] &= (data->flag[0] & flag_zero) ? ~flag_zero : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	if (data->flag[2] > ft_strlen(*str))
 		data->flag[0] &= ~flag_hash;
 	if ((data->flag[0] & flag_hash) && (specifier.ul != 0))
@@ -48,8 +43,7 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 			(*str)[i] = ft_toupper((*str)[i]);
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
-	if ((data->flag[0] & flag_plus))
-			data->flag[0] &= ~flag_plus;
+	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	if (data->flag[0] & flag_hash)
 	{
 		data->flag[0] &= ~flag_space;
@@ -57,7 +51,6 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 			ft_strdup("0x") : ft_strdup("0X");
 		data->val_prefix = 2;
 	}
-	if (data->flag[0] & flag_pre)
-		data->flag[0] &= ~flag_zero;
+	data->flag[0] &= (data->flag[0] & flag_pre) ? ~flag_zero : data->flag[0];
 	return (ft_strlen(*str));
 }

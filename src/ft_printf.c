@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 16:27:43 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/21 11:28:54 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ void 	add_to_result(t_printf *data, char c, int flag)
 	else
 		data->result_end->buf[data->result_i] = c;
 	++(data->result_i);
+	++(data->len_final);
 }
 
 void 	add_str_to_result(t_printf *data, char* str, int flag)
@@ -70,25 +71,28 @@ int		ft_printf(const char *format, ...)
 {
 	va_list     vl;
 	t_printf	data;
+	t_result 	*curr;
 
-	//initialisation
 	ft_bzero(&data, sizeof(data));
-	// data.str_prefix = ft_strdup("a");
 	data.format = ft_strdup(format);
 	data.format_i = -1;
-
-	//code reel ft_printf
 	va_start(vl, format);
 	parser(&data, vl);
 	va_end(vl);
-
 	// affichage de debug
-	print_flag(&data);
-	print_format(&data);
-	print_lst(&data);
+	// print_flag(&data);
+	// print_format(&data);
 
-	//free
+	curr = data.result_start;
+	while (curr)
+	{
+		if (curr->next == NULL)
+			write(1, curr, data.result_i);
+		else
+			write(1, curr, BUF_SIZE);
+		curr = curr->next;
+	}
 	ft_memdel((void **)&(data.format));
 	del_list(data.result_start);
-	return (42);
+	return (data.len_final);
 }

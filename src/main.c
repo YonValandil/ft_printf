@@ -1,4 +1,5 @@
 #include "ft_printf.h"
+#include <stdio.h>
 
 #define printest(...) \
 		dprintf(2, __VA_ARGS__); \
@@ -110,30 +111,38 @@ int		main(void)
 		// printf("\nprintf: \"send : |%LO| |%zO| |%jO| |%hhO| |%hO| |%O| |%lO| !\"\n", ULONG_MAX, UINT_MAX, -851621, CHAR_MIN, SHRT_MIN, INT_MIN, LONG_MIN);
 
 	//----------------AUTRE TEST DIVERS POUR COMPRENDRE-------------------------
-	int p;
-	ft_printf("send : |%p| !", &p);
-	printf("\nprintf: \"send : |%p| !\"\n", &p);
-	ft_printf("send : |%+p| !", &p);
-	printf("\nprintf: \"send : |%+p| !\"\n", &p);
-	ft_printf("send : |%25p| !", &p);
-	printf("\nprintf: \"send : |%25p| !\"\n", &p);
-	ft_printf("send : |%-25p| !", &p);
-	printf("\nprintf: \"send : |%-25p| !\"\n", &p);
-	ft_printf("send : |%025p| !", &p);
-	printf("\nprintf: \"send : |%025p| !\"\n", &p);
-	ft_printf("send : |%.25p| !", &p);
-	printf("\nprintf: \"send : |%.25p| !\"\n", &p);
-	ft_printf("send : |%.p| !", &p);
-	printf("\nprintf: \"send : |%.p| !\"\n", &p);
-	ft_printf("send : |% p| !", &p);
-	printf("\nprintf: \"send : |% p| !\"\n", &p);
-	ft_printf("send : |%#p| !", &p);
-	printf("\nprintf: \"send : |%#p| !\"\n", &p);
+	ft_printf("coucou\n");
+	// printf("coucou\n");
+	// int p;
+	// ft_printf("send : |%p| !", &p);
+	// printf("\nprintf: \"send : |%p| !\"\n", &p);
+	// ft_printf("send : |%+p| !", &p);
+	// printf("\nprintf: \"send : |%+p| !\"\n", &p);
+	// ft_printf("send : |%25p| !", &p);
+	// printf("\nprintf: \"send : |%25p| !\"\n", &p);
+	// ft_printf("send : |%-25p| !", &p);
+	// printf("\nprintf: \"send : |%-25p| !\"\n", &p);
+	// ft_printf("send : |%025p| !", &p);
+	// printf("\nprintf: \"send : |%025p| !\"\n", &p);
+	// ft_printf("send : |%.25p| !", &p);
+	// printf("\nprintf: \"send : |%.25p| !\"\n", &p);
+	// ft_printf("send : |%.p| !", &p);
+	// printf("\nprintf: \"send : |%.p| !\"\n", &p);
+	// ft_printf("send : |% p| !", &p);
+	// printf("\nprintf: \"send : |% p| !\"\n", &p);
+	// ft_printf("send : |%#p| !", &p);
+	// printf("\nprintf: \"send : |%#p| !\"\n", &p);
 
 
 	//TESTS chiffres
-	// ft_printf("|%+#10.5d|", 123);
-	// printf("printf: \"|%+#10.5d|\"\n", 123);
+	// ft_printf("|%+#010.5d|", 123);
+	// printf("printf: \"|%+#010.5d|\"\n", 123);
+	// ft_printf("|%+#010d|", 123);
+	// printf("printf: \"|%+#010d|\"\n", 123);
+	// ft_printf("|%+#10.15d|", 123);
+	// printf("printf: \"|%+#10.15d|\"\n", 123);
+	// ft_printf("|%+#10.d|", 123);
+	// printf("printf: \"|%+#10.d|\"\n", 123);
 	// ft_printf("|%0+#10.5d|", 123);
 	// printf("printf: \"|%0+#10.5d|\"\n", 123);
 	// ft_printf("|%0#10.5d|", 123);

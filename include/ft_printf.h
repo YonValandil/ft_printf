@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/17 16:25:11 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/21 10:14:34 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@
 # include <limits.h>
 # include "libft.h"
 
-# include <stdio.h>
+// # include <stdio.h>
 
-# define BUF_SIZE 1
+# define BUF_SIZE 1024
 # define SPECIFIER "sSpdouxcCiDOUX"
 # define FLAG "0-+ #hhjlzL.123456789"
 
@@ -80,6 +80,7 @@ typedef struct		s_printf
 	char			*format;
 	int				result_i;
 	int				format_i;
+	int				len_final;
 	int				flag[3];
 	char			*str_prefix;
 	int				val_prefix;

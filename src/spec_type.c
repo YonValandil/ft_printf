@@ -2,11 +2,9 @@
 
 int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 {
-	int i;
 	int len_arg;
 	char *str_tmp;
 
-	i = -1;
 	specifier.s = va_arg(vl, char *);
 	if (specifier.s == NULL)
 		str_tmp = ft_strdup("(null)");
@@ -21,12 +19,9 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 	else
 		*str = ft_strdup(str_tmp);
 	len_arg = ft_strlen(*str);
-	if (data->flag[0] & flag_plus)
-		data->flag[0] &= ~flag_plus;
-	if (data->flag[0] & flag_hash)
-		data->flag[0] &= ~flag_hash;
-	if (data->flag[0] & flag_space)
-		data->flag[0] &= ~flag_space;
+	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
 	if ((data->flag[0] & flag_pre) && (data->flag[2] >= len_arg))
 			data->flag[0] &= ~flag_pre;
 	free(str_tmp);
@@ -56,9 +51,7 @@ int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	int len_arg;
-	int i;
 
-	i = -1;
 	specifier.l = va_arg(vl, unsigned long);
 	*str = ft_lltoa_base(specifier.l, 16);
 	len_arg = ft_strlen(*str);
@@ -75,10 +68,8 @@ int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
 
 int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 {
-	int i;
 	int neg;
 
-	i = -1;
 	specifier.l = va_arg(vl, long);
 	apply_modifier_signed(data, &specifier);
 	if ((data->flag[0] & flag_l) || (data->flag[0] & flag_z)
@@ -94,10 +85,8 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 	}
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
-	if (data->flag[0] & flag_hash)
-			data->flag[0] &= ~flag_hash;
-	if (data->flag[0] & flag_pre)
-		data->flag[0] &= ~flag_zero;
+	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_pre) ? ~flag_zero : data->flag[0];
 	if (neg && (data->val_prefix = 1))
 		data->str_prefix = ft_strdup("-");
 	if ((data->flag[0] & flag_plus) && !(neg) && (data->val_prefix = 1))
@@ -107,9 +96,6 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 
 int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 {
-	int i;
-
-	i = -1;
 	specifier.ul = va_arg(vl, unsigned long int);
 	apply_modifier_unsigned(data, &specifier);
 	if (data->flag[0] & flag_l)

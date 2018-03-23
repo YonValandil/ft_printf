@@ -7,17 +7,25 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 
 	specifier.s = va_arg(vl, char *);
 	if (specifier.s == NULL)
-		str_tmp = ft_strdup("(null)");
+	{
+		if(!(str_tmp = ft_strdup("(null)")))
+			exit(EXIT_FAILURE);
+	}
 	else
-		str_tmp = ft_strdup(specifier.s);
+	{
+		if(!(str_tmp = ft_strdup(specifier.s)))
+			exit(EXIT_FAILURE);
+	}
 	len_arg = ft_strlen(str_tmp);
 	if ((data->flag[0] & flag_pre) && (data->flag[2] < len_arg))
 	{
-		*str = (char*)ft_memalloc(data->flag[2] + 1);
+		if(!(*str = (char*)ft_memalloc(data->flag[2] + 1)))
+			exit(EXIT_FAILURE);
 		ft_strncpy(*str, str_tmp, data->flag[2]);
 	}
 	else
-		*str = ft_strdup(str_tmp);
+		if(!(*str = ft_strdup(str_tmp)))
+			exit(EXIT_FAILURE);
 	len_arg = ft_strlen(*str);
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
@@ -34,15 +42,20 @@ int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 
 	ft_bzero(tab, 2);
 	tab[0] = (char)va_arg(vl, int);
-	if ((data->flag[0] & flag_pre) && (data->flag[2] < 1) && !(tab[0]))
-		tab[0] = '\0';
-	*str = ft_strdup(tab);
-	if (data->flag[0] & flag_plus)
-		data->flag[0] &= ~flag_plus;
-	if (data->flag[0] & flag_hash)
-		data->flag[0] &= ~flag_hash;
-	if (data->flag[0] & flag_space)
-		data->flag[0] &= ~flag_space;
+	if ((data->flag[0] & flag_pre) && (data->flag[2] < 1))
+	{
+		// tab[0] = '\0';
+		if(!(*str = ft_memalloc(1)))
+			exit(EXIT_FAILURE);
+	}
+	else
+	{
+		if(!(*str = ft_strdup(tab)))
+			exit(EXIT_FAILURE);
+	}
+	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
 	if ((data->flag[0] & flag_pre) && (data->flag[2] >= 1))
 			data->flag[0] &= ~flag_pre;
 	return (1);
@@ -53,15 +66,14 @@ int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
 	int len_arg;
 
 	specifier.l = va_arg(vl, unsigned long);
-	*str = ft_lltoa_base(specifier.l, 16);
+	if(!(*str = ft_lltoa_base(specifier.l, 16)))
+			exit(EXIT_FAILURE);
 	len_arg = ft_strlen(*str);
-	if (data->flag[0] & flag_hash)
-		data->flag[0] &= ~flag_hash;
-	if (data->flag[0] & flag_space)
-		data->flag[0] &= ~flag_space;
-	if (data->flag[0] & flag_hash)
-		data->flag[0] &= ~flag_hash;
-	data->str_prefix = ft_strdup("0x");
+	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
+	if(!(data->str_prefix = ft_strdup("0x")))
+			exit(EXIT_FAILURE);
 	data->val_prefix = 2;
 	return (len_arg);
 }
@@ -72,25 +84,41 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 
 	specifier.l = va_arg(vl, long);
 	apply_modifier_signed(data, &specifier);
-	if ((data->flag[0] & flag_l) || (data->flag[0] & flag_z)
+	if ((data->flag[0] & flag_pre) && (data->flag[2] == 0) && !(specifier.l))
+	{
+		if(!(*str = ft_strdup("")))
+			exit(EXIT_FAILURE);
+		neg = 0;
+	}
+	else if ((data->flag[0] & flag_l) || (data->flag[0] & flag_z)
 		|| (data->flag[0] & flag_j))
 	{
-		*str = ft_lltoa_base(specifier.l, 10);
+		if(!(*str = ft_lltoa_base(specifier.l, 10)))
+			exit(EXIT_FAILURE);
 		neg = (specifier.l < 0) ? 1 : 0 ;
 	}
 	else
 	{
-		*str = ft_lltoa_base(specifier.d, 10);
+		if(!(*str = ft_lltoa_base(specifier.d, 10)))
+			exit(EXIT_FAILURE);
 		neg = (specifier.d < 0) ? 1 : 0 ;
 	}
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
 	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_pre) ? ~flag_zero : data->flag[0];
+	data->flag[0] &= (neg) ? ~flag_space : data->flag[0];
 	if (neg && (data->val_prefix = 1))
-		data->str_prefix = ft_strdup("-");
+	{
+		if(!(data->str_prefix = ft_strdup("-")))
+			exit(EXIT_FAILURE);
+		data->flag[0] |= flag_plus;
+	}
 	if ((data->flag[0] & flag_plus) && !(neg) && (data->val_prefix = 1))
-		data->str_prefix = ft_strdup("+");
+	{
+		if(!(data->str_prefix = ft_strdup("+")))
+			exit(EXIT_FAILURE);
+	}
 	return (ft_strlen(*str));
 }
 
@@ -99,9 +127,15 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 	specifier.ul = va_arg(vl, unsigned long int);
 	apply_modifier_unsigned(data, &specifier);
 	if (data->flag[0] & flag_l)
-		*str = ft_ulltoa_base(specifier.ul, 10);
+	{
+		if(!(*str = ft_ulltoa_base(specifier.ul, 10)))
+			exit(EXIT_FAILURE);
+	}
 	else
-		*str = ft_ulltoa_base(specifier.u, 10);
+	{
+		if(!(*str = ft_ulltoa_base(specifier.u, 10)))
+			exit(EXIT_FAILURE);
+	}
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
 	if (data->flag[0] & flag_hash)

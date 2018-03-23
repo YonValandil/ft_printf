@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/21 12:16:46 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/23 04:14:09 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,8 @@ int		ft_printf(const char *format, ...)
 	t_result 	*curr;
 
 	ft_bzero(&data, sizeof(data));
-	data.format = ft_strdup(format);
+	if (!(data.format = ft_strdup(format)))
+		exit(EXIT_FAILURE);
 	data.format_i = -1;
 	va_start(vl, format);
 	parser(&data, vl);
@@ -88,7 +89,6 @@ int		ft_printf(const char *format, ...)
 			write(1, curr, BUF_SIZE);
 		curr = curr->next;
 	}
-	// write(1, "\n", 1); //tmp
 	ft_memdel((void **)&(data.format));
 	del_list(data.result_start);
 	return (data.len_final);

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/21 12:27:11 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/23 07:21:51 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	len_arg = 0;
 	t_type specifier;
 	specifier.l = 0;
+	data->val_prefix = 0;
 	static int const *const tab_ptr_get_spec[18] =
 		{(void*)"s", (void*)&s, (void*)"S", (void*)&S,
 		(void*)"p", (void*)&p, (void*)"dDi", (void*)&d,
@@ -76,11 +77,11 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		if (ft_strchr((char*)tab_ptr_get_spec[i], data->format[data->format_i]))
 			len_arg = ((t_ptr_get_spec)tab_ptr_get_spec[i + 1])(data, vl,
 				specifier, &str_arg);
-	data->effective_fw = apply_effective_value(data, len_arg);
 	if ((data->flag[0] & flag_plus) && (data->flag[0] & flag_space))
 		data->flag[0] &= ~flag_space;
 	if ((data->flag[0] & flag_neg))
 		data->flag[0] &= ~flag_zero;
+	data->effective_fw = apply_effective_value(data, len_arg);
 	apply_print_f(data, str_arg, len_arg);
 }
 
@@ -99,16 +100,16 @@ void 	apply_print_f(t_printf *data, char *str_arg, int len_arg)
 	if ((data->flag[0] & flag_width) && !(data->flag[0] & flag_neg)
 		&& !((data->flag[0] & flag_plus) && (data->flag[0] & flag_zero))
 		&& !((data->flag[0] & flag_hash) && (data->flag[0] & flag_zero)))
+	{
 		put_n_char_to_result(data, (data->flag[0] & flag_zero)
 		? '0' : ' ', data->effective_fw);
+	}
 	if (data->val_prefix > 0)
 		add_str_to_result(data, data->str_prefix, 1);
 	if ((data->flag[0] & flag_width) && !(data->flag[0] & flag_neg)
 		&& (((data->flag[0] & flag_plus) && (data->flag[0] & flag_zero))
 		|| ((data->flag[0] & flag_hash) && (data->flag[0] & flag_zero))))
-		(data->flag[0] & flag_zero) ?
-		put_n_char_to_result(data, '0', data->effective_fw) :
-		put_n_char_to_result(data, ' ', data->effective_fw);
+		put_n_char_to_result(data, '0', data->effective_fw);
 	if (data->flag[0] & flag_pre)
 		put_n_char_to_result(data, '0', data->effective_pre);
 	add_str_to_result(data, str_arg, 1);

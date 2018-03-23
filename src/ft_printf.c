@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/23 04:14:09 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/23 09:29:01 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ void 	add_to_result(t_printf *data, char c, int flag)
 	}
 	if (flag == 0)
 		data->result_end->buf[data->result_i] = data->format[data->format_i];
+	else if (flag == 2)
+		data->result_end->buf[data->result_i] = '\0';
 	else
 		data->result_end->buf[data->result_i] = c;
 	++(data->result_i);

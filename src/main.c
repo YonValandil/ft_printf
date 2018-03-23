@@ -314,10 +314,24 @@ int		main(void)
 	// printf("|%d|\n", "42");
 	// ft_printf("|%d %d|\n", 42, -33);
 	// printf("|%d %d|\n", 42, -33);
-	ft_printf("|%d %d|\n", -42, 33);
-	printf("|%d %d|\n", -42, 33);
-	ft_printf("|%#.o|\n", 0);
-	printf("|%#.o|\n", 0);
+	// ft_printf("|%d %d|\n", -42, 33);
+	// printf("|%d %d|\n", -42, 33);
+	// ft_printf("|%#.o|\n", 0);
+	// printf("|%#.o|\n", 0);
+	// ft_printf("|%ju|\n", 4999999999);
+	// printf("|%ju|\n", 4999999999);
+	// ft_printf("|%ju|\n", 4294967296);
+	// printf("|%ju|\n", 4294967296);
+
+	// ft_printf("|%c|\n", 0); //a voir avec le \0 et write
+	// printf("|%c\n", 0);
+
+	ft_printf("\n|%5%|\n"); //% est pas un invalid conversion specifier?
+	printf("|%5%|\n");
+	ft_printf("\n|%-5%|\n"); //% est pas un invalid conversion specifier?
+	printf("|%-5%|\n");
+	// ft_printf("|%5y|\n");
+	// printf("\n|%5y|\n");
 	// //-------------------------------------------------------------------------
 
 	//-------------------------test field width avec o------------------------------------------

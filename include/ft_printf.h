@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/21 10:14:34 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/23 09:33:36 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ void apply_modifier_unsigned(t_printf *data, t_type *specifier);
 void apply_specifier(t_printf *data, va_list vl);
 int apply_effective_value(t_printf *data, int len_arg);
 void apply_print_f(t_printf *data, char *str_arg, int len_arg);
+void percent_case(t_printf *data);
 
 /**
 ** parcourt la str(chaine de format) passé en arguments de ft_printf,

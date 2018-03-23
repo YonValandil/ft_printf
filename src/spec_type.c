@@ -42,17 +42,8 @@ int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 
 	ft_bzero(tab, 2);
 	tab[0] = (char)va_arg(vl, int);
-	if ((data->flag[0] & flag_pre) && (data->flag[2] < 1))
-	{
-		// tab[0] = '\0';
-		if(!(*str = ft_memalloc(1)))
-			exit(EXIT_FAILURE);
-	}
-	else
-	{
-		if(!(*str = ft_strdup(tab)))
-			exit(EXIT_FAILURE);
-	}
+	if(!(*str = ft_strdup((char*)tab)))
+		exit(EXIT_FAILURE);
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
@@ -126,7 +117,8 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	specifier.ul = va_arg(vl, unsigned long int);
 	apply_modifier_unsigned(data, &specifier);
-	if (data->flag[0] & flag_l)
+	if (data->flag[0] & flag_l || (data->flag[0] & flag_z)
+		|| (data->flag[0] & flag_j))
 	{
 		if(!(*str = ft_ulltoa_base(specifier.ul, 10)))
 			exit(EXIT_FAILURE);
@@ -142,5 +134,7 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 			data->flag[0] &= ~flag_hash;
 	if (data->flag[0] & flag_pre)
 		data->flag[0] &= ~flag_zero;
+	if (data->flag[0] & flag_space)
+		data->flag[0] &= ~flag_space;
 	return (ft_strlen(*str));
 }

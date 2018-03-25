@@ -1,11 +1,12 @@
 #include "ft_printf.h"
 
-void	get_flag(t_printf *data)
+int		get_flag(t_printf *data, int i)
 {
-	int i;
 	int *j;
 
 	j = &(data->format_i);
+	if (!(data->format[*j + 1]))
+		return (0);
 	while (ft_strchr(FLAG, data->format[++(*j)]) && (i = -1))
 	{
 		while (++i <= 11)
@@ -24,8 +25,15 @@ void	get_flag(t_printf *data)
 			while (ft_isdigit(data->format[*j + 1]) && (++*j))
 				data->flag[2] = data->flag[2] * 10 + data->format[*j] - '0';
 	}
-	if (data->format[*j] == 'D' || data->format[*j] == 'O' ||
-		data->format[*j] == 'U')
+	maj_specifiers(data);
+	return (1);
+}
+
+void 	maj_specifiers(t_printf *data)
+{
+	if (data->format[data->format_i] == 'D' ||
+		data->format[data->format_i] == 'O' ||
+		data->format[data->format_i] == 'U')
 		data->flag[0] |= flag_l;
 }
 
@@ -42,21 +50,25 @@ void 	percent_case(t_printf *data)
 		put_n_char_to_result(data, ' ', data->flag[1] - 1);
 	}
 }
+
 void	parser(t_printf *data, va_list vl)
 {
 	t_bool	is_flag;
+	int ret;
+	int i;
 
+	i = 0;
 	while ((data->format[++(data->format_i)]) && !(is_flag = false))
 	{
 		if(data->format[data->format_i] == '%' && (is_flag = true))
 		{
 			data->flag[0] = 0;
-			get_flag(data);
+			ret = get_flag(data, i);
 			if (ft_strchr(SPECIFIER, data->format[data->format_i]))
 				apply_specifier(data, vl);
-			else if (data->format[data->format_i] == '%')
+			else if ((data->format[data->format_i] == '%') && (ret))
 				percent_case(data);
-			else
+			else if(ret)
 				add_to_result(data, 'c', 0);
 		}
 		else

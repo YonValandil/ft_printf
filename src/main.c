@@ -326,12 +326,19 @@ int		main(void)
 	// ft_printf("|%c|\n", 0); //a voir avec le \0 et write
 	// printf("|%c\n", 0);
 
-	ft_printf("\n|%5%|\n"); //% est pas un invalid conversion specifier?
-	printf("|%5%|\n");
-	ft_printf("\n|%-5%|\n"); //% est pas un invalid conversion specifier?
-	printf("|%-5%|\n");
+	// ft_printf("\n|%5%|\n"); //% est pas un invalid conversion specifier?
+	// printf("|%5%|\n");
+	// ft_printf("\n|%-5%|\n"); //% est pas un invalid conversion specifier?
+	// printf("|%-5%|\n");
+	// ft_printf("%"); //% est pas un invalid conversion specifier?
+
+	ft_printf("%");
+	printf("%");
 	// ft_printf("|%5y|\n");
 	// printf("\n|%5y|\n");
+
+	ft_printf("\ntest: %C\n", 42);
+
 	// //-------------------------------------------------------------------------
 
 	//-------------------------test field width avec o------------------------------------------

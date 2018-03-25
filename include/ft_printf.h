@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/23 09:33:36 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/03/25 08:05:11 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,6 @@
 # include <stdarg.h>
 # include <limits.h>
 # include "libft.h"
-
-// # include <stdio.h>
 
 # define BUF_SIZE 1024
 # define SPECIFIER "sSpdouxcCiDOUX"
@@ -50,6 +48,7 @@ typedef union		u_type
     float f;
     int d;
 	char* s;
+	wchar_t lc;
 }					t_type;
 
 /**
@@ -96,6 +95,7 @@ void apply_specifier(t_printf *data, va_list vl);
 int apply_effective_value(t_printf *data, int len_arg);
 void apply_print_f(t_printf *data, char *str_arg, int len_arg);
 void percent_case(t_printf *data);
+void maj_specifiers(t_printf *data);
 
 /**
 ** parcourt la str(chaine de format) passé en arguments de ft_printf,
@@ -113,7 +113,7 @@ void	parser(t_printf *print, va_list vl);
 ** parcourt la chaine format (apres le %) et store les valeurs adequates
 ** dans flag[0] flag[1] et flag[2], jusqu'a tomber sur un caractere non flag.
 **/
-void	get_flag(t_printf *print);
+int		get_flag(t_printf *print, int i);
 
 /**
 ** creer/update la list chainee, et store le bon caractere dans le buffer.

@@ -3,8 +3,11 @@
 int 	C(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	(void)data;
-	(void)vl;
-	(void)specifier;
+	wchar_t unicode;
+
+	specifier.lc = va_arg(vl, unsigned long);
+
+
 	return 4;
 }
 

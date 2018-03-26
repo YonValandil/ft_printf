@@ -9,7 +9,7 @@ int 	C(t_printf *data, va_list vl, t_type specifier, char **str)
 	{
 		(*str)[0] = specifier.lc;
 	}
-	else if (specifier.lc <= 0xff)
+	else if (specifier.lc <= 0x7ff)
 	{
 		(*str)[0] = (specifier.lc >> 6) + 0xC0;
 		(*str)[1] = (specifier.lc & 0x3F) + 0x80;
@@ -19,7 +19,6 @@ int 	C(t_printf *data, va_list vl, t_type specifier, char **str)
 		(*str)[0] = (specifier.lc >> 12) + 0xE0;
 		(*str)[1] = ((specifier.lc >> 6) & 0x3F) + 0x80;
 		(*str)[2] = (specifier.lc & 0x3F) + 0x80;
-		printf("dsccsc`scscscsdsdsdscddsdcdsddc\n");
 	}
 	else
 	{

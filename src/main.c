@@ -1,5 +1,7 @@
 #include "ft_printf.h"
 #include <stdio.h>
+#include <wchar.h>
+#include <locale.h>
 
 #define printest(...) \
 		dprintf(2, __VA_ARGS__); \
@@ -7,6 +9,7 @@
 
 int		main(void)
 {
+	setlocale(LC_ALL, "");
 	// int ret;
 
 	// ret = ft_printf("send : |%0-#15hz.7zc| |%.9#019ls| |%.9-0hhd| |%0lu| pandas sauvages!",
@@ -332,12 +335,21 @@ int		main(void)
 	// printf("|%-5%|\n");
 	// ft_printf("%"); //% est pas un invalid conversion specifier?
 
-	ft_printf("%");
-	printf("%");
+	// ft_printf("%");
+	// printf("%");
 	// ft_printf("|%5y|\n");
 	// printf("\n|%5y|\n");
+	ft_printf("\ntest mine: %C\n", L'𢁸');
+	printf("\ntest printf : %C\n", L'𢁸');
+	ft_printf("\ntest mine: %C\n", L'⁕');
+	printf("\ntest printf : %C\n", L'⁕');
+	ft_printf("\ntest mine: %C\n", L'δ');
+	printf("\ntest printf : %C\n", L'δ');
 
-	ft_printf("\ntest: %C\n", 42);
+	// printf("\nte....st printf : %C\n", L'\x22078');
+
+	ft_printf("\ntest mine: %C\n", L'\x3042');
+	printf("\ntest printf : %C\n", L'\x3042');
 
 	// //-------------------------------------------------------------------------
 

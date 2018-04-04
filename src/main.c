@@ -339,18 +339,20 @@ int		main(void)
 	// printf("%");
 	// ft_printf("|%5y|\n");
 	// printf("\n|%5y|\n");
-	ft_printf("\ntest mine: %C\n", L'𢁸');
-	printf("\ntest printf : %C\n", L'𢁸');
-	ft_printf("\ntest mine: %C\n", L'⁕');
-	printf("\ntest printf : %C\n", L'⁕');
-	ft_printf("\ntest mine: %C\n", L'δ');
-	printf("\ntest printf : %C\n", L'δ');
+	// ft_printf("\ntest mine: %C\n", L'𢁸');
+	// printf("\ntest printf : %C\n", L'𢁸');
+	// ft_printf("\ntest mine: %C\n", L'⁕');
+	// printf("\ntest printf : %C\n", L'⁕');
+	// ft_printf("\ntest mine: %C\n", L'δ');
+	// printf("\ntest printf : %C\n", L'δ');
+
+	// ft_printf("\ntest S mine: %S\n", L"𢁸δ⁕體");
+	// printf("\ntest S printf : %S\n\n", L"𢁸δ⁕體");
+
+	printf("{%S}", NULL);
+	ft_printf("{%S}", NULL);
 
 	// printf("\nte....st printf : %C\n", L'\x22078');
-
-	ft_printf("\ntest mine: %C\n", L'\x3042');
-	printf("\ntest printf : %C\n", L'\x3042');
-
 	// //-------------------------------------------------------------------------
 
 	//-------------------------test field width avec o------------------------------------------

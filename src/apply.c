@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/23 09:24:42 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/04/04 05:26:28 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,8 @@ void 	apply_print_f(t_printf *data, char *str_arg, int len_arg)
 		put_n_char_to_result(data, '0', data->effective_fw);
 	if (data->flag[0] & flag_pre)
 		put_n_char_to_result(data, '0', data->effective_pre);
-	if ((data->format[data->format_i] == 'c') && !(ft_strlen(str_arg))) //brainfuck le filechecker mais ne change pas mon result (pour le \0 avec write)
+	if (((data->format[data->format_i] == 'c') ||
+		(data->format[data->format_i] == 'C')) && !(ft_strlen(str_arg)))
 		add_to_result(data, ' ', 2);
 	else
 		add_str_to_result(data, str_arg, 1);

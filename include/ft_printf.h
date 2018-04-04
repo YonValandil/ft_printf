@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/25 08:05:11 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/04/04 00:36:20 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,7 @@ typedef union		u_type
     int d;
 	char* s;
 	wchar_t lc;
+	wchar_t* ls;
 }					t_type;
 
 /**

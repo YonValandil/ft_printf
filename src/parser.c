@@ -35,6 +35,10 @@ void 	maj_specifiers(t_printf *data)
 		data->format[data->format_i] == 'O' ||
 		data->format[data->format_i] == 'U')
 		data->flag[0] |= flag_l;
+	if (data->format[data->format_i] == 'c' && (data->flag[0] & flag_l))
+		data->format[data->format_i] == 'C';
+	if (data->format[data->format_i] == 's' && (data->flag[0] & flag_l))
+		data->format[data->format_i] == 'S';
 }
 
 void 	percent_case(t_printf *data)

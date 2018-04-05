@@ -36,9 +36,9 @@ void 	maj_specifiers(t_printf *data)
 		data->format[data->format_i] == 'U')
 		data->flag[0] |= flag_l;
 	if (data->format[data->format_i] == 'c' && (data->flag[0] & flag_l))
-		data->format[data->format_i] == 'C';
+		data->format[data->format_i] = 'C';
 	if (data->format[data->format_i] == 's' && (data->flag[0] & flag_l))
-		data->format[data->format_i] == 'S';
+		data->format[data->format_i] = 'S';
 }
 
 void 	percent_case(t_printf *data)
@@ -46,11 +46,11 @@ void 	percent_case(t_printf *data)
 	if (!(data->flag[0] & flag_neg))
 	{
 		put_n_char_to_result(data, ' ', data->flag[1] - 1);
-		add_to_result(data, '%', 1);
+		add_to_result(data, data->format[data->format_i], 1);
 	}
 	else
 	{
-		add_to_result(data, '%', 1);
+		add_to_result(data, data->format[data->format_i], 1);
 		put_n_char_to_result(data, ' ', data->flag[1] - 1);
 	}
 }
@@ -70,7 +70,8 @@ void	parser(t_printf *data, va_list vl)
 			ret = get_flag(data, i);
 			if (ft_strchr(SPECIFIER, data->format[data->format_i]))
 				apply_specifier(data, vl);
-			else if ((data->format[data->format_i] == '%') && (ret))
+			// else if ((data->format[data->format_i] == '%') && (ret))
+			else if ((!(ft_strchr(SPECIFIER, data->format[data->format_i]))) && ret)
 				percent_case(data);
 			else if(ret)
 				add_to_result(data, 'c', 0);

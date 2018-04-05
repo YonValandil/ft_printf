@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/04/04 00:36:20 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/04/05 01:40:03 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 # include <limits.h>
 # include "libft.h"
 
-# define BUF_SIZE 1024
+# define BUF_SIZE 4096
 # define SPECIFIER "sSpdouxcCiDOUX"
 # define FLAG "0-+ #hhjlzL.123456789"
 

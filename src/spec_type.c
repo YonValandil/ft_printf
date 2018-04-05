@@ -57,12 +57,24 @@ int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
 	int len_arg;
 
 	specifier.l = va_arg(vl, unsigned long);
-	if(!(*str = ft_lltoa_base(specifier.l, 16)))
+	if(specifier.l == 0)
+	{
+		if(!(*str = ft_memalloc(1)))
+		{
+			*str[0] = '0';
 			exit(EXIT_FAILURE);
+		}
+	}
+	else if(!(*str = ft_lltoa_base(specifier.l, 16)))
+	{
+		exit(EXIT_FAILURE);
+	}
 	len_arg = ft_strlen(*str);
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
+	data->flag[0] |= flag_neg;
+	data->flag[0] |= flag_zero;
 	if(!(data->str_prefix = ft_strdup("0x")))
 			exit(EXIT_FAILURE);
 	data->val_prefix = 2;

@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/04/04 05:26:28 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/04/04 06:20:54 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,7 +72,7 @@ void 	apply_specifier(t_printf *data, va_list vl)
 		(void*)"p", (void*)&p, (void*)"dDi", (void*)&d,
 		(void*)"oO", (void*)&o, (void*)"uU", (void*)&u,
 		(void*)"xX", (void*)&x, (void*)"c", (void*)&c,
-		(void*)"C", (void*)&C};
+	(void*)"C", (void*)&C};
 	while ((i += 2) < (9 * 2))
 		if (ft_strchr((char*)tab_ptr_get_spec[i], data->format[data->format_i]))
 			len_arg = ((t_ptr_get_spec)tab_ptr_get_spec[i + 1])(data, vl,

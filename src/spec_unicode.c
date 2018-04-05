@@ -33,6 +33,9 @@ int 	C(t_printf *data, va_list vl, t_type specifier, char **str)
 	if (!(*str = ft_strnew(4)))
 		exit(EXIT_FAILURE);
 	put_unicode(specifier.lc, str, &i);
+	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
 	return (ft_strlen(*str));
 }
 
@@ -60,5 +63,8 @@ int 	S(t_printf *data, va_list vl, t_type specifier, char **str)
 			++j;
 		}
 	}
+	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
 	return (ft_strlen(*str));
 }

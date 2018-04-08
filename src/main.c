@@ -352,17 +352,17 @@ int		main(void)
 	// ft_printf("\ntest S printf : %S\n\n", L"𢁸δ⁕");
 	// ft_printf("\ntest S printf : %.1S\n\n", L"𢁸δ⁕體");
 
-	ft_printf("\ntest S ft_printf : %.2S\n\n", L"𢁸δ⁕體");
-	printf("\ntest S printf : %.2S\n\n", L"𢁸δ⁕體");
+	ft_printf("\ntest S ft_printf : %.2S\n", L"𢁸δ⁕體");
+	dprintf(1, "test S printf : %.2S\n\n", L"𢁸δ⁕體");
 
-	ft_printf("\ntest S ft_printf : %.8S\n\n", L"𢁸δ⁕體");
-	printf("\ntest S printf : %.8S\n\n", L"𢁸δ⁕體");
+	ft_printf("\ntest S ft_printf : %.8S\n", L"𢁸δ⁕體");
+	dprintf(1, "test S printf : %.8S\n\n", L"𢁸δ⁕體");
 
-	ft_printf("\ntest S ft_printf : %.24S\n\n", L"𢁸δ⁕體");
-	printf("\ntest S printf : %.24S\n\n", L"𢁸δ⁕體");
+	ft_printf("\ntest S ft_printf : %.24S\n", L"𢁸δ⁕體");
+	dprintf(1, "test S printf : %.24S\n\n", L"𢁸δ⁕體");
 
-	// printf("%S", L"Á±≥");
-	// ft_printf("%S", L"Á±≥");
+	dprintf(1, "\nprintf %S\n", L"Á±≥");
+	ft_printf("mine %S\n", L"Á±≥");
 
 	// printf("{%S}", NULL);
 	// ft_printf("{%S}", NULL);

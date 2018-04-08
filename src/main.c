@@ -348,13 +348,37 @@ int		main(void)
 	// ft_printf("\ntest mine: %C\n", L'δ');
 	// printf("\ntest printf : %C\n", L'δ');
 
-	// ft_printf("\ntest S mine: %S\n", L"𢁸δ⁕體");
-	// printf("\ntest S printf : %S\n\n", L"𢁸δ⁕體");
+	// ft_printf("\ntest S mine: %S\n", L"𢁸⁕δ體");
+	// ft_printf("\ntest S printf : %S\n\n", L"𢁸δ⁕");
+	// ft_printf("\ntest S printf : %.1S\n\n", L"𢁸δ⁕體");
+
+	ft_printf("\ntest S ft_printf : %.2S\n\n", L"𢁸δ⁕體");
+	printf("\ntest S printf : %.2S\n\n", L"𢁸δ⁕體");
+
+	ft_printf("\ntest S ft_printf : %.8S\n\n", L"𢁸δ⁕體");
+	printf("\ntest S printf : %.8S\n\n", L"𢁸δ⁕體");
+
+	ft_printf("\ntest S ft_printf : %.24S\n\n", L"𢁸δ⁕體");
+	printf("\ntest S printf : %.24S\n\n", L"𢁸δ⁕體");
+
+	// printf("%S", L"Á±≥");
+	// ft_printf("%S", L"Á±≥");
 
 	// printf("{%S}", NULL);
 	// ft_printf("{%S}", NULL);
-	printf("{%05p}", 0);
-	ft_printf("{%05p}", 0);
+	// printf("{%05p}", 0);
+	// ft_printf("{%05p}", 0);
+	// printf("{%-15p}", 0);
+	// ft_printf("{%-15p}", 0);
+	// printf("\n\n");
+	// printf("%#o", 0);
+	// ft_printf("%#o", 0);
+	// printf("{%05p}", 0);
+	// ft_printf("{%05p}", 0);
+	// ft_printf("{% 04d}", 5);
+	// printf("{% 04d}", 5);
+	// ft_printf("%.u, %.0u", 0, 0);
+	// printf("%.u, %.0u", 0, 0);
 	// //-------------------------------------------------------------------------
 
 	//-------------------------test field width avec o------------------------------------------

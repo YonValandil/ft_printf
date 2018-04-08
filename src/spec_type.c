@@ -57,24 +57,13 @@ int 	p(t_printf *data, va_list vl, t_type specifier, char **str)
 	int len_arg;
 
 	specifier.l = va_arg(vl, unsigned long);
-	if(specifier.l == 0)
-	{
-		if(!(*str = ft_memalloc(1)))
-		{
-			*str[0] = '0';
-			exit(EXIT_FAILURE);
-		}
-	}
-	else if(!(*str = ft_lltoa_base(specifier.l, 16)))
-	{
+	if(!(*str = ft_lltoa_base(specifier.l, 16)))
 		exit(EXIT_FAILURE);
-	}
 	len_arg = ft_strlen(*str);
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
-	data->flag[0] |= flag_neg;
-	data->flag[0] |= flag_zero;
+	(data->flag[0] & flag_zero) ? data->flag[0] |= flag_neg : data->flag[0];
 	if(!(data->str_prefix = ft_strdup("0x")))
 			exit(EXIT_FAILURE);
 	data->val_prefix = 2;
@@ -122,6 +111,9 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 		if(!(data->str_prefix = ft_strdup("+")))
 			exit(EXIT_FAILURE);
 	}
+	if ((data->flag[0] & flag_space) && ((data->flag[0] & flag_zero))) {
+
+	}
 	return (ft_strlen(*str));
 }
 
@@ -129,7 +121,12 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	specifier.ul = va_arg(vl, unsigned long int);
 	apply_modifier_unsigned(data, &specifier);
-	if (data->flag[0] & flag_l || (data->flag[0] & flag_z)
+	if ((data->flag[0] & flag_pre) && (data->flag[2] == 0) && !(specifier.l))
+	{
+		if(!(*str = ft_strdup("")))
+			exit(EXIT_FAILURE);
+	}
+	else if (data->flag[0] & flag_l || (data->flag[0] & flag_z)
 		|| (data->flag[0] & flag_j))
 	{
 		if(!(*str = ft_ulltoa_base(specifier.ul, 10)))
@@ -141,9 +138,9 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 			exit(EXIT_FAILURE);
 	}
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
-			data->flag[0] &= ~flag_pre;
+		data->flag[0] &= ~flag_pre;
 	if (data->flag[0] & flag_hash)
-			data->flag[0] &= ~flag_hash;
+		data->flag[0] &= ~flag_hash;
 	if (data->flag[0] & flag_pre)
 		data->flag[0] &= ~flag_zero;
 	if (data->flag[0] & flag_space)

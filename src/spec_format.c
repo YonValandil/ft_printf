@@ -9,6 +9,11 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		if(!(*str = ft_strdup("")))
 			exit(EXIT_FAILURE);
 	}
+	else if (specifier.ul == 0)
+	{
+		*str = ft_strdup("0");
+		data->flag[0] &= ~flag_hash;
+	}
 	else if ((data->flag[0] & flag_l) || (data->flag[0] & flag_z) ||
 		(data->flag[0] & flag_j))
 	{
@@ -24,6 +29,7 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		data->flag[0] &= ~flag_pre;
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	if (data->flag[2] > ft_strlen(*str))
+	// if ((data->flag[2] > ft_strlen(*str)) || (specifier.ul == 0))
 		data->flag[0] &= ~flag_hash;
 	if ((data->flag[0] & flag_hash))
 	{

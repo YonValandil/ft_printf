@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/01 09:02:41 by jjourne           #+#    #+#             */
-/*   Updated: 2018/04/08 04:11:53 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/04/10 03:37:59 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,10 +82,10 @@ void 	apply_specifier(t_printf *data, va_list vl)
 	if ((data->flag[0] & flag_neg) && (data->format[data->format_i] != 'p'))
 		data->flag[0] &= ~flag_zero;
 	data->effective_fw = apply_effective_value(data, len_arg);
-	apply_print_f(data, str_arg, len_arg);
+	apply_print_f(data, str_arg);
 }
 
-/**
+/*
 ** applique les differentes etapes (obligatoire et optionnel) de printf,
 ** dans l'ordre:
 ** 1 - la largeur de champ
@@ -94,12 +94,12 @@ void 	apply_specifier(t_printf *data, va_list vl)
 ** 4 - ajoute la precision
 ** 5 - la valeur de l'argument dans va_arg
 ** 6 - et la largeur de champ de fin
-**/
-void 	apply_print_f(t_printf *data, char *str_arg, int len_arg)
+*/
+void 	apply_print_f(t_printf *data, char *str_arg)
 {
 	if ((data->flag[0] & flag_width) && !(data->flag[0] & flag_neg)
 		&& !((data->flag[0] & flag_plus) && (data->flag[0] & flag_zero))
-		&& !((data->flag[0] & flag_space) && (data->flag[0] & flag_zero))//////
+		&& !((data->flag[0] & flag_space) && (data->flag[0] & flag_zero))
 		&& !((data->flag[0] & flag_hash) && (data->flag[0] & flag_zero)))
 	{
 		put_n_char_to_result(data, (data->flag[0] & flag_zero)
@@ -127,6 +127,11 @@ void 	apply_print_f(t_printf *data, char *str_arg, int len_arg)
 	ft_memdel((void**)&str_arg);
 	ft_memdel((void**)&(data->str_prefix));
 }
+
+// void 	apply_print_f_end()
+// {
+	/* code */
+// }
 
 /**
 ** calcul les valeurs effective (la valeur reel a appliquer)

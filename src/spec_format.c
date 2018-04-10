@@ -26,11 +26,11 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 		if(!(*str = ft_ulltoa_base(specifier.u, 8)))
 			exit(EXIT_FAILURE);
 	}
-	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
+	if ((data->flag[0] & flag_pre) && (data->flag[2] <= (int) ft_strlen(*str)))
 		data->flag[0] &= ~flag_pre;
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];////
-	if (data->flag[2] > ft_strlen(*str))
+	if (data->flag[2] > (int) ft_strlen(*str))
 		data->flag[0] &= ~flag_hash;
 	if ((data->flag[0] & flag_hash))
 	{
@@ -66,10 +66,10 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 		if(!(*str = ft_ulltoa_base(specifier.u, 16)))
 			exit(EXIT_FAILURE);
 	}
-	while (++i <= ft_strlen(*str))
+	while (++i <= (int) ft_strlen(*str))
 		if (data->format[data->format_i] == 'X')
 			(*str)[i] = ft_toupper((*str)[i]);
-	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
+	if ((data->flag[0] & flag_pre) && (data->flag[2] <= (int) ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];////

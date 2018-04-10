@@ -39,6 +39,7 @@ int 	s(t_printf *data, va_list vl, t_type specifier, char **str)
 int 	c(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	char tab[2];
+	(void)specifier;
 
 	ft_bzero(tab, 2);
 	tab[0] = (char)va_arg(vl, int);
@@ -103,7 +104,7 @@ int 	d(t_printf *data, va_list vl, t_type specifier, char **str)
 			exit(EXIT_FAILURE);
 		neg = (specifier.d < 0) ? 1 : 0 ;
 	}
-	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
+	if ((data->flag[0] & flag_pre) && (data->flag[2] <= (int)ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
 	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
 	data->flag[0] &= (data->flag[0] & flag_pre) ? ~flag_zero : data->flag[0];
@@ -145,13 +146,10 @@ int 	u(t_printf *data, va_list vl, t_type specifier, char **str)
 		if(!(*str = ft_ulltoa_base(specifier.u, 10)))
 			exit(EXIT_FAILURE);
 	}
-	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
+	if ((data->flag[0] & flag_pre) && (data->flag[2] <= (int)ft_strlen(*str)))
 		data->flag[0] &= ~flag_pre;
-	if (data->flag[0] & flag_hash)
-		data->flag[0] &= ~flag_hash;
-	if (data->flag[0] & flag_pre)
-		data->flag[0] &= ~flag_zero;
-	if (data->flag[0] & flag_space)
-		data->flag[0] &= ~flag_space;
+	data->flag[0] &= (data->flag[0] & flag_hash) ? ~flag_hash : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_pre) ? ~flag_zero : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];
 	return (ft_strlen(*str));
 }

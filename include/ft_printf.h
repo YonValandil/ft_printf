@@ -6,7 +6,7 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/09/03 23:42:49 by jjourne           #+#    #+#             */
-/*   Updated: 2018/04/05 01:40:03 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/04/10 04:00:30 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,11 +94,11 @@ void apply_modifier_signed(t_printf *data, t_type *specifier);
 void apply_modifier_unsigned(t_printf *data, t_type *specifier);
 void apply_specifier(t_printf *data, va_list vl);
 int apply_effective_value(t_printf *data, int len_arg);
-void apply_print_f(t_printf *data, char *str_arg, int len_arg);
+void apply_print_f(t_printf *data, char *str_arg);
 void percent_case(t_printf *data);
 void maj_specifiers(t_printf *data);
 
-/**
+/*
 ** parcourt la str(chaine de format) passé en arguments de ft_printf,
 ** determine si on a un: (1)caractere simple, (2)caractere d'echappement '\', (3)caractere de specfication de format '%'
 ** (1): aucune modification, l'afficher sur la sortie standard
@@ -107,45 +107,45 @@ void maj_specifiers(t_printf *data);
 **
 ** ARGUMENT EN ENTRE: structure printf, va_list
 ** TYPE DE RETOUR: void
-**/
+*/
 void	parser(t_printf *print, va_list vl);
 
-/**
+/*
 ** parcourt la chaine format (apres le %) et store les valeurs adequates
 ** dans flag[0] flag[1] et flag[2], jusqu'a tomber sur un caractere non flag.
-**/
+*/
 int		get_flag(t_printf *print, int i);
 
-/**
+/*
 ** creer/update la list chainee, et store le bon caractere dans le buffer.
 ** si flag == 0 alors on prend le caractere dans la chaine de format
 ** sinon on envoi le caractere manuellement
-**/
+*/
 void 	add_to_result(t_printf *data, char c, int flag);
 void 	add_str_to_result(t_printf *data, char *str, int flag);
 void 	put_n_char_to_result(t_printf *data, char c, int flag);
 
-/**
+/*
 ** fonction principale:
 ** creer la valist initialize les parametres et appel les autres sous fonctions.
-**/
+*/
 int		ft_printf(const char *format, ...);
 
-/**
+/*
 ** fonction pour supprimer la liste chainee qui contient le buffer du resultat
-**/
+*/
 void 	del_list(t_result *lst);
 
-/**
+/*
 ** fonctions d'affichage pour le debug
-**/
+*/
 void 	print_flag(t_printf *data);
 void 	print_lst(t_printf *data);
 void 	print_format(t_printf *data);
 
-/**
+/*
 ** Toutes les declarations des specifiers en pointeurs de fonctions
-**/
+*/
 
 int 	s(t_printf *data, va_list vl, t_type specifier, char **str);
 int		S(t_printf *data, va_list vl, t_type specifier, char **str);

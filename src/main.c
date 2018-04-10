@@ -378,7 +378,7 @@ int		main(void)
 	// ft_printf("%#.o", 42);
 
 	// printf("% x|%+x", 42, 42);
-	ft_printf("% x|%+x", 42, 42);
+	// ft_printf("% x|%+x", 42, 42);
 
 	// printf("%.0p, %.p\n", 0, 0);
 	// ft_printf("%.0p, %.p\n", 0, 0);

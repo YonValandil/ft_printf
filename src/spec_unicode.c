@@ -29,31 +29,6 @@ int put_unicode(wchar_t wchar, char **str, int *i)
 
 int unicode_len(wchar_t *uni_str, int *byte_len)
 {
-	// wchar_t *asd = uni_str;
-    //
-	// while (*uni_str != 0)
-	// 	uni_str++;
-	// return (uni_str - asd);
-
-//----------------------------------
-
-	// int i;
-    //
-	// i = 0;
-	// while (uni_str[i] != 0)
-	// {
-	// 	if (*uni_str <= 0x7f)
-	// 		++i;
-	// 	else if (*uni_str <= 0x7ff)
-	// 		i += 2;
-	// 	else if (*uni_str <= 0xffff)
-	// 		i += 3;
-	// 	else
-	// 		i += 4;
-	// }
-	// return (i);
-//----------------------------------
-
 	wchar_t *asd = uni_str;
 
 	while (*uni_str != 0)
@@ -86,11 +61,11 @@ int 	C(t_printf *data, va_list vl, t_type specifier, char **str)
 	return (ft_strlen(*str));
 }
 
-#include <stdio.h>
 int 	S(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	int i;
 	int j;
+	int z;
 	int uni_byte_len;
 	int uni_len;
 
@@ -98,8 +73,6 @@ int 	S(t_printf *data, va_list vl, t_type specifier, char **str)
 	j = 0;
 	uni_byte_len = 0;
 	specifier.ls = va_arg(vl, wchar_t*);
-	// if ((data->flag[0] & flag_pre) && (data->flag[2] < uni_byte_len))
-		// uni_byte_len = data->flag[2];
 	if (specifier.ls == NULL)
 	{
 		if(!(*str = ft_strdup("(null)")))
@@ -107,25 +80,18 @@ int 	S(t_printf *data, va_list vl, t_type specifier, char **str)
 	}
 	else
 	{
-		int z;
 		uni_len = unicode_len(specifier.ls, &uni_byte_len);
-		// if (!(*str = ft_strnew(uni_byte_len)))
 		if (!(*str = ft_strnew(uni_len * 4)))
 			exit(EXIT_FAILURE);
-		// printf("uni_byte_len === %d\n", uni_byte_len);
-		// while (i < uni_byte_len)
 		while (j < uni_len)
 		{
-			// printf("i === %d\n", i);
-			// printf("j === %d\n", j);
-			z=i;
+			z = i;
 			put_unicode((specifier.ls)[j], str, &i);
 			if ((data->flag[0] & flag_pre) && (i>=data->flag[2]))
 			{
-				str[0][z]=0;
-				break;
+				str[0][z] = 0;
+				break ;
 			}
-			// put_unicode((specifier.ls)[j], str, &i, uni_byte_len);
 			++i;
 			++j;
 		}

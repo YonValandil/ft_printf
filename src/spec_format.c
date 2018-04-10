@@ -4,12 +4,13 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 {
 	specifier.ul = va_arg(vl, unsigned long);
 	apply_modifier_unsigned(data, &specifier);
-	if ((data->flag[0] & flag_pre) && (data->flag[2] == 0))
+	if ((data->flag[0] & flag_pre) && (data->flag[2] == 0) && (specifier.ul ==0))
 	{
 		if(!(*str = ft_strdup("")))
 			exit(EXIT_FAILURE);
 	}
 	else if (specifier.ul == 0)
+	// if (specifier.ul == 0)
 	{
 		*str = ft_strdup("0");
 		data->flag[0] &= ~flag_hash;
@@ -28,8 +29,8 @@ int 	o(t_printf *data, va_list vl, t_type specifier, char **str)
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 		data->flag[0] &= ~flag_pre;
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];////
 	if (data->flag[2] > ft_strlen(*str))
-	// if ((data->flag[2] > ft_strlen(*str)) || (specifier.ul == 0))
 		data->flag[0] &= ~flag_hash;
 	if ((data->flag[0] & flag_hash))
 	{
@@ -71,6 +72,7 @@ int 	x(t_printf *data, va_list vl, t_type specifier, char **str)
 	if ((data->flag[0] & flag_pre) && (data->flag[2] <= ft_strlen(*str)))
 			data->flag[0] &= ~flag_pre;
 	data->flag[0] &= (data->flag[0] & flag_plus) ? ~flag_plus : data->flag[0];
+	data->flag[0] &= (data->flag[0] & flag_space) ? ~flag_space : data->flag[0];////
 	if ((data->flag[0] & flag_hash) && (specifier.ul != 0))
 	{
 		data->flag[0] &= ~flag_space;

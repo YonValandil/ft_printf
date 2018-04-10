@@ -45,13 +45,15 @@ void 	percent_case(t_printf *data)
 {
 	if (!(data->flag[0] & flag_neg))
 	{
-		put_n_char_to_result(data, ' ', data->flag[1] - 1);
+		put_n_char_to_result(data, (data->flag[0] & flag_zero)
+		? '0' : ' ', data->flag[1] - 1);
 		add_to_result(data, data->format[data->format_i], 1);
 	}
 	else
 	{
 		add_to_result(data, data->format[data->format_i], 1);
-		put_n_char_to_result(data, ' ', data->flag[1] - 1);
+		put_n_char_to_result(data, (data->flag[0] & flag_zero) ?
+		'0' : ' ', data->flag[1] - 1);
 	}
 }
 
@@ -70,7 +72,6 @@ void	parser(t_printf *data, va_list vl)
 			ret = get_flag(data, i);
 			if (ft_strchr(SPECIFIER, data->format[data->format_i]))
 				apply_specifier(data, vl);
-			// else if ((data->format[data->format_i] == '%') && (ret))
 			else if ((!(ft_strchr(SPECIFIER, data->format[data->format_i]))) && ret)
 				percent_case(data);
 			else if(ret)

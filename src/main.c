@@ -352,22 +352,43 @@ int		main(void)
 	// ft_printf("\ntest S printf : %S\n\n", L"𢁸δ⁕");
 	// ft_printf("\ntest S printf : %.1S\n\n", L"𢁸δ⁕體");
 
-	ft_printf("\ntest S ft_printf : %.2S\n", L"𢁸δ⁕體");
-	dprintf(1, "test S printf : %.2S\n\n", L"𢁸δ⁕體");
+	// ft_printf("\ntest S ft_printf : %.2S\n", L"𢁸δ⁕體");
+	// dprintf(1, "test S printf : %.2S\n\n", L"𢁸δ⁕體");
+    //
+	// ft_printf("\ntest S ft_printf : %.8S\n", L"𢁸δ⁕體");
+	// dprintf(1, "test S printf : %.8S\n\n", L"𢁸δ⁕體");
+    //
+	// ft_printf("\ntest S ft_printf : %.24S\n", L"𢁸δ⁕體");
+	// dprintf(1, "test S printf : %.24S\n\n", L"𢁸δ⁕體");
+    //
+	// dprintf(1, "\nprintf %S\n", L"Á±≥");
+	// ft_printf("mine %S\n", L"Á±≥");
 
-	ft_printf("\ntest S ft_printf : %.8S\n", L"𢁸δ⁕體");
-	dprintf(1, "test S printf : %.8S\n\n", L"𢁸δ⁕體");
+	// printf("{%05.%}", 0);
+	// ft_printf("{%05.%}", 0);
 
-	ft_printf("\ntest S ft_printf : %.24S\n", L"𢁸δ⁕體");
-	dprintf(1, "test S printf : %.24S\n\n", L"𢁸δ⁕體");
+	// printf("% o|%+o", 42, 42);
+	// printf("%+o", 42);
+	// printf("% o", 42);
+	// ft_printf("% o|%+o", 42, 42);
 
-	dprintf(1, "\nprintf %S\n", L"Á±≥");
-	ft_printf("mine %S\n", L"Á±≥");
+	// printf("%#.o", 42);
+
+	// printf("%#.o", 42);
+	// ft_printf("%#.o", 42);
+
+	// printf("% x|%+x", 42, 42);
+	ft_printf("% x|%+x", 42, 42);
+
+	// printf("%.0p, %.p\n", 0, 0);
+	// ft_printf("%.0p, %.p\n", 0, 0);
 
 	// printf("{%S}", NULL);
 	// ft_printf("{%S}", NULL);
 	// printf("{%05p}", 0);
 	// ft_printf("{%05p}", 0);
+	// printf("{%5p}", 0);////////
+	// ft_printf("{%5p}", 0);
 	// printf("{%-15p}", 0);
 	// ft_printf("{%-15p}", 0);
 	// printf("\n\n");

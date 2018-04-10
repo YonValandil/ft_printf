@@ -6,13 +6,13 @@
 /*   By: jjourne <jjourne@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/15 01:43:35 by jjourne           #+#    #+#             */
-/*   Updated: 2018/03/23 09:29:01 by jjourne          ###   ########.fr       */
+/*   Updated: 2018/04/10 04:06:53 by jjourne          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-void 	del_list(t_result *lst)
+void	del_list(t_result *lst)
 {
 	t_result *tmp;
 
@@ -26,7 +26,7 @@ void 	del_list(t_result *lst)
 	ft_memdel((void **)&tmp);
 }
 
-void 	add_to_result(t_printf *data, char c, int flag)
+void	add_to_result(t_printf *data, char c, int flag)
 {
 	t_result *new;
 
@@ -51,7 +51,7 @@ void 	add_to_result(t_printf *data, char c, int flag)
 	++(data->len_final);
 }
 
-void 	add_str_to_result(t_printf *data, char* str, int flag)
+void	add_str_to_result(t_printf *data, char *str, int flag)
 {
 	int i;
 
@@ -60,7 +60,7 @@ void 	add_str_to_result(t_printf *data, char* str, int flag)
 		add_to_result(data, str[i], flag);
 }
 
-void 	put_n_char_to_result(t_printf *data, char c, int n)
+void	put_n_char_to_result(t_printf *data, char c, int n)
 {
 	int i;
 
@@ -71,9 +71,9 @@ void 	put_n_char_to_result(t_printf *data, char c, int n)
 
 int		ft_printf(const char *format, ...)
 {
-	va_list     vl;
+	va_list		vl;
 	t_printf	data;
-	t_result 	*curr;
+	t_result	*curr;
 
 	ft_bzero(&data, sizeof(data));
 	if (!(data.format = ft_strdup(format)))

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parser.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: jjourne <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/10 04:09:54 by jjourne           #+#    #+#             */
+/*   Updated: 2018/04/10 04:09:57 by jjourne          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "ft_printf.h"
 
 int		get_flag(t_printf *data, int i)
@@ -15,7 +27,7 @@ int		get_flag(t_printf *data, int i)
 		if (data->format[*j] == 'h' && (data->flag[0] |= flag_hh))
 			data->flag[0] ^= (data->flag[0] & flag_h) ? 1 << 6 : 3 << 5;
 		if (ft_isdigit(data->format[*j]) && (data->format[*j] != '0') &&
-			(data->flag[0] |= flag_width) && !(data->flag[1] = 0))
+				(data->flag[0] |= flag_width) && !(data->flag[1] = 0))
 		{
 			--*j;
 			while (ft_isdigit(data->format[*j + 1]) && (++*j))
@@ -29,11 +41,11 @@ int		get_flag(t_printf *data, int i)
 	return (1);
 }
 
-void 	maj_specifiers(t_printf *data)
+void	maj_specifiers(t_printf *data)
 {
 	if (data->format[data->format_i] == 'D' ||
-		data->format[data->format_i] == 'O' ||
-		data->format[data->format_i] == 'U')
+			data->format[data->format_i] == 'O' ||
+			data->format[data->format_i] == 'U')
 		data->flag[0] |= flag_l;
 	if (data->format[data->format_i] == 'c' && (data->flag[0] & flag_l))
 		data->format[data->format_i] = 'C';
@@ -41,40 +53,41 @@ void 	maj_specifiers(t_printf *data)
 		data->format[data->format_i] = 'S';
 }
 
-void 	percent_case(t_printf *data)
+void	percent_case(t_printf *data)
 {
 	if (!(data->flag[0] & flag_neg))
 	{
 		put_n_char_to_result(data, (data->flag[0] & flag_zero)
-		? '0' : ' ', data->flag[1] - 1);
+				? '0' : ' ', data->flag[1] - 1);
 		add_to_result(data, data->format[data->format_i], 1);
 	}
 	else
 	{
 		add_to_result(data, data->format[data->format_i], 1);
 		put_n_char_to_result(data, (data->flag[0] & flag_zero) ?
-		'0' : ' ', data->flag[1] - 1);
+				'0' : ' ', data->flag[1] - 1);
 	}
 }
 
 void	parser(t_printf *data, va_list vl)
 {
 	t_bool	is_flag;
-	int ret;
-	int i;
+	int		ret;
+	int		i;
 
 	i = 0;
 	while ((data->format[++(data->format_i)]) && !(is_flag = false))
 	{
-		if(data->format[data->format_i] == '%' && (is_flag = true))
+		if (data->format[data->format_i] == '%' && (is_flag = true))
 		{
 			data->flag[0] = 0;
 			ret = get_flag(data, i);
 			if (ft_strchr(SPECIFIER, data->format[data->format_i]))
 				apply_specifier(data, vl);
-			else if ((!(ft_strchr(SPECIFIER, data->format[data->format_i]))) && ret)
+			else if ((!(ft_strchr(SPECIFIER,
+								data->format[data->format_i]))) && ret)
 				percent_case(data);
-			else if(ret)
+			else if (ret)
 				add_to_result(data, 'c', 0);
 		}
 		else
